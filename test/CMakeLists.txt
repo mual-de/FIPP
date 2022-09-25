@@ -1,6 +1,7 @@
 find_package(GTest REQUIRED)
 
 add_subdirectory(Point)
+add_subdirectory(ImageContainer)
 
 function(do_test target result)
   add_test(NAME ${target}_test COMMAND ${target})

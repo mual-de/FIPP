@@ -54,11 +54,12 @@ namespace FIPP
             inline BackendFlags getFlags() { return m_backend.flags; };
             inline bool isBound() { return m_activeBound; };
             inline void setBound() { m_activeBound = true; };
+            inline void setUnBound(){ m_activeBound = false;};
             inline std::shared_ptr<std::mutex> getMutex() { return m_mutexPtr; };
             virtual const unsigned char *getConstPtr() const = 0;
             virtual unsigned char *getPtr() const = 0;
-            virtual ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, int size, Backend backend, int memPitch = 0) const = 0;
-            virtual ContainerError updateMemory(std::shared_ptr<ImageContainer> img) const = 0;
+            virtual ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, int size, Backend backend, int memPitch = 0) = 0;
+            virtual ContainerError updateMemory(std::shared_ptr<ImageContainer> img) = 0;
         };
 
     };

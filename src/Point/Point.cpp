@@ -19,3 +19,12 @@ double Point<T>::getAbsValue()
 {
     return sqrt(this->m_x * this->m_x + this->m_y * this->m_y);
 }
+
+
+template class Point<int>;
+template class Point<float>;
+template class Point<double>;
+template class Point<unsigned char>;
+template class Point<char>;
+
+
