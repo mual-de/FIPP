@@ -53,7 +53,7 @@ namespace FIPP
                 m_mutex.unlock();
             };
             inline bool getStatus() { return m_isEnabled; };
-            inline std::vector<UnitTestEntry> getEntries();
+            inline std::vector<UnitTestEntry> getEntries(){return this->m_entries;};
 
         private:
             bool m_isEnabled;

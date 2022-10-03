@@ -15,6 +15,7 @@ void UnitTestLogger::log(LogLevel lvl, std::string msg, std::string fName, std::
         if (lvl <= m_minlvl)
         {
             UnitTestEntry entry {lvl, msg, fName, fnName, lineNum, frameNumber};
+            this->m_entries.push_back(entry);
         }
     }
 }
