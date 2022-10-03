@@ -17,11 +17,13 @@ bool GenericPipelineElementSiSo::startElement(FIPP::img::ImageContainerConfig im
         LOG(LogLevel::ERROR, "Wrong predecessor");
         return false;
     }
+    this->startThread();
     return this->m_successor->startElement(imgConfig, this->m_elemId);
 }
 
 bool GenericPipelineElementSiSo::stopElement() {
     this->m_isRunning = false;
+    this->stopThread();
     LOG(LogLevel::ERROR, "stop running element");
     return this->m_successor->stopElement();
 }
@@ -33,3 +35,8 @@ void GenericPipelineElementSiSo::connectPredecessor(int elemId){
 void GenericPipelineElementSiSo::connectSuccessor(std::shared_ptr<IGenericPipelineElement> elem){
     this->m_successor = elem;
 }
+
+void GenericPipelineElementSiSo::sendImageToSucessors(std::shared_ptr<img::ImageContainer> img){
+    this->m_successor->addImageToInputPipe(img);
+}
+

@@ -34,15 +34,6 @@ namespace FIPP
             virtual std::string getName() const = 0;
             virtual int getId() const = 0;
 
-        protected:
-            virtual void sendImageToSucessors(std::shared_ptr<img::ImageContainer> img) = 0;
-            /**
-             * @brief Overwrite by derived plugin to do calculation on next image
-             * 
-             * @param img 
-             */
-            virtual void doCalculation(std::shared_ptr<img::ImageContainer> img) = 0;
-
         };
 
     };

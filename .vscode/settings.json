@@ -45,7 +45,25 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "any": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstring": "cpp",
+        "unordered_map": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "random": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp",
+        "cinttypes": "cpp",
+        "variant": "cpp",
+        "list": "cpp",
+        "valarray": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "textMateRules": [

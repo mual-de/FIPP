@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/src/include/**",
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/third-party/yaml-cpp/include/**",
                 "/usr/include/**"
             ],
             "defines": [],
