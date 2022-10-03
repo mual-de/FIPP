@@ -32,14 +32,19 @@ void GenericPipelineElement::run()
         std::unique_lock lk(this->m_inputLockMutex);
         this->m_cvNotify.wait(lk, []
                               { return true; });
-        if(!this->m_stop){ break;}
-        if(this->m_newImgArrived){
+        if (!this->m_stop)
+        {
+            break;
+        }
+        if (this->m_newImgArrived)
+        {
             std::shared_ptr<img::ImageContainer> actImg = this->m_inputQueue.front();
             this->m_inputQueue.pop();
             lk.unlock();
+            this->m_frameNumber = actImg->getFrameNumber();
             std::shared_ptr<img::ImageContainer> retImg = this->doCalculation(actImg);
             this->sendImageToSucessors(retImg);
-        } 
+        }
     }
     this->m_isRunning = false;
 }

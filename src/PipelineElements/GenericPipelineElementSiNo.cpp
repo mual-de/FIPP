@@ -37,6 +37,7 @@ void GenericPipelineElementSiNo::run()
             std::shared_ptr<img::ImageContainer> actImg = this->m_inputQueue.front();
             this->m_inputQueue.pop();
             lk.unlock();
+            this->m_frameNumber = actImg->getFrameNumber();
             this->doCalculation(actImg);
         } 
     }

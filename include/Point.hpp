@@ -11,6 +11,7 @@
  */
 #ifndef __POINT_HPP__
 #define __POINT_HPP__
+#include <string.h>
 
 namespace FIPP
 {
@@ -37,6 +38,7 @@ namespace FIPP
             m_y = static_cast<T>(pt.m_y);
         };
         double getAbsValue();
+        inline std::string asStr(){return "x: " + std::to_string(m_x) + " - y: " + std::to_string(m_y);};
         inline T getArea() { return m_x * m_y; };
         inline T getX() { return m_x; };
         inline T getY() { return m_y; };
