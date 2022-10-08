@@ -6,7 +6,7 @@ using namespace FIPP::logging;
 
 #define LOG(lvl, msg) this->m_log->log(lvl, msg, "MetaDataLogger", __func__, __LINE__, this->m_frameNumber);
 
-MetaDataLogger::MetaDataLogger(YAML::Node config, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : GenericPipelineElementSiSo("MetaDataLogger", elemId, log){
+MetaDataLogger::MetaDataLogger(YAML::Node config, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : GenericPluginSiSo("MetaDataLogger", elemId, log){
     LOG(LogLevel::INFO, "Plugin created");
 }
 MetaDataLogger::~MetaDataLogger(){

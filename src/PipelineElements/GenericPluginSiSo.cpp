@@ -1,18 +1,19 @@
-#include "PipelineElements/GenericPipelineElementSiSo.hpp"
+#include "PipelineElements/GenericPluginSiSo.hpp"
+#include "PipelineElements/IGenericSink.hpp"
 #include "ImageContainer/ImageFormat.hpp"
 #include "Logging/ILogging.hpp"
 using namespace FIPP::pipe;
 using namespace FIPP::logging;
 
-#define LOG(lvl, msg) this->m_log->log(lvl, msg, "GenericPipelineElementSISO", __func__, __LINE__, this->m_frameNumber);
+#define LOG(lvl, msg) this->m_log->log(lvl, msg, "GenericPluginSiSo", __func__, __LINE__, this->m_frameNumber);
 
-GenericPipelineElementSiSo::GenericPipelineElementSiSo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : GenericPipelineElement(elemName, elemId, log)
+GenericPluginSiSo::GenericPluginSiSo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : GenericPlugin(elemName, elemId, log)
 {
     LOG(LogLevel::ERROR, "Started PipelineElement");
     this->m_predecessorId = -1;
 }
 
-bool GenericPipelineElementSiSo::startElement(FIPP::img::ImageContainerConfig imgConfig, int predecessorId)
+bool GenericPluginSiSo::startElement(FIPP::img::ImageContainerConfig imgConfig, int predecessorId)
 {
     LOG(LogLevel::ERROR, "predecessor id: " + std::to_string(predecessorId));
     LOG(LogLevel::ERROR, "predecessor internal id: " + std::to_string(m_predecessorId));
@@ -30,7 +31,7 @@ bool GenericPipelineElementSiSo::startElement(FIPP::img::ImageContainerConfig im
     return true;
 }
 
-bool GenericPipelineElementSiSo::stopElement()
+bool GenericPluginSiSo::stopElement()
 {
     this->stopThread();
     LOG(LogLevel::ERROR, "stop running element");
@@ -40,21 +41,26 @@ bool GenericPipelineElementSiSo::stopElement()
     return true;
 }
 
-void GenericPipelineElementSiSo::connectPredecessor(int elemId)
+void GenericPluginSiSo::connectPredecessor(int elemId)
 {
     this->m_predecessorId = elemId;
 }
 
-void GenericPipelineElementSiSo::connectSuccessor(std::shared_ptr<IGenericPipelineElement> elem)
+void GenericPluginSiSo::connectSuccessor(std::shared_ptr<IGenericPipelineElement> elem)
 {
     this->m_successor = elem;
 }
 
-void GenericPipelineElementSiSo::sendImageToSucessors(std::shared_ptr<img::ImageContainer> img)
+void GenericPluginSiSo::sendImageToSucessors(std::shared_ptr<img::ImageContainer> img)
 {
     // Needed for testruns
     if (this->m_successor != nullptr)
     {
-        this->m_successor->addImageToInputPipe(img);
+        if(this->m_successor->getElementType() == ElementTypes::PLUGIN){
+            std::static_pointer_cast<IGenericPlugin>(this->m_successor)->addImageToInputPipe(img);
+        }
+        else{
+            std::static_pointer_cast<IGenericSink>(this->m_successor)->addImageToInputPipe(img);
+        }
     }
 }

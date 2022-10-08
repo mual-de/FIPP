@@ -1,6 +1,6 @@
-#ifndef __GENERIC_PIPELINE_ELEMENT_SISO_HPP__
-#define __GENERIC_PIPELINE_ELEMENT_SISO_HPP__
-#include "GenericPipelineElement.hpp"
+#ifndef __GENERIC_PLUGIN_SISO_HPP__
+#define __GENERIC_PLUGIN_SISO_HPP__
+#include "GenericPlugin.hpp"
 #include "../Logging/ILogging.hpp"
 #include <memory>
 #include <string>
@@ -11,11 +11,11 @@ namespace FIPP
 {
     namespace pipe
     {
-        class GenericPipelineElementSiSo : public GenericPipelineElement
+        class GenericPluginSiSo : public GenericPlugin
         {
         public:
-            GenericPipelineElementSiSo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
-            virtual ~GenericPipelineElementSiSo(){};
+            GenericPluginSiSo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
+            virtual ~GenericPluginSiSo(){};
             bool startElement(img::ImageContainerConfig imgConfig, int predecessorId);
             bool stopElement();
             void connectPredecessor(int elemId);

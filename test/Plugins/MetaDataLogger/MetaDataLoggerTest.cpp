@@ -20,7 +20,7 @@ TEST(Creation, basics)
     // Expect equality.
     YAML::Node node = YAML::Load("[1, 2, 3]");
     std::shared_ptr<logging::ILogger> log = std::make_shared<logging::UnitTestLogger>(logging::LogLevel::WARNING);
-    std::shared_ptr<pipe::IGenericPipelineElement> pe = std::make_shared<plugins::MetaDataLogger>(node, 1, log);
+    std::shared_ptr<pipe::IGenericPlugin> pe = std::make_shared<plugins::MetaDataLogger>(node, 1, log);
     EXPECT_EQ(pe->getId(), 1);
     EXPECT_EQ(pe->getName(), "MetaDataLogger");
 }
@@ -36,7 +36,7 @@ TEST(Creation, bounding)
     YAML::Node node = YAML::Load("[1, 2, 3]");
     std::shared_ptr<img::ImageContainer> pImg = std::make_shared<img::ImageContainerCPU>(size, format);
     std::shared_ptr<logging::ILogger> log = std::make_shared<logging::UnitTestLogger>(logging::LogLevel::INFO);
-    std::shared_ptr<pipe::IGenericPipelineElement> pe = std::make_shared<plugins::MetaDataLogger>(node, 1, log);
+    std::shared_ptr<pipe::IGenericPlugin> pe = std::make_shared<plugins::MetaDataLogger>(node, 1, log);
     pe->connectPredecessor(0);
     std::cout << "connected predecessor" << std::endl;
     img::ImageContainerConfig conf;

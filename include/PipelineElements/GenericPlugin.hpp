@@ -1,6 +1,6 @@
-#ifndef __GENERIC_PIPELINE_ELEMENT_HPP__
-#define __GENERIC_PIPELINE_ELEMENT_HPP__
-#include "IGenericPipelineElement.hpp"
+#ifndef __GENERIC_PLUGIN_ELEMENT_HPP__
+#define __GENERIC_PLUGIN_ELEMENT_HPP__
+#include "IGenericPlugin.hpp"
 #include "../Logging/ILogging.hpp"
 #include <memory>
 #include <string>
@@ -14,16 +14,14 @@ namespace FIPP
 {
     namespace pipe
     {
-        class GenericPipelineElement : public IGenericPipelineElement
+        class GenericPlugin : public IGenericPlugin
         {
         public:
-            GenericPipelineElement(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
-            ~GenericPipelineElement();
-            virtual void connectPredecessor(int elemId) = 0;
-            virtual void connectSuccessor(std::shared_ptr<IGenericPipelineElement> elem) = 0;
+            GenericPlugin(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
+            ~GenericPlugin();
+            inline bool isRunning() { return this->m_isRunning; };
             virtual bool startElement(img::ImageContainerConfig imgConfig, int predecessorId) = 0;
             virtual bool stopElement() = 0;
-            inline bool isRunning() { return this->m_isRunning; };
 
             void addImageToInputPipe(std::shared_ptr<img::ImageContainer> img);
             /**
@@ -38,6 +36,7 @@ namespace FIPP
              * @return int
              */
             inline int getId() const { return this->m_elemId; };
+            inline ElementTypes getElementType() { return ElementTypes::PLUGIN; };
 
         protected:
             const std::string m_elemName;

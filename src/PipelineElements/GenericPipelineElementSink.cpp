@@ -1,8 +1,8 @@
-#include "PipelineElements/GenericPipelineElementSiNo.hpp"
+#include "PipelineElements/GenericPluginSink.hpp"
 
 using namespace FIPP::pipe;
 
-GenericPipelineElementSiNo::GenericPipelineElementSiNo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : m_elemName(elemName), m_elemId(elemId)
+GenericPluginSiSo::GenericPluginSiSo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : m_elemName(elemName), m_elemId(elemId)
 {
     m_log = log;
     m_frameNumber = 0;
@@ -11,7 +11,7 @@ GenericPipelineElementSiNo::GenericPipelineElementSiNo(std::string elemName, int
     m_isRunning = false;
 }
 
-void GenericPipelineElementSiNo::addImageToInputPipe(std::shared_ptr<img::ImageContainer> img)
+void GenericPluginSiSo::addImageToInputPipe(std::shared_ptr<img::ImageContainer> img)
 {
     std::lock_guard lk(this->m_inputLockMutex);
     this->m_inputQueue.push(img);
@@ -19,7 +19,7 @@ void GenericPipelineElementSiNo::addImageToInputPipe(std::shared_ptr<img::ImageC
     this->m_cvNotify.notify_one();
 }
 
-void GenericPipelineElementSiNo::startThread()
+void GenericPluginSiSo::startThread()
 {
     this->m_workerThread = std::thread(&GenericPipelineElementSiNo::run, this);
     this->m_isRunning = true;

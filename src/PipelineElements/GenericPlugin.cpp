@@ -1,10 +1,10 @@
-#include "PipelineElements/GenericPipelineElement.hpp"
+#include "PipelineElements/GenericPlugin.hpp"
 #include <chrono>
-#define LOG(lvl, msg) this->m_log->log(lvl, msg, "GenericPipelineElement", __func__, __LINE__, this->m_frameNumber);
+#define LOG(lvl, msg) this->m_log->log(lvl, msg, "GenericPlugin", __func__, __LINE__, this->m_frameNumber);
 
 using namespace FIPP::pipe;
 using namespace FIPP::logging;
-GenericPipelineElement::GenericPipelineElement(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : m_elemName(elemName), m_elemId(elemId)
+GenericPlugin::GenericPlugin(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : m_elemName(elemName), m_elemId(elemId)
 {
     m_log = log;
     m_frameNumber = 0;
@@ -13,7 +13,7 @@ GenericPipelineElement::GenericPipelineElement(std::string elemName, int elemId,
     m_isRunning = false;
 }
 
-GenericPipelineElement::~GenericPipelineElement()
+GenericPlugin::~GenericPlugin()
 {
     // Stop running thread before dtor
     if (this->m_isRunning)
@@ -23,7 +23,7 @@ GenericPipelineElement::~GenericPipelineElement()
     }
 }
 
-void GenericPipelineElement::addImageToInputPipe(std::shared_ptr<img::ImageContainer> img)
+void GenericPlugin::addImageToInputPipe(std::shared_ptr<img::ImageContainer> img)
 {
     std::lock_guard lk(this->m_inputLockMutex);
     this->m_inputQueue.push(img);
@@ -31,15 +31,15 @@ void GenericPipelineElement::addImageToInputPipe(std::shared_ptr<img::ImageConta
     this->m_cvNotify.notify_one();
 }
 
-void GenericPipelineElement::startThread()
+void GenericPlugin::startThread()
 {
     LOG(LogLevel::CONFIG, "Start Thread");
     this->m_stop = false;
-    this->m_workerThread = std::thread(&GenericPipelineElement::run, this);
+    this->m_workerThread = std::thread(&GenericPlugin::run, this);
     this->m_isRunning = true;
 }
 
-bool GenericPipelineElement::stopThread()
+bool GenericPlugin::stopThread()
 {
     this->m_stop = true;
     LOG(LogLevel::CONFIG, "Notify thread");
@@ -49,7 +49,7 @@ bool GenericPipelineElement::stopThread()
     return true;
 };
 
-void GenericPipelineElement::run()
+void GenericPlugin::run()
 {
     LOG(LogLevel::CONFIG, "Started Thread");
     while (!this->m_stop)
