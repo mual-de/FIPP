@@ -11,7 +11,7 @@
  */
 #ifndef __POINT_HPP__
 #define __POINT_HPP__
-#include <string.h>
+#include <string>
 
 namespace FIPP
 {

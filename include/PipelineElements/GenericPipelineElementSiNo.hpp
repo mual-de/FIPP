@@ -28,6 +28,7 @@ namespace FIPP
         {
         public:
             GenericPipelineElementSiNo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
+            virtual ~GenericPipelineElementSiNo(){};
             virtual bool startElement(img::ImageContainerConfig imgConfig, int predecessorId);
             bool stopElement() = 0;
             /**

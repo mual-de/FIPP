@@ -15,7 +15,8 @@ namespace FIPP
         {
         public:
             GenericPipelineElementSiSo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
-            virtual bool startElement(img::ImageContainerConfig imgConfig, int predecessorId);
+            virtual ~GenericPipelineElementSiSo(){};
+            bool startElement(img::ImageContainerConfig imgConfig, int predecessorId);
             bool stopElement();
             void connectPredecessor(int elemId);
             void connectSuccessor(std::shared_ptr<IGenericPipelineElement> elem);
@@ -24,7 +25,7 @@ namespace FIPP
             std::shared_ptr<IGenericPipelineElement> m_successor;
             int m_predecessorId;
 
-            virtual void sendImageToSucessors(std::shared_ptr<img::ImageContainer> img) = 0;
+            void sendImageToSucessors(std::shared_ptr<img::ImageContainer> img);
             /**
              * @brief Overwrite by derived plugin to do calculation on next image
              *

@@ -10,8 +10,8 @@ namespace FIPP
         class MetaDataLogger : public pipe::GenericPipelineElementSiSo
         {
             public:
-                MetaDataLogger(YAML::Node config, std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
-
+                MetaDataLogger(YAML::Node config, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
+                ~MetaDataLogger();
             protected:
                 std::shared_ptr<img::ImageContainer> doCalculation(std::shared_ptr<img::ImageContainer> img);
         };
