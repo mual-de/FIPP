@@ -10,13 +10,14 @@ GenericPlugin::GenericPlugin(std::string elemName, int elemId, std::shared_ptr<F
     m_frameNumber = 0;
     m_newImgArrived = false;
     m_stop = false;
-    m_isRunning = false;
+    m_filterActivated = INPUT_FILTER_ALLOW_ALL_INPUTS;
+    m_state = ElementState::IDLE;
 }
 
 GenericPlugin::~GenericPlugin()
 {
     // Stop running thread before dtor
-    if (this->m_isRunning)
+    if (this->m_state == ElementState::RUNNING)
     {
         LOG(LogLevel::CONFIG, "Stop Thread");
         this->stopThread();
@@ -34,24 +35,27 @@ void GenericPlugin::addImageToInputPipe(std::shared_ptr<img::ImageContainer> img
 void GenericPlugin::startThread()
 {
     LOG(LogLevel::CONFIG, "Start Thread");
+    this->m_state = ElementState::STARTING;
     this->m_stop = false;
     this->m_workerThread = std::thread(&GenericPlugin::run, this);
-    this->m_isRunning = true;
 }
 
 bool GenericPlugin::stopThread()
 {
     this->m_stop = true;
+    this->m_state = ElementState::STOPPING;
     LOG(LogLevel::CONFIG, "Notify thread");
     this->m_cvNotify.notify_all();
     LOG(LogLevel::CONFIG, "Wait for join");
     this->m_workerThread.join();
+    this->m_state = ElementState::IDLE;
     return true;
 };
 
 void GenericPlugin::run()
 {
     LOG(LogLevel::CONFIG, "Started Thread");
+    this->m_state = ElementState::RUNNING;
     while (!this->m_stop)
     {
         std::unique_lock lk(this->m_inputLockMutex);
@@ -80,5 +84,4 @@ void GenericPlugin::run()
         }
     }
     LOG(LogLevel::CONFIG, "set in not running state!");
-    this->m_isRunning = false;
 }

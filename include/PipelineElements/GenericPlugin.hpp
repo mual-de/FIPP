@@ -1,3 +1,16 @@
+/**
+ * @file GenericPlugin.hpp
+ * @author Alexander Mueller (dev@alexandermaxmueller.de)
+ * @brief Implements a GenericPlugin
+ * @version 0.1
+ * @date 2022-10-13
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ * Basic class for all plugins, provides general functions for threading and
+ * startup phase.
+ * 
+ */
 #ifndef __GENERIC_PLUGIN_ELEMENT_HPP__
 #define __GENERIC_PLUGIN_ELEMENT_HPP__
 #include "IGenericPlugin.hpp"
@@ -19,10 +32,8 @@ namespace FIPP
         public:
             GenericPlugin(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             ~GenericPlugin();
-            inline bool isRunning() { return this->m_isRunning; };
-            virtual bool startElement(img::ImageContainerConfig imgConfig, int predecessorId) = 0;
-            virtual bool stopElement() = 0;
 
+            inline ElementState getState() { return this->m_state; };
             void addImageToInputPipe(std::shared_ptr<img::ImageContainer> img);
             /**
              * @brief get the object name set by the derived class (e.g. crop-plugin).
@@ -37,10 +48,20 @@ namespace FIPP
              */
             inline int getId() const { return this->m_elemId; };
             inline ElementTypes getElementType() { return ElementTypes::PLUGIN; };
+            /**
+             * @brief Run internal doCalculation function for software tests.
+             * 
+             * @param img 
+             * @return std::shared_ptr<img::ImageContainer> 
+             */
+            inline std::shared_ptr<img::ImageContainer> testInternalFunction(std::shared_ptr<img::ImageContainer> img){return this->doCalculation(img);};
+
+            
 
         protected:
             const std::string m_elemName;
             const int m_elemId;
+            bool m_filterActivated;
             /**
              * @brief store every log information
              *
@@ -70,10 +91,10 @@ namespace FIPP
              */
             std::atomic_bool m_stop;
             /**
-             * @brief stores if pipeline element is running
+             * @brief Current state of plugin
              *
              */
-            bool m_isRunning;
+            ElementState m_state;
             /**
              * @brief Thread to run the doCalculation function.
              *

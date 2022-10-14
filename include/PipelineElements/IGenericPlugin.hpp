@@ -1,9 +1,19 @@
+/**
+ * @file IGenericPlugin.hpp
+ * @author Alexander Mueller (dev@alexandermaxmueller.de)
+ * @brief Interface for a Generic Plugin as PipelineElement
+ * @version 0.1
+ * @date 2022-10-14
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef __IGENERIC__PLUGIN_HPP__
 #define __IGENERIC__PLUGIN_HPP__
 
 #include <memory>
 #include <string>
-#include "IGenericPipelineElement.hpp"
+#include "IGenericSink.hpp"
 #include "../ImageContainer/ImageFormat.hpp"
 #include "../ImageContainer/ImageContainer.hpp"
 namespace FIPP
@@ -11,18 +21,24 @@ namespace FIPP
 
     namespace pipe
     {
-        class IGenericPlugin : public IGenericPipelineElement
+
+        class IGenericPlugin : public IGenericSink
         {
         public:
-            virtual bool startElement(img::ImageContainerConfig imgConfig, int predecessorId) = 0;
-            virtual bool stopElement() = 0;
-            virtual bool isRunning() = 0;
-            virtual std::string getName() const = 0;
-            virtual int getId() const = 0;
-            virtual ElementTypes getElementType() = 0;
-            virtual void connectPredecessor(int elemId) = 0;
-            virtual void connectSuccessor(std::shared_ptr<IGenericPipelineElement> elem) = 0;
-            virtual void addImageToInputPipe(std::shared_ptr<img::ImageContainer> img) = 0;
+            /**
+             * @brief tell this plugin which is/are the next plugins to send the result of this plugin to these plugins.
+             * 
+             * @param elem 
+             */
+            virtual void connectSuccessor(std::shared_ptr<IGenericSink> elem) = 0;
+            /**
+             * @brief Calls internal doCalculation function for a testrun without a running thread.
+             * 
+             * Simplifies testing with unit testing, put an image in and check if result is as expected.
+             * @param img to run processing on
+             * @return std::shared_ptr<img::ImageContainer> return value from doCalculation
+             */
+            virtual std::shared_ptr<img::ImageContainer> testInternalFunction(std::shared_ptr<img::ImageContainer> img) = 0;
         };
 
     };

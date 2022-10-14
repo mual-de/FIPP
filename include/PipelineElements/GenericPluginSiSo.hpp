@@ -6,6 +6,7 @@
 #include <string>
 #include <mutex>
 #include <queue>
+#include "InputFilter.hpp"
 
 namespace FIPP
 {
@@ -16,15 +17,16 @@ namespace FIPP
         public:
             GenericPluginSiSo(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             virtual ~GenericPluginSiSo(){};
-            bool startElement(img::ImageContainerConfig imgConfig, int predecessorId);
+            bool startElement(int predecessorId);
             bool stopElement();
             void connectPredecessor(int elemId);
-            void connectSuccessor(std::shared_ptr<IGenericPipelineElement> elem);
+            void connectSuccessor(std::shared_ptr<IGenericSink> elem);
+            bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId);
 
         protected:
-            std::shared_ptr<IGenericPipelineElement> m_successor;
+            std::shared_ptr<IGenericSink> m_successor;
             int m_predecessorId;
-
+            InputFilter m_filter;
             void sendImageToSucessors(std::shared_ptr<img::ImageContainer> img);
             /**
              * @brief Overwrite by derived plugin to do calculation on next image
@@ -32,6 +34,7 @@ namespace FIPP
              * @param img
              */
             virtual std::shared_ptr<img::ImageContainer> doCalculation(std::shared_ptr<img::ImageContainer> img) = 0;
+
         };
 
     };

@@ -22,6 +22,7 @@ double Point<T>::getAbsValue()
 
 
 template class Point<int>;
+template class Point<unsigned int>;
 template class Point<float>;
 template class Point<double>;
 template class Point<unsigned char>;

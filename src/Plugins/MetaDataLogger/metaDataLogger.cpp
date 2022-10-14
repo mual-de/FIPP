@@ -8,7 +8,9 @@ using namespace FIPP::logging;
 
 MetaDataLogger::MetaDataLogger(YAML::Node config, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : GenericPluginSiSo("MetaDataLogger", elemId, log){
     LOG(LogLevel::INFO, "Plugin created");
+    this->m_filterActivated = INPUT_FILTER_ALLOW_ALL_INPUTS;
 }
+
 MetaDataLogger::~MetaDataLogger(){
     LOG(LogLevel::INFO, "Plugin shutdown");
 }

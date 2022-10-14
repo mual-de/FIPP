@@ -45,10 +45,10 @@ TEST(Creation, bounding)
     back.flags = img::BackendFlags::CPU_ONLY;
     back.type = img::BackendType::CPU;
     conf.backend = back;
-    bool res = pe->startElement(conf, 0);
-    while(!pe->isRunning()){};
+    bool res = pe->startElement(0);
+    while(pe->getState() != pipe::ElementState::RUNNING){};
     pe->addImageToInputPipe(pImg);
-    std::this_thread::sleep_for(std::chrono::milliseconds(300));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     pe->stopElement();
     std::vector<logging::UnitTestEntry> entries = std::static_pointer_cast<logging::UnitTestLogger>(log)->getEntriesForFNameAndFunction("MetaDataLogger", "doCalculation");
     EXPECT_EQ(entries.size(), 2);

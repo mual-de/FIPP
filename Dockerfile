@@ -9,7 +9,7 @@ RUN apt-get -y install clang
 RUN echo 'tzdata tzdata/Areas select Europe' | debconf-set-selections
 RUN echo 'tzdata tzdata/Zones/Europe select Berlin' | debconf-set-selections
 RUN DEBIAN_FRONTEND="noninteractive" apt install -y tzdata
-RUN apt-get -y install build-essential 
+RUN apt-get -y install build-essential gdb
 RUN apt-get -y install cmake
 RUN apt-get -y install git
 RUN apt-get -y install v4l-utils

@@ -4,3 +4,4 @@ lib
 Testing
 *.vsdx
 .log
+.vscode/launch.json

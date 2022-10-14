@@ -24,6 +24,7 @@ namespace FIPP
         T m_y;
 
     public:
+        Point<T>() : m_x(static_cast<T>(0)), m_y(static_cast<T>(0)){};
         Point<T>(T x, T y);
         template <typename U>
         Point<T>(U x, U y)
@@ -38,7 +39,7 @@ namespace FIPP
             m_y = static_cast<T>(pt.m_y);
         };
         double getAbsValue();
-        inline std::string asStr(){return "x: " + std::to_string(m_x) + " - y: " + std::to_string(m_y);};
+        inline std::string asStr() { return "x: " + std::to_string(m_x) + " - y: " + std::to_string(m_y); };
         inline T getArea() { return m_x * m_y; };
         inline T getX() { return m_x; };
         inline T getY() { return m_y; };
@@ -46,6 +47,8 @@ namespace FIPP
         inline int getYInt() const { return static_cast<int>(m_y); };
         inline float getXFloat() const { return static_cast<float>(m_x); };
         inline float getYFloat() const { return static_cast<float>(m_y); };
+        inline bool operator>(Point<T> cmp) { return (m_x > cmp.m_x) && (m_y > cmp.m_y); };
+        inline bool operator<(Point<T> cmp) { return (m_x < cmp.m_x) && (m_y < cmp.m_y); };
         inline bool operator==(Point<T> cmp) { return (m_x == cmp.m_x) && (m_y == cmp.m_y); };
         inline bool operator!=(Point<T> cmp) { return !((m_x == cmp.m_x) && (m_y == cmp.m_y)); };
         template <typename U>
