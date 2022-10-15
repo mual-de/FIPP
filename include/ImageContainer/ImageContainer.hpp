@@ -7,6 +7,7 @@
 #include <mutex>
 #include <memory>
 
+
 namespace FIPP
 {
     namespace img
@@ -43,18 +44,30 @@ namespace FIPP
              */
             int m_memsize;
             std::shared_ptr<std::mutex> m_mutexPtr;
+            const unsigned int m_uuid;
 
         public:
-            ImageContainer(Point<unsigned int> size, ImageFormat fmt);
+            ImageContainer(Point<unsigned int> size, ImageFormat fmt, unsigned int uuid);
             inline Point<unsigned int> getDims() { return m_dims; };
             inline unsigned long long int getFrameNumber() { return m_frameNumber; };
             inline BackendType getBackendType() { return m_backend.type; };
             inline BackendFlags getBackendFlags() { return m_backend.flags; };
             inline ImageFormat getImgFormat() { return m_imgFormat; };
             inline BackendFlags getFlags() { return m_backend.flags; };
-            inline bool isBound() { return m_activeBound; };
-            inline void setBound() { m_activeBound = true; };
-            inline void setUnBound(){ m_activeBound = false;};
+            inline bool isBound() const { return m_activeBound; };
+            inline void setBound()
+            {
+                m_mutexPtr->lock();
+                m_activeBound = true;
+                m_mutexPtr->unlock();
+            };
+            inline void setUnBound()
+            {
+                m_mutexPtr->lock();
+                m_activeBound = false;
+                m_mutexPtr->unlock();
+            };
+            inline const unsigned int getUUID() const { return m_uuid; };
             inline std::shared_ptr<std::mutex> getMutex() { return m_mutexPtr; };
             virtual const unsigned char *getConstPtr() const = 0;
             virtual unsigned char *getPtr() const = 0;

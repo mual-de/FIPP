@@ -13,7 +13,7 @@ namespace FIPP
         {
 
         public:
-            ImageContainerCPU(Point<unsigned int> size, ImageFormat format);
+            ImageContainerCPU(Point<unsigned int> size, ImageFormat format, unsigned int uuid);
             ~ImageContainerCPU();
             const unsigned char *getConstPtr() const;
             unsigned char *getPtr() const;

@@ -34,7 +34,7 @@ TEST(Creation, bounding)
     format.bytesPerPixel = 1;
     format.imgType = img::ImageType::GRAY;
     YAML::Node node = YAML::Load("[1, 2, 3]");
-    std::shared_ptr<img::ImageContainer> pImg = std::make_shared<img::ImageContainerCPU>(size, format);
+    std::shared_ptr<img::ImageContainer> pImg = std::make_shared<img::ImageContainerCPU>(size, format,0);
     std::shared_ptr<logging::ILogger> log = std::make_shared<logging::UnitTestLogger>(logging::LogLevel::INFO);
     std::shared_ptr<pipe::IGenericPlugin> pe = std::make_shared<plugins::MetaDataLogger>(node, 1, log);
     pe->connectPredecessor(0);

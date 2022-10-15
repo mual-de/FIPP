@@ -2,7 +2,7 @@
 #include <cstring>
 using namespace FIPP::img;
 
-ImageContainerCPU::ImageContainerCPU(Point<unsigned int> size, ImageFormat format) : ImageContainer(size, format)
+ImageContainerCPU::ImageContainerCPU(Point<unsigned int> size, ImageFormat format, unsigned int uuid) : ImageContainer(size, format, uuid)
 {
     m_data = (unsigned char *)malloc(m_memsize);
 }
