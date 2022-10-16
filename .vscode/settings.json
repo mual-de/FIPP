@@ -63,7 +63,8 @@
         "cinttypes": "cpp",
         "variant": "cpp",
         "list": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "shared_mutex": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "textMateRules": [

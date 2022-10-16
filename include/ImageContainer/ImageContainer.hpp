@@ -6,7 +6,8 @@
 
 #include <mutex>
 #include <memory>
-
+#include <variant>
+#include <map>
 
 namespace FIPP
 {
@@ -20,6 +21,12 @@ namespace FIPP
             INVALID_SIZE,
             INVALID_FORMAT
         } ContainerError;
+        /**
+         * @brief Datatype for every metadata object
+         * 
+         */
+        typedef std::variant<int, float, Point<int>, Point<float>, Point<unsigned int>, std::string, std::map<std::string, std::variant<int, float, Point<int>, Point<float>, Point<unsigned int>, std::string, std::map<std::string, std::variant<int, float, Point<int>, Point<float>, Point<unsigned int>, std::string, bool>>, bool>>, bool> MetaDataSubSet;
+        typedef std::map<std::string, MetaDataSubSet> MetaDataSet;
 
         class ImageContainer
         {
@@ -30,8 +37,20 @@ namespace FIPP
              *
              */
             unsigned long long int m_frameNumber;
+            /**
+             * @brief ImageFormat of this imageContainer, can't be changed during runtime.
+             *
+             */
             ImageFormat m_imgFormat;
+            /**
+             * @brief memory pitch is provided by cuda and other libs to store data more efficient.
+             *
+             */
             unsigned int m_memoryPitch;
+            /**
+             * @brief Backendtype of this container (e.g. CUDA or CPU)
+             *
+             */
             Backend m_backend;
             /**
              * @brief Indicates if this ImageContainer is bound to an object
@@ -43,8 +62,21 @@ namespace FIPP
              *
              */
             int m_memsize;
+            /**
+             * @brief Mutex if internal data will be changed.
+             *
+             */
             std::shared_ptr<std::mutex> m_mutexPtr;
+            /**
+             * @brief uuid specific to every image pool
+             *
+             */
             const unsigned int m_uuid;
+            /**
+             * @brief map of metadata values, can have at least 3 levels of informations
+             *
+             */
+            std::shared_ptr<MetaDataSet> m_metaData;
 
         public:
             ImageContainer(Point<unsigned int> size, ImageFormat fmt, unsigned int uuid);
@@ -67,6 +99,29 @@ namespace FIPP
                 m_activeBound = false;
                 m_mutexPtr->unlock();
             };
+
+            inline std::shared_ptr<MetaDataSet> getMetaData()
+            {
+                return this->m_metaData;
+            }
+            inline void addMetaData(std::string key, MetaDataSubSet meta)
+            {
+                if (this->m_metaData == nullptr)
+                {
+                    this->m_metaData = std::make_shared<MetaDataSet>();
+                }
+                this->m_metaData->insert(key, meta);
+            }
+            inline MetaDataSet getMetaData(std::string key = "none")
+            {
+                if (key.compare("none") == 0)
+                {
+                    return m_metaData;
+                }
+                if (m_metaData.find(key) != m_metaData.end())
+                {
+                }
+            }
             inline const unsigned int getUUID() const { return m_uuid; };
             inline std::shared_ptr<std::mutex> getMutex() { return m_mutexPtr; };
             virtual const unsigned char *getConstPtr() const = 0;
