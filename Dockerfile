@@ -14,7 +14,7 @@ RUN apt-get -y install cmake
 RUN apt-get -y install git
 RUN apt-get -y install v4l-utils
 RUN apt-get -y install libopencv-dev
-RUN apt-get -Y install python3-pip
+RUN apt-get -y install python3-pip
 RUN pip install conan
 
 # Run the output program from the previous step
