@@ -2,6 +2,7 @@
 #define __IMAGE_CONTAINER_HPP__
 
 #include "ImageFormat.hpp"
+#include "MetaDataSystem.hpp"
 #include "../Point.hpp"
 
 #include <mutex>
@@ -21,12 +22,6 @@ namespace FIPP
             INVALID_SIZE,
             INVALID_FORMAT
         } ContainerError;
-        /**
-         * @brief Datatype for every metadata object
-         * 
-         */
-        typedef std::variant<int, float, Point<int>, Point<float>, Point<unsigned int>, std::string, std::map<std::string, std::variant<int, float, Point<int>, Point<float>, Point<unsigned int>, std::string, std::map<std::string, std::variant<int, float, Point<int>, Point<float>, Point<unsigned int>, std::string, bool>>, bool>>, bool> MetaDataSubSet;
-        typedef std::map<std::string, MetaDataSubSet> MetaDataSet;
 
         class ImageContainer
         {
@@ -72,11 +67,8 @@ namespace FIPP
              *
              */
             const unsigned int m_uuid;
-            /**
-             * @brief map of metadata values, can have at least 3 levels of informations
-             *
-             */
-            std::shared_ptr<MetaDataSet> m_metaData;
+            
+            std::shared_ptr<MetaDataMapNode> m_metaData;
 
         public:
             ImageContainer(Point<unsigned int> size, ImageFormat fmt, unsigned int uuid);
@@ -100,27 +92,26 @@ namespace FIPP
                 m_mutexPtr->unlock();
             };
 
-            inline std::shared_ptr<MetaDataSet> getMetaData()
+            inline std::shared_ptr<MetaDataMapNode> getMetaData()
             {
                 return this->m_metaData;
             }
-            inline void addMetaData(std::string key, MetaDataSubSet meta)
+            inline void addMetaData(std::string key, std::shared_ptr<MetaDataNode> meta)
             {
                 if (this->m_metaData == nullptr)
                 {
-                    this->m_metaData = std::make_shared<MetaDataSet>();
+                    this->m_metaData = std::make_shared<MetaDataMapNode>();
                 }
-                this->m_metaData->insert(key, meta);
+                this->m_metaData->addNode(key, meta);
             }
-            inline MetaDataSet getMetaData(std::string key = "none")
+
+            inline std::shared_ptr<MetaDataNode> getMetaData(std::string key = "none")
             {
                 if (key.compare("none") == 0)
                 {
                     return m_metaData;
                 }
-                if (m_metaData.find(key) != m_metaData.end())
-                {
-                }
+                return this->m_metaData->getNode(key);
             }
             inline const unsigned int getUUID() const { return m_uuid; };
             inline std::shared_ptr<std::mutex> getMutex() { return m_mutexPtr; };

@@ -1,6 +1,5 @@
 #ifndef __META_DATA_SYSTEM_HPP__
 #define __META_DATA_SYSTEM_HPP__
-#include <variant>
 #include <map>
 #include <memory>
 #include <vector>
@@ -23,10 +22,12 @@ namespace FIPP
             POINT_INT,
             POINT_FLOAT,
             POINT_UNSIGNED_INT,
+            STRING,
             VECTOR_INT,
             VECTOR_UNSIGNED_INT,
             VECTOR_FLOAT,
-            STRING,
+            VECTOR_CHAR,
+            VECTOR_BOOL,
             VECTOR_POINT_INT,
             VECTOR_POINT_FLOAT,
             VECTOR_POINT_UNSIGNED_INT,
@@ -34,74 +35,61 @@ namespace FIPP
             MAP,
             NONE
         } MetaTypes;
-
+        /**
+             * @brief Get Type of this node provided by @see MetaTypes
+             *
+             */
         class MetaDataNode
         {
         public:
-            virtual MetaTypes getType() = 0;
+            /**
+             * @brief Get Type of this node provided by @see MetaTypes
+             * @return node type as MetaTypes
+             */
+            virtual const MetaTypes getType() const = 0;
         };
 
-        class MetaDataMap : public MetaDataNode
-        {
-        public:
-            MetaDataMap();
-            void addValue<
-            const std::map<std::string, MetaDataNode> *getMapPtr() const
-            {
-                return &m_data;
-            };
-            MetaTypes getType() { return MetaTypes::MAP; };
-            std::map<std::string, MetaDataNode> getMap() { return m_data; };
+        class MetaDataValueNodeGeneric: public MetaDataNode{
+            public:
+                MetaDataValueNodeGeneric(MetaTypes type) : m_type(type){};
+                const MetaTypes getType() const {return this->m_type;};
+            protected:
+                const MetaTypes m_type;
+        };
 
-        private:
-            std::map<std::string, MetaDataNode> m_data;
+        
+        template <typename T>
+        class MetaDataValueNode : public MetaDataValueNodeGeneric{
+            public:
+                MetaDataValueNode(T value);
+                const T getValue() const{return this->m_value;};
+            private:
+                const T m_value;
         };
 
         template <typename T>
-        class MetaDataVec : public MetaDataNode
-        {
-        public:
-            MetaDataVec(std::vector<T> vec);
-            void addValue(T val) { this->m_vec.push_back(val); };
-            const std::vector<T> *getVectorPtr() { return &this->m_vec; };
-            std::vector<T> getVector() { return this->m_vec; };
-            MetaTypes getType() { return this->m_type; };
+        class MetaDataVectorNode : public MetaDataValueNodeGeneric{
+            public:
+                MetaDataVectorNode(std::vector<T> vector);
+                const std::vector<T> getValue() const {return this->m_values;};
+                const std::vector<T>* getValuePtr() {return &this->m_values;};
+            private:
+                const std::vector<T> m_values;
 
-        private:
-            std::vector<T> m_vec;
-            const m_type;
         };
 
-        template <typename T>
-        class MetaDataVal : public MetaDataNode
-        {
-        public:
-            MetaDataVal<T>(T val);
-            T getValue() { return this->m_val; };
-            MetaTypes getType() { return this->m_meta; };
-
-        private:
-            const T m_val;
-            const MetaTypes m_meta;
+        class MetaDataMapNode : public MetaDataNode{
+            public:
+                MetaDataMapNode();
+                const MetaTypes getType() const {return MetaTypes::MAP;};
+                void addNode(std::string key, std::shared_ptr<MetaDataNode> value);
+                void deleteNode(std::string key);
+                void copyToMap(std::shared_ptr<MetaDataMapNode> copyMap);
+                std::shared_ptr<MetaDataNode> getNode(std::string key);
+            private:
+                std::map<std::string, std::shared_ptr<MetaDataNode>> m_values;
         };
-
-        MetaDataVal<int>(int val) : m_val(val), m_type(MetaTypes::INT){};
-        MetaDataVal<float>(float val) : m_val(val), m_type(MetaTypes::FLOAT){};
-        MetaDataVal<bool>(bool val) : m_val(val), m_type(MetaTypes::BOOL){};
-        MetaDataVal<unsigned int>(unsigned int val) : m_val(val), m_type(MetaTypes::UNSIGNED_INT){};
-        MetaDataVal<char>(char val) : m_val(val), m_type(MetaTypes::CHAR){};
-        MetaDataVal<Point<int>>(Point<int> val) : m_val(val), m_type(MetaTypes::POINT_INT){};
-        MetaDataVal<Point<float>>(Point<float> val) : m_val(val), m_type(MetaTypes::POINT_FLOAT){};
-        MetaDataVal<Point<unsigned int>>(Point<unsigned int> val) : m_val(val), m_type(MetaTypes::POINT_UNSIGNED_INT){};
-        MetaDataVal<std::string>(std::string val) : m_val(val), m_type(MetaTypes::STRING){};
-
-        MetaDataVec<int>() : m_type(MetaTypes::VECTOR_INT){};
-        MetaDataVec<float>() : m_type(MetaTypes::VECTOR_FLOAT){};
-        MetaDataVec<unsigned int>() : m_type(MetaTypes::VECTOR_UNSIGNED_INT){};
-        MetaDataVec<Point<int>>() : m_type(MetaTypes::VECTOR_POINT_INT){};
-        MetaDataVec<Point<float>>() : m_type(MetaTypes::VECTOR_POINT_FLOAT){};
-        MetaDataVec<Point<unsigned int>>() : m_type(MetaTypes::VECTOR_POINT_UNSIGNED_INT){};
-        MetaDataVec<std::string>() : m_type(MetaTypes::VECTOR_STRING){};
+        
 
     }
 }
