@@ -1,0 +1,52 @@
+class Backend{
+    <<enumeration>>
+     CPU
+     CUDA
+     OPENCL
+   }
+
+   class ImageType{
+    <<enumeration>>
+    RGB
+    RGBA
+    GRAY
+    }
+   class ImageFormat{
+   + ImageType type
+   + uint8 bitDepthPerPixel
+   + uint8 bytesPerPixel
+   }
+   
+   ImageFormat --* ImageType
+   
+
+   class ImageContainer{
+    - Point dimension
+    - long long int frameNumber
+    - Backend backend
+    - uint32 flags
+    - bool active_bound
+    - ImageFormat img_format
+    - int32 memory_pitch
+    - mutex mutex
+    + getDims() Point
+    + getFrameNumber() long long int
+    + updateMemory(uchar* dataPtr, Backend backend, ImageFormat imgFmt, int32 memoryPitch)
+    + getConstPtr() uchar*
+    + getPtr() uchar*
+    + lock() bool
+    + unlock() bool
+    + boundImg() bool
+    + unboundImg() bool
+    + isBound() bool
+   }
+   ImageContainer --* ImageFormat
+   ImageContainer --* Backend
+   class ImageContainerCuda{
+     - uchar* hstPtr
+     + getHostPtr() uchar*
+     + getConstHostPtr() const uchar*
+   }
+   ImageContainer <|-- ImageContainerCuda
+   class ImagePool
+   ImagePool "many"  --* ImageContainer 
