@@ -3,10 +3,11 @@
 using namespace FIPP;
 using namespace FIPP::plugins;
 using namespace FIPP::logging;
+#define PLUGIN_NAME "MetaDataLogger"
 
-#define LOG(lvl, msg) this->m_log->log(lvl, msg, "MetaDataLogger", __func__, __LINE__, this->m_frameNumber);
+#define LOG(lvl, msg) this->m_log->log(lvl, msg, PLUGIN_NAME, __func__, __LINE__, this->m_frameNumber);
 
-MetaDataLogger::MetaDataLogger(YAML::Node config, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : GenericPluginSiSo("MetaDataLogger", elemId, log){
+MetaDataLogger::MetaDataLogger(YAML::Node config, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : GenericPluginSiSo(PLUGIN_NAME, elemId, log){
     LOG(LogLevel::INFO, "Plugin created");
     this->m_filterActivated = INPUT_FILTER_ALLOW_ALL_INPUTS;
 }

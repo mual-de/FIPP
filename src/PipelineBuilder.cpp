@@ -1,9 +1,9 @@
-#include "PluginBuilder.hpp"
+#include "PipelineBuilder.hpp"
 
 using namespace FIPP::pipe;
 #define LOG(lvl, msg) this->m_log->log(lvl, msg, __FILE__, __func__, __LINE__, 0);
 
-PipelineBuilder::PipelineBuilder(std::shared_ptr<logging::ILogger> log)
+PipelineBuilder::PipelineBuilder(std::shared_ptr<logging::ILogger> log, std::vector<std::string> pluginFolders)
 {
     this->m_log = log;
 }

@@ -34,7 +34,7 @@ namespace FIPP
         class PipelineBuilder
         {
         public:
-            PipelineBuilder(std::shared_ptr<logging::ILogger> log);
+            PipelineBuilder(std::shared_ptr<logging::ILogger> log, std::vector<std::string> path2plugins);
             /**
              * @brief Get the Pipeline Element object specified by given parameters
              *
@@ -56,6 +56,10 @@ namespace FIPP
              *
              */
             std::set<int> m_idsInUsage;
+            /**
+             * @brief map of available plugins and their correspondent constructors.
+            */
+            std::map<std::string, void*> m_plugins;
         };
     }
 }

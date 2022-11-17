@@ -28,8 +28,8 @@ namespace FIPP
         {
         public:
             GenericSink(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
-            virtual ~GenericSink(){};
-            virtual bool startElement(int predecessorId);
+            ~GenericSink(){};
+            bool startElement(int predecessorId);
             bool stopElement() = 0;
             /**
              * @brief Stop running thread.
@@ -91,6 +91,10 @@ namespace FIPP
              * 
              */
             bool m_stop;
+            /**
+             * Current state of these pipeline element
+             * @see pipe::ElementState
+            */
             ElementState m_state;
             /**
              * @brief Thread to run the doCalculation function.
