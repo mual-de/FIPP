@@ -97,7 +97,8 @@ namespace FIPP
 
             std::unique_ptr<img::ImagePool> m_pool;
             virtual void doCalculation(std::shared_ptr<img::ImageContainer> img) = 0;
-
+            virtual void initializeInterfaces() = 0;
+            virtual void closeInterfaces() = 0;
             void startThread();
             bool stopThread();
 

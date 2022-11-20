@@ -29,6 +29,7 @@ void GenericSource::startThread()
 {
     LOG(LogLevel::CONFIG, "Start Thread");
     this->m_fps_duration = std::chrono::milliseconds(static_cast<int>(ceil((1/this->m_fps)*1000)));
+    this->initializeInterfaces();
     this->m_state = ElementState::STARTING;
     this->m_stop = false;
     this->m_workerThread = std::thread(&GenericSource::run, this);
@@ -40,6 +41,7 @@ bool GenericSource::stopThread()
     this->m_state = ElementState::STOPPING;
     LOG(LogLevel::CONFIG, "Wait for join");
     this->m_workerThread.join();
+    this->closeInterfaces();
     this->m_state = ElementState::IDLE;
     return true;
 };

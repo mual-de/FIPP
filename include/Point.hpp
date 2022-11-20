@@ -13,17 +13,19 @@
 #define __POINT_HPP__
 #include <string>
 
+namespace YAML
+{
+    class Node;
+};
+
 namespace FIPP
 {
     template <typename T>
     class Point
     {
-
-    private:
+    public:
         T m_x;
         T m_y;
-
-    public:
         Point<T>() : m_x(static_cast<T>(0)), m_y(static_cast<T>(0)){};
         Point<T>(T x, T y);
         template <typename U>
@@ -40,6 +42,7 @@ namespace FIPP
         };
         double getAbsValue();
         inline std::string asStr() { return "x: " + std::to_string(m_x) + " - y: " + std::to_string(m_y); };
+        YAML::Node asYaml();
         inline T getArea() { return m_x * m_y; };
         inline T getX() { return m_x; };
         inline T getY() { return m_y; };
@@ -55,6 +58,12 @@ namespace FIPP
         inline bool operator==(Point<U> cmp) { return (m_x == static_cast<T>(cmp.m_x)) && (m_y == static_cast<T>(cmp.m_y)); };
         template <typename U>
         inline bool operator!=(Point<U> cmp) { return !((m_x == static_cast<T>(cmp.m_x)) && (m_y == static_cast<T>(cmp.m_y))); };
+    };
+
+    class PointFactory
+    {
+    public:
+        static Point<int> ptIntFromYAML(YAML::Node node);
     };
 };
 #endif

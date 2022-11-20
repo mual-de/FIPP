@@ -28,7 +28,7 @@ namespace FIPP
         {
         public:
             GenericSink(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
-            ~GenericSink(){};
+            ~GenericSink();
             bool startElement(int predecessorId);
             bool stopElement() = 0;
             /**

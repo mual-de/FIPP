@@ -18,8 +18,9 @@ option(BUILD_TESTS "Build tests" ON)
 enable_testing()
 
 add_subdirectory(src)
-add_library(FIPP src/CentralController.cpp src/PipelineBuilder.cpp)
-target_link_libraries(FIPP Point Logging ImageContainer PipelineElements yaml-cpp)
+add_library(FIPP SHARED src/CentralController.cpp src/PipelineBuilder.cpp)
+find_package(yaml-cpp)
+target_link_libraries(FIPP PUBLIC Point Logging ImageContainer PipelineElements yaml-cpp)
 set_target_properties(FIPP PROPERTIES PUBLIC_HEADER include/**)
 
 if (BUILD_TESTS)
