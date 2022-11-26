@@ -67,6 +67,67 @@ TEST(Creation, map)
     EXPECT_EQ(iCompNodePtr->getValue(), -10);
     
 }
+TEST(Creation, mapMap)
+{
+    // Expect equality.
+    img::MetaDataMapNode mapNode;
+    std::shared_ptr<img::MetaDataValueNode<int>> iNodePtr = std::make_shared<img::MetaDataValueNode<int>>(-10);
+    std::vector<float> floatTest(10,-40.00f);
+    std::shared_ptr<img::MetaDataVectorNode<float>> fNodeVecPtr = std::make_shared<img::MetaDataVectorNode<float>>(floatTest);
+    std::shared_ptr<img::MetaDataMapNode> mNodePtr = std::make_shared<img::MetaDataMapNode>();
+    mNodePtr->addNode("integer", iNodePtr);
+    mNodePtr->addNode("vector", fNodeVecPtr);
+    mapNode.addNode("subMap", mNodePtr);
+    EXPECT_EQ(mapNode.getNode("subMap")->getType(), img::MetaTypes::MAP);
+    std::shared_ptr<img::MetaDataMapNode> mCompNode = std::dynamic_pointer_cast<img::MetaDataMapNode>(mapNode.getNode("subMap")); 
+    std::shared_ptr<img::MetaDataValueNode<int>> iCompNodePtr = std::dynamic_pointer_cast<img::MetaDataValueNode<int>>(mCompNode->getNode("integer"));
+    EXPECT_EQ(iCompNodePtr->getValue(), -10);
+    
+}
+
+TEST(Copy, map)
+{
+    // Expect equality.
+    img::MetaDataMapNode mapNode;
+    std::shared_ptr<img::MetaDataMapNode> mNode2Ptr = std::make_shared<img::MetaDataMapNode>();
+    std::shared_ptr<img::MetaDataValueNode<int>> iNodePtr = std::make_shared<img::MetaDataValueNode<int>>(-10);
+    std::vector<float> floatTest(10,-40.00f);
+    std::shared_ptr<img::MetaDataVectorNode<float>> fNodeVecPtr = std::make_shared<img::MetaDataVectorNode<float>>(floatTest);
+    std::shared_ptr<img::MetaDataMapNode> mNodePtr = std::make_shared<img::MetaDataMapNode>();
+    mNodePtr->addNode("integer", iNodePtr);
+    mNodePtr->addNode("vector", fNodeVecPtr);
+    mapNode.addNode("subMap", mNodePtr);
+    mapNode.copyToMap(mNode2Ptr);
+    EXPECT_EQ(mNode2Ptr->getNode("subMap")->getType(), img::MetaTypes::MAP);
+    std::shared_ptr<img::MetaDataMapNode> mCompNode = std::dynamic_pointer_cast<img::MetaDataMapNode>(mNode2Ptr->getNode("subMap")); 
+    std::shared_ptr<img::MetaDataValueNode<int>> iCompNodePtr = std::dynamic_pointer_cast<img::MetaDataValueNode<int>>(mCompNode->getNode("integer"));
+    EXPECT_EQ(iCompNodePtr->getValue(), -10);
+}
+
+/**
+ * Copy a map from one to another node ptr.
+ * Delete one leaf of the old map and check if it still exists in the copied map
+*/
+TEST(Copy, mapWithDeletedElement)
+{
+    // Expect equality.
+    img::MetaDataMapNode mapNode;
+    std::shared_ptr<img::MetaDataMapNode> mNode2Ptr = std::make_shared<img::MetaDataMapNode>();
+    std::shared_ptr<img::MetaDataValueNode<int>> iNodePtr = std::make_shared<img::MetaDataValueNode<int>>(-10);
+    std::vector<float> floatTest(10,-40.00f);
+    std::shared_ptr<img::MetaDataVectorNode<float>> fNodeVecPtr = std::make_shared<img::MetaDataVectorNode<float>>(floatTest);
+    std::shared_ptr<img::MetaDataMapNode> mNodePtr = std::make_shared<img::MetaDataMapNode>();
+    mNodePtr->addNode("integer", iNodePtr);
+    mNodePtr->addNode("vector", fNodeVecPtr);
+    mapNode.addNode("subMap", mNodePtr);
+    mapNode.copyToMap(mNode2Ptr);
+    mNodePtr->deleteNode("integer");
+    EXPECT_EQ(mNode2Ptr->getNode("subMap")->getType(), img::MetaTypes::MAP);
+    std::shared_ptr<img::MetaDataMapNode> mCompNode = std::dynamic_pointer_cast<img::MetaDataMapNode>(mNode2Ptr->getNode("subMap")); 
+    std::shared_ptr<img::MetaDataValueNode<int>> iCompNodePtr = std::dynamic_pointer_cast<img::MetaDataValueNode<int>>(mCompNode->getNode("integer"));
+    EXPECT_EQ(iCompNodePtr->getValue(), -10);
+    EXPECT_EQ(mNodePtr->getNode("integer"), nullptr);
+}
 
 int main(int argc, char **argv)
 {
