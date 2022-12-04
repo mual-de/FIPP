@@ -13,14 +13,14 @@ GenericPluginSiSoWP::GenericPluginSiSoWP(std::string elemName, int elemId, std::
     this->m_predecessorId = -1;
 }
 
-bool GenericPluginSiSoWP::startElement(int predecessorId)
+StartState GenericPluginSiSoWP::startElement(int predecessorId)
 {
     LOG(LogLevel::ERROR, "predecessor id: " + std::to_string(predecessorId));
     LOG(LogLevel::ERROR, "predecessor internal id: " + std::to_string(m_predecessorId));
     if (predecessorId != this->m_predecessorId)
     {
         LOG(LogLevel::ERROR, "Wrong predecessor");
-        return false;
+        return StartState::WRONG_PREDECESSOR;
     }
     if(this->m_pool.get() != nullptr){
         LOG(LogLevel::INFO, "pool hasn't been reseted yet, reset is done by starter");
@@ -32,8 +32,10 @@ bool GenericPluginSiSoWP::startElement(int predecessorId)
     if (this->m_successor != nullptr)
     {
         return this->m_successor->startElement(this->m_elemId);
+    }else{
+        return StartState::STARTED;
     }
-    return true;
+    return StartState::START_ERROR;
 }
 
 bool GenericPluginSiSoWP::interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId)
@@ -57,7 +59,7 @@ bool GenericPluginSiSoWP::interogateConnection(img::ImageContainerConfig imgConf
     return false;
 }
 
-bool GenericPluginSiSoWP::stopElement()
+StopState GenericPluginSiSoWP::stopElement()
 {
     this->stopThread();
     LOG(LogLevel::ERROR, "stop running element");
@@ -66,7 +68,10 @@ bool GenericPluginSiSoWP::stopElement()
         return this->m_successor->stopElement();
     }
     this->m_pool.reset();
-    return true;
+    if(this->m_successor == nullptr){
+        return StopState::STOPPED;
+    }
+    return StopState::STOP_ERROR;
 }
 
 void GenericPluginSiSoWP::connectPredecessor(int elemId)

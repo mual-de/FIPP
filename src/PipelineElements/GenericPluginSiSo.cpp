@@ -13,14 +13,14 @@ GenericPluginSiSo::GenericPluginSiSo(std::string elemName, int elemId, std::shar
     this->m_predecessorId = -1;
 }
 
-bool GenericPluginSiSo::startElement(int predecessorId)
+StartState GenericPluginSiSo::startElement(int predecessorId)
 {
     LOG(LogLevel::ERROR, "predecessor id: " + std::to_string(predecessorId));
     LOG(LogLevel::ERROR, "predecessor internal id: " + std::to_string(m_predecessorId));
     if (predecessorId != this->m_predecessorId)
     {
         LOG(LogLevel::ERROR, "Wrong predecessor");
-        return false;
+        return StartState::WRONG_PREDECESSOR;
     }
     this->startThread();
     // Needed for tests without connected output!
@@ -28,7 +28,7 @@ bool GenericPluginSiSo::startElement(int predecessorId)
     {
         return this->m_successor->startElement(this->m_elemId);
     }
-    return true;
+    return StartState::START_ERROR;
 }
 
 bool GenericPluginSiSo::interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId)
@@ -52,15 +52,15 @@ bool GenericPluginSiSo::interogateConnection(img::ImageContainerConfig imgConfig
     return false;
 }
 
-bool GenericPluginSiSo::stopElement()
+StopState GenericPluginSiSo::stopElement()
 {
     this->stopThread();
-    LOG(LogLevel::ERROR, "stop running element");
+    LOG(LogLevel::INFO, "stop running element");
     if (this->m_successor != nullptr)
     {
         return this->m_successor->stopElement();
     }
-    return true;
+    return StopState::STOPPED;
 }
 
 void GenericPluginSiSo::connectPredecessor(int elemId)

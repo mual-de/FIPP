@@ -9,6 +9,8 @@ set(PipelineElementsHeaders
     "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/GenericPluginSiSo.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/GenericPluginSiSoWP.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/GenericSink.hpp"
+    "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/GenericSinkSi.hpp"
+    "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/GenericSinkMi.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/GenericSource.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/IGenericPipelineElement.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/IGenericPlugin.hpp"

@@ -31,8 +31,8 @@ namespace FIPP
         public:
             GenericPluginSiSoWP(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             virtual ~GenericPluginSiSoWP(){};
-            bool startElement(int predecessorId);
-            bool stopElement();
+            StartState startElement(int predecessorId);
+            StopState stopElement();
             void connectPredecessor(int elemId);
             void connectSuccessor(std::shared_ptr<IGenericSink> elem);
             bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId);

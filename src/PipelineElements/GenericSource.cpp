@@ -64,7 +64,7 @@ void GenericSource::run()
     LOG(LogLevel::CONFIG, "set in not running state!");
 }
 
-bool GenericSource::startElement(int predecessorId)
+StartState GenericSource::startElement(int predecessorId)
 {
     LOG(LogLevel::INFO, "start element");
     this->startThread();
@@ -73,9 +73,9 @@ bool GenericSource::startElement(int predecessorId)
     {
         return this->m_successor->startElement(this->m_elemId);
     }
-    return true;
+    return StartState::STARTED;
 }
-bool GenericSource::stopElement()
+StopState GenericSource::stopElement()
 {
     this->stopThread();
     LOG(LogLevel::ERROR, "stop running element");
@@ -83,5 +83,5 @@ bool GenericSource::stopElement()
     {
         return this->m_successor->stopElement();
     }
-    return true;
+    return StopState::STOPPED;
 };
