@@ -73,6 +73,33 @@ TEST(YamlTest, Set){
   EXPECT_EQ(test.getY(), -20);
 }
 
+TEST(OperatorTest, MUL){
+  Point<int> test(10,20);
+  Point<int> result = test * 2;
+  EXPECT_EQ(result.getX(), 20);
+  EXPECT_EQ(result.getY(), 40);
+}
+TEST(OperatorTest, DIV){
+  Point<int> test(10,20);
+  Point<int> result = test / 2;
+  EXPECT_EQ(result.getX(), 5);
+  EXPECT_EQ(result.getY(), 10);
+}
+TEST(OperatorTest, ADD){
+  Point<int> test(10,20);
+  Point<int> result = test + test;
+  EXPECT_EQ(result.getX(), 20);
+  EXPECT_EQ(result.getY(), 40);
+}
+
+TEST(OperatorTest, SUB){
+  Point<int> test(10,20);
+  Point<int> result = test - test;
+  EXPECT_EQ(result.getX(), 0);
+  EXPECT_EQ(result.getY(), 0);
+}
+
+
 int main(int argc, char **argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
