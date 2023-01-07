@@ -13,6 +13,8 @@ GenericSource::GenericSource(std::string elemName, int elemId, std::shared_ptr<F
     m_frameNumber = 0;
     m_stop = false;
     m_state = ElementState::IDLE;
+    // Always start by frame number, thread restart doesn't reset this counter for better error tracing. 
+    this->m_frameNumber = 0;
 }
 
 GenericSource::~GenericSource()
@@ -29,6 +31,7 @@ void GenericSource::startThread()
 {
     LOG(LogLevel::CONFIG, "Start Thread");
     this->m_fps_duration = std::chrono::milliseconds(static_cast<int>(ceil((1/this->m_fps)*1000)));
+    
     this->initializeInterfaces();
     this->m_state = ElementState::STARTING;
     this->m_stop = false;
@@ -55,10 +58,12 @@ void GenericSource::run()
         auto sleepTimer = std::chrono::steady_clock::now() + this->m_fps_duration;
         // get next free image
         std::shared_ptr<img::ImageContainer> img = this->m_pool->getNextFreeImage();
+        img->setFrameNumber(this->m_frameNumber);
         // implemented by derived class
         this->doCalculation(img);
         // and out to pipe
         this->m_successor->addImageToInputPipe(img);
+        this->m_frameNumber ++;
         std::this_thread::sleep_until(sleepTimer);
     }
     LOG(LogLevel::CONFIG, "set in not running state!");
