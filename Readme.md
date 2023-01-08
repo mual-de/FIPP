@@ -1,3 +1,9 @@
+# FIPP
+Fast Image Processing Pipeline Systeme implemented in C++17 without bigger dependencies. See wiki for further informations.
+Plugins for FIPP are located in [FIPP-Plugins](https://github.com/mual-de/FIPP-Plugins).
+FIPP imageProcessing Library is planned as direct interface between FIPP and opencv/nppi.
+
+
 ## Build
 
 Before building this project, conan has to be configured. Change `~/.conan/profiles/default` with nano to:
