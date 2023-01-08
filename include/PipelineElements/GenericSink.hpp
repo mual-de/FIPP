@@ -29,20 +29,6 @@ namespace FIPP
         public:
             GenericSink(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             ~GenericSink();
-            bool startElement(int predecessorId);
-            bool stopElement() = 0;
-            /**
-             * @brief Stop running thread.
-             * 
-             * @return true 
-             * @return false 
-             */
-            bool stopThread(){
-                this->m_stop = true;
-                this->m_cvNotify.notify_one();
-                this->m_workerThread.join();
-                return true;
-            };
             void addImageToInputPipe(std::shared_ptr<img::ImageContainer> img);
                         /**
              * @brief get the object name set by the derived class (e.g. crop-plugin).
@@ -59,6 +45,8 @@ namespace FIPP
 
             inline ElementTypes getElementType(){return ElementTypes::SINK;};
             inline ElementState getState(){return this->m_state;};
+            virtual bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId) = 0;
+
 
         protected:
             const std::string m_elemName;
@@ -74,6 +62,7 @@ namespace FIPP
              * 
              */
             unsigned long long int m_frameNumber;
+            
 
             std::mutex m_inputLockMutex;
             /**
@@ -107,7 +96,10 @@ namespace FIPP
              * @param img 
              */
             virtual void doCalculation(std::shared_ptr<img::ImageContainer> img) = 0;
+            virtual void initializeInterfaces() = 0;
+            virtual void closeInterfaces() = 0;
             void startThread();
+            bool stopThread();
         private:
             void run();
             bool m_newImgArrived;

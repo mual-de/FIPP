@@ -21,8 +21,8 @@ namespace FIPP
         public:
             GenericSource(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             ~GenericSource();
-            virtual bool startElement(int predecessorId) = 0;
-            virtual bool stopElement() = 0;
+            StartState startElement(int predecessorId);
+            StopState stopElement();
             /**
              * @brief get the object name set by the derived class (e.g. crop-plugin).
              *

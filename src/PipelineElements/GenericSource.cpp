@@ -13,6 +13,8 @@ GenericSource::GenericSource(std::string elemName, int elemId, std::shared_ptr<F
     m_frameNumber = 0;
     m_stop = false;
     m_state = ElementState::IDLE;
+    // Always start by frame number, thread restart doesn't reset this counter for better error tracing. 
+    this->m_frameNumber = 0;
 }
 
 GenericSource::~GenericSource()
@@ -29,6 +31,7 @@ void GenericSource::startThread()
 {
     LOG(LogLevel::CONFIG, "Start Thread");
     this->m_fps_duration = std::chrono::milliseconds(static_cast<int>(ceil((1/this->m_fps)*1000)));
+    
     this->initializeInterfaces();
     this->m_state = ElementState::STARTING;
     this->m_stop = false;
@@ -55,16 +58,18 @@ void GenericSource::run()
         auto sleepTimer = std::chrono::steady_clock::now() + this->m_fps_duration;
         // get next free image
         std::shared_ptr<img::ImageContainer> img = this->m_pool->getNextFreeImage();
+        img->setFrameNumber(this->m_frameNumber);
         // implemented by derived class
         this->doCalculation(img);
         // and out to pipe
         this->m_successor->addImageToInputPipe(img);
+        this->m_frameNumber ++;
         std::this_thread::sleep_until(sleepTimer);
     }
     LOG(LogLevel::CONFIG, "set in not running state!");
 }
 
-bool GenericSource::startElement(int predecessorId)
+StartState GenericSource::startElement(int predecessorId)
 {
     LOG(LogLevel::INFO, "start element");
     this->startThread();
@@ -73,9 +78,9 @@ bool GenericSource::startElement(int predecessorId)
     {
         return this->m_successor->startElement(this->m_elemId);
     }
-    return true;
+    return StartState::STARTED;
 }
-bool GenericSource::stopElement()
+StopState GenericSource::stopElement()
 {
     this->stopThread();
     LOG(LogLevel::ERROR, "stop running element");
@@ -83,5 +88,5 @@ bool GenericSource::stopElement()
     {
         return this->m_successor->stopElement();
     }
-    return true;
+    return StopState::STOPPED;
 };

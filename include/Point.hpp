@@ -58,6 +58,18 @@ namespace FIPP
         inline bool operator==(Point<U> cmp) { return (m_x == static_cast<T>(cmp.m_x)) && (m_y == static_cast<T>(cmp.m_y)); };
         template <typename U>
         inline bool operator!=(Point<U> cmp) { return !((m_x == static_cast<T>(cmp.m_x)) && (m_y == static_cast<T>(cmp.m_y))); };
+        template <typename U>
+        inline Point<T> operator/(const U div) { return Point<T>(m_x / static_cast<T>(div), m_y / static_cast<T>(div)); };
+        inline Point<T> operator/(const T div) { return Point<T>(m_x / div, m_y / div); };
+        template <typename U>
+        inline Point<T> operator*(const U mul) { return Point<T>(m_x * static_cast<T>(mul), m_y * static_cast<T>(mul)); };
+        inline Point<T> operator*(const T mul) { return Point<T>(m_x * mul, m_y * mul); };
+        template <typename U>
+        inline Point<T> operator+(const Point<U> add) { return Point<T>(m_x + static_cast<T>(add.getX()), m_y + static_cast<T>(add.getY())); };
+        inline Point<T> operator+(const Point<T> add) { return Point<T>(m_x + add.m_x, m_y + add.m_y); };
+        template <typename U>
+        inline Point<T> operator-(const Point<U> sub) { return Point<T>(m_x - static_cast<T>(sub.getX()), m_y - static_cast<T>(sub.getY())); };
+        inline Point<T> operator-(const Point<T> sub) { return Point<T>(m_x - sub.m_x , m_y - sub.m_y); };
     };
 
     class PointFactory

@@ -56,6 +56,19 @@ namespace FIPP
             PAUSED
         } ElementState;
 
+        typedef enum e_startState{
+            STARTED,
+            PENDING,
+            WRONG_PREDECESSOR,
+            START_ERROR
+        } StartState;
+
+        typedef enum e_stopState{
+            STOPPED,
+            STOP_ERROR,
+            ALREADY_STOPPED
+        } StopState;
+
         class IGenericPipelineElement
         {
         public:
@@ -66,8 +79,8 @@ namespace FIPP
              * @return true 
              * @return false 
              */
-            virtual bool startElement(int predecessorId) = 0;
-            virtual bool stopElement() = 0;
+            virtual StartState startElement(int predecessorId) = 0;
+            virtual StopState stopElement() = 0;
             /**
              * Get current state from internal state machine.
             */
