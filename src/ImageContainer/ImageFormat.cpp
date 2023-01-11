@@ -1,7 +1,7 @@
 #include "ImageContainer/ImageFormat.hpp"
 #include <yaml-cpp/yaml.h>
-using namespace FIPP::img;
-ImageContainerConfig getContainerConfigFromYaml(YAML::Node containerNode)
+
+FIPP::img::ImageContainerConfig FIPP::img::getContainerConfigFromYaml(YAML::Node containerNode)
 {
     ImageContainerConfig conf;
     if (!containerNode["dimensions"])
