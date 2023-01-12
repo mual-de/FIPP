@@ -61,15 +61,7 @@ jobs:
         run: |
           sudo apt-get install -y python3 python3-pip
           pip install conan
-          echo "[settings]" >> "~/.conan/profiles/default"
-          echo "os=Linux"  >> "~/.conan/profiles/default"
-          echo "os_build=Linux" >> "~/.conan/profiles/default"
-          echo "arch=x86_64" >> "~/.conan/profiles/default"
-          echo "arch_build=x86_64" >> "~/.conan/profiles/default"
-          echo "compiler=gcc" >> "~/.conan/profiles/default"
-          echo "compiler.version=11" >> "~/.conan/profiles/default"
-          echo "compiler.libcxx=libstdc++11" >> "~/.conan/profiles/default"
-          echo "build_type=Debug" >> "~/.conan/profiles/default"
+          conan profile update settings.compiler.libcxx=libstdc++11 default
           conan install ..
 
       # - name: Log the CMake version
