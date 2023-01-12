@@ -64,6 +64,7 @@ jobs:
           conan install ..
           conan profile update settings.compiler.libcxx=libstdc++11 default
           conan install ..
+        working-directory: ${{ env.build_dir }}
 
       # - name: Log the CMake version
       #   run: cmake --version
