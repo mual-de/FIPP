@@ -1,0 +1,110 @@
+name: CMake-based build on (Ubuntu) Linux
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: [ main ]
+    paths:
+      - "**"
+      - "!.github/**"
+
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "**"
+      - "!.github/**"
+
+env:
+  build_type: "Release"      
+  build_examples: "ON"      
+  makeflags: "--no-print-directory"
+
+jobs:
+  build:
+    
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - os: ubuntu-22.04
+          cuda: "11.2"
+          gcc: 10
+          shell: "bash"
+          cmake-generator: "Unix Makefiles"
+        - os: ubuntu-20.04
+          cuda: "11.6"
+          gcc: 10
+          shell: "bash"
+          cmake-generator: "Unix Makefiles"
+    env:
+      build_dir: "build"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install CUDA on Ubuntu systems
+        if: contains(matrix.os, 'ubuntu')
+        env:
+          cuda: ${{ matrix.cuda }}
+        run: .github/action-scripts/install-cuda-ubuntu.sh
+        shell: bash
+
+      - name: Install/Select GCC and G++
+        if: ${{ matrix.os-type == 'ubuntu' }}
+        run: |
+          sudo apt-get install -y gcc-${{ matrix.gcc }} g++-${{ matrix.gcc }}
+          echo "CC=/usr/bin/gcc-${{ matrix.gcc }}" >> $GITHUB_ENV
+          echo "CXX=/usr/bin/g++-${{ matrix.gcc }}" >> $GITHUB_ENV
+          echo "CUDAHOSTCXX=/usr/bin/g++-${{ matrix.gcc }}" >> $GITHUB_ENV
+      - name: Install conan
+        run: |
+          sudo apt-get install -y python3 python3-pip
+          pip install conan
+          echo "[settings]" >> "~/.conan/profiles/default"
+          echo "os=Linux"  >> "~/.conan/profiles/default"
+          echo "os_build=Linux" >> "~/.conan/profiles/default"
+          echo "arch=x86_64" >> "~/.conan/profiles/default"
+          echo "arch_build=x86_64" >> "~/.conan/profiles/default"
+          echo "compiler=gcc" >> "~/.conan/profiles/default"
+          echo "compiler.version=11" >> "~/.conan/profiles/default"
+          echo "compiler.libcxx=libstdc++11" >> "~/.conan/profiles/default"
+          echo "build_type=Debug" >> "~/.conan/profiles/default"
+          conan install ..
+
+      # - name: Log the CMake version
+      #   run: cmake --version
+
+      - name: CMake configure
+        id: configure
+        run: cmake -B ${{ env.build_dir }} -G "${{ matrix.cmake-generator }}" ${{ matrix.platform-flag }} -DCMAKE_BUILD_TYPE=${{ env.build_type }} -DCAW_BUILD_EXAMPLES=ON
+
+      - name: Process potential errors in CMake configuration
+        if: ${{ failure() && steps.configure.outcome == 'failure' }}
+        working-directory: ${{ env.build_dir }}
+        run: |
+          if [[ -f "CMakeFiles/CMakeOutput.log" ]]; then
+            echo "---- CMakeFiles/CMakeOutput.log"
+            cat CMakeFiles/CMakeOutput.log
+            echo "----"
+          fi
+          if [[ -f "CMakeFiles/CMakeError.log" ]]; then
+            echo "---- CMakeFiles/CMakeError.log"
+            cat CMakeFiles/CMakeError.log
+            echo "----"
+          fi
+
+      - name: Build
+        env:
+          MAKEFLAGS: "--no-print-dir"
+        # Note: `--config` will do nothing with single-config generation, e.g. GNU Make.
+        run: cmake --build ${{env.build_dir}} --config ${{ env.build_type }} --verbose --parallel `nproc`
+
+      # - name: Test
+        # working-directory: ${{github.workspace}}/build
+        # There are currently no unit tests defined by the cmake configuration!
+        # ... plus, the tests will be mostly useless on a machine without a GPU,
+        # so we can't really test.
+        # run: ctest -C ${{env.BUILD_TYPE}}
+      
+
