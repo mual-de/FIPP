@@ -59,7 +59,7 @@ jobs:
           echo "CUDAHOSTCXX=/usr/bin/g++-${{ matrix.gcc }}" >> $GITHUB_ENV
 
       - name: Create build dir
-        run: make build
+        run: mkdir build
       - name: Install conan
         run: |
           sudo apt-get install -y python3 python3-pip
