@@ -1,4 +1,4 @@
-name: CMake-based build on (Ubuntu) Linux
+name: Build and Test
 
 on:
   workflow_dispatch:
@@ -97,11 +97,8 @@ jobs:
         # Note: `--config` will do nothing with single-config generation, e.g. GNU Make.
         run: cmake --build ${{env.build_dir}} --config ${{ env.build_type }} --verbose --parallel `nproc`
 
-      # - name: Test
+      - name: Test
         # working-directory: ${{github.workspace}}/build
-        # There are currently no unit tests defined by the cmake configuration!
-        # ... plus, the tests will be mostly useless on a machine without a GPU,
-        # so we can't really test.
-        # run: ctest -C ${{env.BUILD_TYPE}}
+        run: ctest -C ${{env.BUILD_TYPE}}
       
 

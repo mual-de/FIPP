@@ -3,6 +3,8 @@ Fast Image Processing Pipeline Systeme implemented in C++17 without bigger depen
 Plugins for FIPP are located in [FIPP-Plugins](https://github.com/mual-de/FIPP-Plugins).
 FIPP imageProcessing Library is planned as direct interface between FIPP and opencv/nppi.
 
+![Build and Test](https://github.com/mual-de/FIPP/actions/workflows/build_cpp.yml/badge.svg)
+
 
 ## Build
 
