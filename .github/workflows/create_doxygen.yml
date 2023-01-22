@@ -1,7 +1,4 @@
 name: Deploy Doxygen Documentation to github-pages
-branding:
-  icon: "upload-cloud"
-  color: "purple"
 
 on:
   push:
