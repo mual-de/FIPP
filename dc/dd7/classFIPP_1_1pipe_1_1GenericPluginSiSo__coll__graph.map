@@ -1,0 +1,9 @@
+<map id="FIPP::pipe::GenericPluginSiSo" name="FIPP::pipe::GenericPluginSiSo">
+<area shape="rect" id="node1" title=" " alt="" coords="101,380,313,407"/>
+<area shape="rect" id="node2" href="$df/dde/classFIPP_1_1pipe_1_1GenericPlugin.html" title=" " alt="" coords="17,291,201,317"/>
+<area shape="rect" id="node3" href="$d4/d37/classFIPP_1_1pipe_1_1IGenericPlugin.html" title=" " alt="" coords="11,179,199,206"/>
+<area shape="rect" id="node4" href="$dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html" title=" " alt="" coords="17,96,193,123"/>
+<area shape="rect" id="node5" href="$d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html" title=" " alt="" coords="5,5,205,47"/>
+<area shape="rect" id="node6" href="$d5/d28/classFIPP_1_1pipe_1_1InputFilter.html" title=" " alt="" coords="227,291,387,317"/>
+<area shape="rect" id="node7" href="$d7/dcd/classFIPP_1_1Point.html" title=" " alt="" coords="224,172,389,213"/>
+</map>

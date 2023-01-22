@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$d1/d23/classFIPP_1_1img_1_1MetaDataNode.html" title="Get Type of this node provided by." alt="" coords="5,35,195,61"/>
+<area shape="rect" id="node2" href="$db/dc6/classFIPP_1_1img_1_1MetaDataMapNode.html" title="A node of MetaDataNode containing a std::share_ptr&lt;std::map&lt;std::string, std::shared_ptr&lt;MetaDataNode..." alt="" coords="243,5,460,32"/>
+<area shape="rect" id="node3" href="$dd/db4/classFIPP_1_1img_1_1MetaDataValueNodeGeneric.html" title="Generic Value Node to store information about the Node type next to values." alt="" coords="256,57,447,98"/>
+<area shape="rect" id="node4" href="$da/d0e/classFIPP_1_1img_1_1MetaDataValueNode.html" title="Implementation of MetaDataValueNodeGeneric for simple values (int, float etc.)" alt="" coords="511,23,701,65"/>
+<area shape="rect" id="node5" href="$df/dcc/classFIPP_1_1img_1_1MetaDataVectorNode.html" title="Implementation of MetaDataValueNodeGeneric for simple vectors (int, float etc.)" alt="" coords="508,89,704,130"/>
+</map>

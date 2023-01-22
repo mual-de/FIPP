@@ -1,0 +1,7 @@
+<map id="FIPP::img::MetaDataNode" name="FIPP::img::MetaDataNode">
+<area shape="rect" id="node1" title="Get Type of this node provided by." alt="" coords="133,5,322,32"/>
+<area shape="rect" id="node2" href="$db/dc6/classFIPP_1_1img_1_1MetaDataMapNode.html" title="A node of MetaDataNode containing a std::share_ptr&lt;std::map&lt;std::string, std::shared_ptr&lt;MetaDataNode..." alt="" coords="5,87,223,114"/>
+<area shape="rect" id="node3" href="$dd/db4/classFIPP_1_1img_1_1MetaDataValueNodeGeneric.html" title="Generic Value Node to store information about the Node type next to values." alt="" coords="247,80,437,121"/>
+<area shape="rect" id="node4" href="$da/d0e/classFIPP_1_1img_1_1MetaDataValueNode.html" title="Implementation of MetaDataValueNodeGeneric for simple values (int, float etc.)" alt="" coords="137,169,328,211"/>
+<area shape="rect" id="node5" href="$df/dcc/classFIPP_1_1img_1_1MetaDataVectorNode.html" title="Implementation of MetaDataValueNodeGeneric for simple vectors (int, float etc.)" alt="" coords="352,169,548,211"/>
+</map>

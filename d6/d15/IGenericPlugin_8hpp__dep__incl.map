@@ -1,0 +1,6 @@
+<map id="include/PipelineElements/IGenericPlugin.hpp" name="include/PipelineElements/IGenericPlugin.hpp">
+<area shape="rect" id="node1" title="Interface for a Generic Plugin as PipelineElement." alt="" coords="112,5,299,47"/>
+<area shape="rect" id="node2" href="$d5/d7a/GenericPlugin_8hpp.html" title="Implements a GenericPlugin." alt="" coords="112,95,299,136"/>
+<area shape="rect" id="node3" href="$d8/d88/GenericPluginSiSo_8hpp.html" title="Generic Plugin with Single Input and Single Output." alt="" coords="5,184,192,225"/>
+<area shape="rect" id="node4" href="$d0/d44/GenericPluginSiSoWP_8hpp.html" title="Generic Plugin Single Input Single Outpur with ImagePool." alt="" coords="217,184,407,225"/>
+</map>

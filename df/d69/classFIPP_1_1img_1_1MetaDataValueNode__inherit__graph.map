@@ -1,0 +1,5 @@
+<map id="FIPP::img::MetaDataValueNode&lt; T &gt;" name="FIPP::img::MetaDataValueNode&lt; T &gt;">
+<area shape="rect" id="node1" title="Implementation of MetaDataValueNodeGeneric for simple values (int, float etc.)" alt="" coords="5,169,196,211"/>
+<area shape="rect" id="node2" href="$dd/db4/classFIPP_1_1img_1_1MetaDataValueNodeGeneric.html" title="Generic Value Node to store information about the Node type next to values." alt="" coords="5,80,196,121"/>
+<area shape="rect" id="node3" href="$d1/d23/classFIPP_1_1img_1_1MetaDataNode.html" title="Get Type of this node provided by." alt="" coords="6,5,195,32"/>
+</map>

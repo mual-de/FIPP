@@ -1,0 +1,14 @@
+<map id="include/ImageContainer/ImagePool.hpp" name="include/ImageContainer/ImagePool.hpp">
+<area shape="rect" id="node1" title="Implementation of an ImagePool to provide access to ImageContainers preallocated before pipeline star..." alt="" coords="261,5,439,47"/>
+<area shape="rect" id="node2" href="$d5/da6/ImageFormat_8hpp.html" title="All definitions for image formats and backend types." alt="" coords="5,169,143,196"/>
+<area shape="rect" id="node7" href="$db/dd1/ImageContainer_8hpp.html" title=" " alt="" coords="273,95,427,121"/>
+<area shape="rect" id="node10" title=" " alt="" coords="579,244,641,271"/>
+<area shape="rect" id="node3" href="$d4/d76/Point_8hpp.html" title="Type Definition for 2&#45;Dimension Point type (also used for 2&#45;D dimensions etc.)" alt="" coords="224,244,319,271"/>
+<area shape="rect" id="node5" title=" " alt="" coords="149,244,199,271"/>
+<area shape="rect" id="node6" title=" " alt="" coords="31,244,117,271"/>
+<area shape="rect" id="node4" title=" " alt="" coords="242,319,301,345"/>
+<area shape="rect" id="node8" href="$db/d46/MetaDataSystem_8hpp.html" title="Implementation for a MetaDataSystem to store meta data next to image data in ImageContainer." alt="" coords="269,169,431,196"/>
+<area shape="rect" id="node9" title=" " alt="" coords="386,244,463,271"/>
+<area shape="rect" id="node11" title=" " alt="" coords="506,169,570,196"/>
+<area shape="rect" id="node12" title=" " alt="" coords="595,169,663,196"/>
+</map>
