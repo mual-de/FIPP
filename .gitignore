@@ -1,4 +1,7 @@
 build
+doc/html
+doc/latex
+doc/diagrams
 _deps
 lib
 Testing

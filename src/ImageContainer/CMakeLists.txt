@@ -1,5 +1,9 @@
 project(ImageContainer VERSION 0.1.0)
+if(ENABLE_CUDA)
+add_library(ImageContainer SHARED ImageContainer.cpp ImageContainerCPU.cpp ImageContainerCUDA.cpp ImagePool.cpp MetaDataSystem.cpp ImageFormat.cpp)
+else()
 add_library(ImageContainer SHARED ImageContainer.cpp ImageContainerCPU.cpp ImagePool.cpp MetaDataSystem.cpp ImageFormat.cpp)
+endif()
 find_package(yaml-cpp)
 target_include_directories(ImageContainer PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../include>  
