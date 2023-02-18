@@ -1,6 +1,7 @@
 #ifndef __GENERIC_SINK_SI_HPP__
 #define __GENERIC_SINK_SI_HPP__
 #include "GenericSink.hpp"
+
 #include "../Logging/ILogging.hpp"
 #define LOG(lvl, msg) this->m_log->log(lvl, msg, "GenericSinkSi", __func__, __LINE__, this->m_frameNumber);
 namespace FIPP
@@ -39,8 +40,29 @@ namespace FIPP
                 return StopState::STOPPED;
             };
 
+            void connectPredecessor(int elemId)
+            {
+                if (this->m_predeccessor == -1)
+                {
+                    this->m_predeccessor = elemId;
+                }
+                else
+                {
+                    if (this->m_predeccessor == elemId)
+                    {
+                        LOG(FIPP::logging::WARNING, "connect predecessor called twice!");
+                    }
+                    else
+                    {
+                        LOG(FIPP::logging::ERROR, "Element id already set");
+                        throw std::invalid_argument("Element id already set!");
+                    }
+                }
+            };
+            bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId);
         private:
-            int m_predeccessor;
+            int m_predeccessor = -1;
+            
         };
     };
 };

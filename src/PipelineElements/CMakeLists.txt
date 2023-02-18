@@ -1,5 +1,5 @@
 project(PipelineElements)
-add_library(PipelineElements SHARED GenericSource.cpp GenericSink.cpp GenericPlugin.cpp GenericPluginSiSo.cpp GenericPluginSiSoWP.cpp InputFilter.cpp)
+add_library(PipelineElements SHARED GenericSource.cpp GenericSink.cpp GenericSinkSi.cpp GenericPlugin.cpp GenericPluginSiSo.cpp GenericPluginSiSoWP.cpp InputFilter.cpp)
 target_include_directories(PipelineElements PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../include>  
 $<INSTALL_INTERFACE:include/FIPP/PipelineElements>)
 find_package(yaml-cpp)
