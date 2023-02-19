@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title="Interface for a Generic Plugin as PipelineElement." alt="" coords="677,5,864,47"/>
 <area shape="rect" id="node2" title=" " alt="" coords="93,393,171,420"/>
 <area shape="rect" id="node3" title=" " alt="" coords="439,468,497,495"/>
-<area shape="rect" id="node4" href="$d1/dfe/IGenericSink_8hpp_source.html" title=" " alt="" coords="357,95,489,121"/>
+<area shape="rect" id="node4" href="$d1/dfe/IGenericSink_8hpp.html" title="An interface for all pipeline sinks." alt="" coords="357,95,489,121"/>
 <area shape="rect" id="node6" href="$d5/da6/ImageFormat_8hpp.html" title="All definitions for image formats and backend types." alt="" coords="766,319,1023,345"/>
 <area shape="rect" id="node10" href="$db/dd1/ImageContainer_8hpp.html" title=" " alt="" coords="358,244,631,271"/>
 <area shape="rect" id="node5" href="$d6/d36/IGenericPipelineElement_8hpp.html" title="Generic Interface for all Pipeline Elements." alt="" coords="247,169,457,196"/>

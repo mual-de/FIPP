@@ -69,35 +69,38 @@ $(function() {
 <div class="title">IGenericSource.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __IGENERIC__SOURCE_HPP__</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __IGENERIC__SOURCE_HPP__</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d6/d36/IGenericPipelineElement_8hpp.html">IGenericPipelineElement.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;../ImageContainer/ImageFormat.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../ImageContainer/ImageContainer.hpp&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>FIPP</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">namespace </span>pipe</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">class </span>IGenericSink;</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html">   16</a></span>&#160;        <span class="keyword">class </span><a class="code" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html">IGenericSource</a> : <span class="keyword">public</span> <a class="code" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">IGenericPipelineElement</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> connectSuccessor(std::shared_ptr&lt;IGenericSink&gt; elem) = 0;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> interogateConnection() = 0;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        };</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    };</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div>
+<a href="../../d2/dda/IGenericSource_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef __IGENERIC__SOURCE_HPP__</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define __IGENERIC__SOURCE_HPP__</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d6/d36/IGenericPipelineElement_8hpp.html">IGenericPipelineElement.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;../ImageContainer/ImageFormat.hpp&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;../ImageContainer/ImageContainer.hpp&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>FIPP</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">namespace </span>pipe</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">class </span>IGenericSink;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html">   26</a></span>&#160;        <span class="keyword">class </span><a class="code" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html">IGenericSource</a> : <span class="keyword">public</span> <a class="code" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">IGenericPipelineElement</a></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a413e79fa1afa676acd295d58649fafbe">   34</a></span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a413e79fa1afa676acd295d58649fafbe">connectSuccessor</a>(std::shared_ptr&lt;IGenericSink&gt; elem) = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a44d5b64a7917df29321aadca2a178a26">   41</a></span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a44d5b64a7917df29321aadca2a178a26">interogateConnection</a>() = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        };</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aIGenericPipelineElement_8hpp_html"><div class="ttname"><a href="../../d6/d36/IGenericPipelineElement_8hpp.html">IGenericPipelineElement.hpp</a></div><div class="ttdoc">Generic Interface for all Pipeline Elements.</div></div>
-<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericPipelineElement_html"><div class="ttname"><a href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">FIPP::pipe::IGenericPipelineElement</a></div><div class="ttdef"><b>Definition:</b> IGenericPipelineElement.hpp:73</div></div>
-<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSource_html"><div class="ttname"><a href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html">FIPP::pipe::IGenericSource</a></div><div class="ttdef"><b>Definition:</b> IGenericSource.hpp:17</div></div>
+<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericPipelineElement_html"><div class="ttname"><a href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">FIPP::pipe::IGenericPipelineElement</a></div><div class="ttdef"><b>Definition:</b> IGenericPipelineElement.hpp:74</div></div>
+<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSource_html"><div class="ttname"><a href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html">FIPP::pipe::IGenericSource</a></div><div class="ttdef"><b>Definition:</b> IGenericSource.hpp:27</div></div>
+<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSource_html_a413e79fa1afa676acd295d58649fafbe"><div class="ttname"><a href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a413e79fa1afa676acd295d58649fafbe">FIPP::pipe::IGenericSource::connectSuccessor</a></div><div class="ttdeci">virtual void connectSuccessor(std::shared_ptr&lt; IGenericSink &gt; elem)=0</div><div class="ttdoc">Connect a successor in pipeline order to this source.</div></div>
+<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSource_html_a44d5b64a7917df29321aadca2a178a26"><div class="ttname"><a href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a44d5b64a7917df29321aadca2a178a26">FIPP::pipe::IGenericSource::interogateConnection</a></div><div class="ttdeci">virtual bool interogateConnection()=0</div><div class="ttdoc">Check if connection is possible and pipeline would start.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

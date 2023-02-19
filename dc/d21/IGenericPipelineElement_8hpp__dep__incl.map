@@ -1,8 +1,8 @@
 <map id="include/PipelineElements/IGenericPipelineElement.hpp" name="include/PipelineElements/IGenericPipelineElement.hpp">
 <area shape="rect" id="node1" title="Generic Interface for all Pipeline Elements." alt="" coords="413,5,627,47"/>
 <area shape="rect" id="node2" href="$d6/d9b/PipelineBuilder_8hpp_source.html" title=" " alt="" coords="203,102,402,129"/>
-<area shape="rect" id="node3" href="$d1/dfe/IGenericSink_8hpp_source.html" title=" " alt="" coords="427,95,613,136"/>
-<area shape="rect" id="node12" href="$d2/dda/IGenericSource_8hpp_source.html" title=" " alt="" coords="637,95,824,136"/>
+<area shape="rect" id="node3" href="$d1/dfe/IGenericSink_8hpp.html" title="An interface for all pipeline sinks." alt="" coords="427,95,613,136"/>
+<area shape="rect" id="node12" href="$d2/dda/IGenericSource_8hpp.html" title="A generic interface for all pipeline sources." alt="" coords="637,95,824,136"/>
 <area shape="rect" id="node4" href="$dd/d5f/GenericSink_8hpp.html" title="Generic Class for a Pipeline Element with one input and no ouptu (end of pipeline,..." alt="" coords="216,184,403,225"/>
 <area shape="rect" id="node7" href="$d6/d2c/GenericSource_8hpp_source.html" title=" " alt="" coords="637,184,824,225"/>
 <area shape="rect" id="node8" href="$df/d40/IGenericPlugin_8hpp.html" title="Interface for a Generic Plugin as PipelineElement." alt="" coords="427,184,613,225"/>

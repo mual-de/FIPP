@@ -1,0 +1,11 @@
+<map id="include/PipelineElements/IGenericSink.hpp" name="include/PipelineElements/IGenericSink.hpp">
+<area shape="rect" id="node1" title="An interface for all pipeline sinks." alt="" coords="321,5,508,47"/>
+<area shape="rect" id="node2" href="$dd/d5f/GenericSink_8hpp.html" title="Generic Class for a Pipeline Element with one input and no ouptu (end of pipeline,..." alt="" coords="111,95,297,136"/>
+<area shape="rect" id="node5" href="$d6/d2c/GenericSource_8hpp_source.html" title=" " alt="" coords="321,95,508,136"/>
+<area shape="rect" id="node6" href="$df/d40/IGenericPlugin_8hpp.html" title="Interface for a Generic Plugin as PipelineElement." alt="" coords="532,95,719,136"/>
+<area shape="rect" id="node3" href="$dd/d8a/GenericSinkMi_8hpp_source.html" title=" " alt="" coords="5,184,192,225"/>
+<area shape="rect" id="node4" href="$d9/d9b/GenericSinkSi_8hpp_source.html" title=" " alt="" coords="216,184,403,225"/>
+<area shape="rect" id="node7" href="$d5/d7a/GenericPlugin_8hpp.html" title="Implements a GenericPlugin." alt="" coords="532,184,719,225"/>
+<area shape="rect" id="node8" href="$d8/d88/GenericPluginSiSo_8hpp.html" title="Generic Plugin with Single Input and Single Output." alt="" coords="425,273,612,315"/>
+<area shape="rect" id="node9" href="$d0/d44/GenericPluginSiSoWP_8hpp.html" title="Generic Plugin Single Input Single Outpur with ImagePool." alt="" coords="637,273,827,315"/>
+</map>

@@ -92,9 +92,11 @@ Collaboration diagram for FIPP::pipe::GenericSink:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d4/d71/classFIPP_1_1pipe_1_1GenericSink__coll__graph.png" border="0" usemap="#aFIPP_1_1pipe_1_1GenericSink_coll__map" alt="Collaboration graph"/></div>
 <map name="aFIPP_1_1pipe_1_1GenericSink_coll__map" id="aFIPP_1_1pipe_1_1GenericSink_coll__map">
-<area shape="rect" title=" " alt="" coords="19,169,191,196"/>
-<area shape="rect" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html" title=" " alt="" coords="17,95,193,121"/>
+<area shape="rect" title=" " alt="" coords="118,213,290,240"/>
+<area shape="rect" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html" title=" " alt="" coords="21,124,197,151"/>
 <area shape="rect" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html" title=" " alt="" coords="5,5,205,47"/>
+<area shape="rect" href="../../d5/d28/classFIPP_1_1pipe_1_1InputFilter.html" title=" " alt="" coords="228,124,388,151"/>
+<area shape="rect" href="../../d7/dcd/classFIPP_1_1Point.html" title=" " alt="" coords="229,5,395,47"/>
 </map>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -103,8 +105,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1e6a5124007bcd21ed924503268d33ac"><td class="memItemLeft" align="right" valign="top"><a id="a1e6a5124007bcd21ed924503268d33ac"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>GenericSink</b> (std::string elemName, int elemId, std::shared_ptr&lt; <a class="el" href="../../da/d96/classFIPP_1_1logging_1_1ILogger.html">FIPP::logging::ILogger</a> &gt; log)</td></tr>
 <tr class="separator:a1e6a5124007bcd21ed924503268d33ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada205d9c0a94d36aca8404072477d9cc"><td class="memItemLeft" align="right" valign="top"><a id="ada205d9c0a94d36aca8404072477d9cc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addImageToInputPipe</b> (std::shared_ptr&lt; <a class="el" href="../../d0/d93/classFIPP_1_1img_1_1ImageContainer.html">img::ImageContainer</a> &gt; img)</td></tr>
+<tr class="memitem:ada205d9c0a94d36aca8404072477d9cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/df8/classFIPP_1_1pipe_1_1GenericSink.html#ada205d9c0a94d36aca8404072477d9cc">addImageToInputPipe</a> (std::shared_ptr&lt; <a class="el" href="../../d0/d93/classFIPP_1_1img_1_1ImageContainer.html">img::ImageContainer</a> &gt; img)</td></tr>
+<tr class="memdesc:ada205d9c0a94d36aca8404072477d9cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an image to input pipeline.  <a href="../../d4/df8/classFIPP_1_1pipe_1_1GenericSink.html#ada205d9c0a94d36aca8404072477d9cc">More...</a><br /></td></tr>
 <tr class="separator:ada205d9c0a94d36aca8404072477d9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad292db4f8909aed9d82a018ad1f21eb3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/df8/classFIPP_1_1pipe_1_1GenericSink.html#ad292db4f8909aed9d82a018ad1f21eb3">getName</a> () const</td></tr>
 <tr class="memdesc:ad292db4f8909aed9d82a018ad1f21eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the object name set by the derived class (e.g.  <a href="../../d4/df8/classFIPP_1_1pipe_1_1GenericSink.html#ad292db4f8909aed9d82a018ad1f21eb3">More...</a><br /></td></tr>
@@ -123,8 +125,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>addImageToInputPipe</
 <tr class="memdesc:a17397e9287af4c44fdf980f791bc4da8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the incomming images can be processed by this pipeline element.  <a href="../../d4/df8/classFIPP_1_1pipe_1_1GenericSink.html#a17397e9287af4c44fdf980f791bc4da8">More...</a><br /></td></tr>
 <tr class="separator:a17397e9287af4c44fdf980f791bc4da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classFIPP_1_1pipe_1_1IGenericSink"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classFIPP_1_1pipe_1_1IGenericSink')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">FIPP::pipe::IGenericSink</a></td></tr>
-<tr class="memitem:aeef7e6c0dfadb24bd08d4df8e437c326 inherit pub_methods_classFIPP_1_1pipe_1_1IGenericSink"><td class="memItemLeft" align="right" valign="top"><a id="aeef7e6c0dfadb24bd08d4df8e437c326"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>connectPredecessor</b> (int elemId)=0</td></tr>
+<tr class="memitem:aeef7e6c0dfadb24bd08d4df8e437c326 inherit pub_methods_classFIPP_1_1pipe_1_1IGenericSink"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#aeef7e6c0dfadb24bd08d4df8e437c326">connectPredecessor</a> (int elemId)=0</td></tr>
+<tr class="memdesc:aeef7e6c0dfadb24bd08d4df8e437c326 inherit pub_methods_classFIPP_1_1pipe_1_1IGenericSink"><td class="mdescLeft">&#160;</td><td class="mdescRight">set a element identified by elem id as predecessor in pipeline structure.  <a href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#aeef7e6c0dfadb24bd08d4df8e437c326">More...</a><br /></td></tr>
 <tr class="separator:aeef7e6c0dfadb24bd08d4df8e437c326 inherit pub_methods_classFIPP_1_1pipe_1_1IGenericSink"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classFIPP_1_1pipe_1_1IGenericPipelineElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classFIPP_1_1pipe_1_1IGenericPipelineElement')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">FIPP::pipe::IGenericPipelineElement</a></td></tr>
 <tr class="memitem:a2d3002874e4a3df235746a97e0dbfbb0 inherit pub_methods_classFIPP_1_1pipe_1_1IGenericPipelineElement"><td class="memItemLeft" align="right" valign="top">virtual StartState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html#a2d3002874e4a3df235746a97e0dbfbb0">startElement</a> (int predecessorId)=0</td></tr>
@@ -145,9 +147,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>initializeInt
 <tr class="memitem:a43c8e7d9a22885b22a59c8cfaa119a54"><td class="memItemLeft" align="right" valign="top"><a id="a43c8e7d9a22885b22a59c8cfaa119a54"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>closeInterfaces</b> ()=0</td></tr>
 <tr class="separator:a43c8e7d9a22885b22a59c8cfaa119a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63e06623a6b1a74052f209cc6dd7f5df"><td class="memItemLeft" align="right" valign="top"><a id="a63e06623a6b1a74052f209cc6dd7f5df"></a>
+<tr class="memitem:a05cebcc99f0e31a2a53e3d849ba459c5"><td class="memItemLeft" align="right" valign="top"><a id="a05cebcc99f0e31a2a53e3d849ba459c5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>startThread</b> ()</td></tr>
-<tr class="separator:a63e06623a6b1a74052f209cc6dd7f5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a05cebcc99f0e31a2a53e3d849ba459c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78f523a4df28b95ceb6b296c243951d3"><td class="memItemLeft" align="right" valign="top"><a id="a78f523a4df28b95ceb6b296c243951d3"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>stopThread</b> ()</td></tr>
 <tr class="separator:a78f523a4df28b95ceb6b296c243951d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -190,6 +192,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../.
 std::thread&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/df8/classFIPP_1_1pipe_1_1GenericSink.html#afeedab144d62ff880e7a4f2b2955056d">m_workerThread</a></td></tr>
 <tr class="memdesc:afeedab144d62ff880e7a4f2b2955056d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread to run the doCalculation function. <br /></td></tr>
 <tr class="separator:afeedab144d62ff880e7a4f2b2955056d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adebdcde8b296c73225f47831b79cd250"><td class="memItemLeft" align="right" valign="top"><a id="adebdcde8b296c73225f47831b79cd250"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_filterActivated</b></td></tr>
+<tr class="separator:adebdcde8b296c73225f47831b79cd250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add31de68eb5b6c5e6b2d17d2feb684cb"><td class="memItemLeft" align="right" valign="top"><a id="add31de68eb5b6c5e6b2d17d2feb684cb"></a>
+<a class="el" href="../../d5/d28/classFIPP_1_1pipe_1_1InputFilter.html">InputFilter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/df8/classFIPP_1_1pipe_1_1GenericSink.html#add31de68eb5b6c5e6b2d17d2feb684cb">m_filter</a></td></tr>
+<tr class="memdesc:add31de68eb5b6c5e6b2d17d2feb684cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter for interogation requests to check if these can be handled by this sink. <br /></td></tr>
+<tr class="separator:add31de68eb5b6c5e6b2d17d2feb684cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -204,6 +213,42 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_newImgArrived</b></
 <tr class="separator:add10b3470745bd072bbd86a8d09540a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ada205d9c0a94d36aca8404072477d9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada205d9c0a94d36aca8404072477d9cc">&#9670;&nbsp;</a></span>addImageToInputPipe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GenericSink::addImageToInputPipe </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="../../d0/d93/classFIPP_1_1img_1_1ImageContainer.html">img::ImageContainer</a> &gt;&#160;</td>
+          <td class="paramname"><em>img</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add an image to input pipeline. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a33f5d5e4be833446cb50cf908d56c128">FIPP::pipe::IGenericSink</a>.</p>
+
+</div>
+</div>
 <a id="a368bf6d2f3afa7e0a41d3374cf71e9e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a368bf6d2f3afa7e0a41d3374cf71e9e4">&#9670;&nbsp;</a></span>doCalculation()</h2>
 
@@ -336,8 +381,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_newImgArrived</b></
 <p>Check if the incomming images can be processed by this pipeline element. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">imgConfig</td><td></td></tr>
-    <tr><td class="paramname">predecessorId</td><td></td></tr>
+    <tr><td class="paramname">imgConfig</td><td>configuration of the output image format of the predecessor </td></tr>
+    <tr><td class="paramname">predecessorId</td><td>id of the predecessor to check if this is a valid predeccessor. </td></tr>
   </table>
   </dd>
 </dl>
@@ -346,6 +391,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_newImgArrived</b></
 false </dd></dl>
 
 <p>Implements <a class="el" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a45593e9af5e3213ff34f05d0dbbe0290">FIPP::pipe::IGenericSink</a>.</p>
+
+<p>Implemented in <a class="el" href="../../d7/d83/classFIPP_1_1pipe_1_1GenericSinkSi.html#aa77751a4e7e86573398bb2f18d18a5fc">FIPP::pipe::GenericSinkSi</a>.</p>
 
 </div>
 </div>

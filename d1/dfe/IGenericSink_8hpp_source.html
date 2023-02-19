@@ -69,39 +69,42 @@ $(function() {
 <div class="title">IGenericSink.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __IGENERIC__SINK_HPP__</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __IGENERIC__SINK_HPP__</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d6/d36/IGenericPipelineElement_8hpp.html">IGenericPipelineElement.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;../ImageContainer/ImageFormat.hpp&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../ImageContainer/ImageContainer.hpp&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define INPUT_FILTER_ALLOW_ALL_INPUTS false</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define INPUT_FILTER_CHECK_VALUES true</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>FIPP</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">namespace </span>pipe</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">   17</a></span>&#160;        <span class="keyword">class </span><a class="code" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">IGenericSink</a> : <span class="keyword">public</span> <a class="code" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">IGenericPipelineElement</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> connectPredecessor(<span class="keywordtype">int</span> elemId) = 0;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> addImageToInputPipe(std::shared_ptr&lt;img::ImageContainer&gt; img) = 0;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a45593e9af5e3213ff34f05d0dbbe0290">   30</a></span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a45593e9af5e3213ff34f05d0dbbe0290">interogateConnection</a>(<a class="code" href="../../de/ddb/structFIPP_1_1img_1_1e__ImageContainerConfig.html">img::ImageContainerConfig</a> imgConfig, <span class="keywordtype">int</span> predecessorId) = 0;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        };</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<a href="../../d1/dfe/IGenericSink_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef __IGENERIC__SINK_HPP__</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define __IGENERIC__SINK_HPP__</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d6/d36/IGenericPipelineElement_8hpp.html">IGenericPipelineElement.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;../ImageContainer/ImageFormat.hpp&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;../ImageContainer/ImageContainer.hpp&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define INPUT_FILTER_ALLOW_ALL_INPUTS false</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define INPUT_FILTER_CHECK_VALUES true</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>FIPP</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">namespace </span>pipe</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">   27</a></span>&#160;        <span class="keyword">class </span><a class="code" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">IGenericSink</a> : <span class="keyword">public</span> <a class="code" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">IGenericPipelineElement</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#aeef7e6c0dfadb24bd08d4df8e437c326">   35</a></span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#aeef7e6c0dfadb24bd08d4df8e437c326">connectPredecessor</a>(<span class="keywordtype">int</span> elemId) = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a33f5d5e4be833446cb50cf908d56c128">   41</a></span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a33f5d5e4be833446cb50cf908d56c128">addImageToInputPipe</a>(std::shared_ptr&lt;img::ImageContainer&gt; img) = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a45593e9af5e3213ff34f05d0dbbe0290">   50</a></span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a45593e9af5e3213ff34f05d0dbbe0290">interogateConnection</a>(<a class="code" href="../../de/ddb/structFIPP_1_1img_1_1e__ImageContainerConfig.html">img::ImageContainerConfig</a> imgConfig, <span class="keywordtype">int</span> predecessorId) = 0;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        };</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aIGenericPipelineElement_8hpp_html"><div class="ttname"><a href="../../d6/d36/IGenericPipelineElement_8hpp.html">IGenericPipelineElement.hpp</a></div><div class="ttdoc">Generic Interface for all Pipeline Elements.</div></div>
-<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericPipelineElement_html"><div class="ttname"><a href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">FIPP::pipe::IGenericPipelineElement</a></div><div class="ttdef"><b>Definition:</b> IGenericPipelineElement.hpp:73</div></div>
-<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSink_html"><div class="ttname"><a href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">FIPP::pipe::IGenericSink</a></div><div class="ttdef"><b>Definition:</b> IGenericSink.hpp:18</div></div>
+<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericPipelineElement_html"><div class="ttname"><a href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">FIPP::pipe::IGenericPipelineElement</a></div><div class="ttdef"><b>Definition:</b> IGenericPipelineElement.hpp:74</div></div>
+<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSink_html"><div class="ttname"><a href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">FIPP::pipe::IGenericSink</a></div><div class="ttdef"><b>Definition:</b> IGenericSink.hpp:28</div></div>
+<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSink_html_a33f5d5e4be833446cb50cf908d56c128"><div class="ttname"><a href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a33f5d5e4be833446cb50cf908d56c128">FIPP::pipe::IGenericSink::addImageToInputPipe</a></div><div class="ttdeci">virtual void addImageToInputPipe(std::shared_ptr&lt; img::ImageContainer &gt; img)=0</div><div class="ttdoc">Add an image to input pipeline.</div></div>
 <div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSink_html_a45593e9af5e3213ff34f05d0dbbe0290"><div class="ttname"><a href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#a45593e9af5e3213ff34f05d0dbbe0290">FIPP::pipe::IGenericSink::interogateConnection</a></div><div class="ttdeci">virtual bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId)=0</div><div class="ttdoc">Check if the incomming images can be processed by this pipeline element.</div></div>
+<div class="ttc" id="aclassFIPP_1_1pipe_1_1IGenericSink_html_aeef7e6c0dfadb24bd08d4df8e437c326"><div class="ttname"><a href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html#aeef7e6c0dfadb24bd08d4df8e437c326">FIPP::pipe::IGenericSink::connectPredecessor</a></div><div class="ttdeci">virtual void connectPredecessor(int elemId)=0</div><div class="ttdoc">set a element identified by elem id as predecessor in pipeline structure.</div></div>
 <div class="ttc" id="astructFIPP_1_1img_1_1e__ImageContainerConfig_html"><div class="ttname"><a href="../../de/ddb/structFIPP_1_1img_1_1e__ImageContainerConfig.html">FIPP::img::e_ImageContainerConfig</a></div><div class="ttdef"><b>Definition:</b> ImageFormat.hpp:124</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

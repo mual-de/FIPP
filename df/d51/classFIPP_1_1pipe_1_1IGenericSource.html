@@ -93,11 +93,11 @@ Collaboration diagram for FIPP::pipe::IGenericSource:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a413e79fa1afa676acd295d58649fafbe"><td class="memItemLeft" align="right" valign="top"><a id="a413e79fa1afa676acd295d58649fafbe"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>connectSuccessor</b> (std::shared_ptr&lt; <a class="el" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">IGenericSink</a> &gt; elem)=0</td></tr>
+<tr class="memitem:a413e79fa1afa676acd295d58649fafbe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a413e79fa1afa676acd295d58649fafbe">connectSuccessor</a> (std::shared_ptr&lt; <a class="el" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">IGenericSink</a> &gt; elem)=0</td></tr>
+<tr class="memdesc:a413e79fa1afa676acd295d58649fafbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect a successor in pipeline order to this source.  <a href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a413e79fa1afa676acd295d58649fafbe">More...</a><br /></td></tr>
 <tr class="separator:a413e79fa1afa676acd295d58649fafbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44d5b64a7917df29321aadca2a178a26"><td class="memItemLeft" align="right" valign="top"><a id="a44d5b64a7917df29321aadca2a178a26"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>interogateConnection</b> ()=0</td></tr>
+<tr class="memitem:a44d5b64a7917df29321aadca2a178a26"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a44d5b64a7917df29321aadca2a178a26">interogateConnection</a> ()=0</td></tr>
+<tr class="memdesc:a44d5b64a7917df29321aadca2a178a26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if connection is possible and pipeline would start.  <a href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a44d5b64a7917df29321aadca2a178a26">More...</a><br /></td></tr>
 <tr class="separator:a44d5b64a7917df29321aadca2a178a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classFIPP_1_1pipe_1_1IGenericPipelineElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classFIPP_1_1pipe_1_1IGenericPipelineElement')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html">FIPP::pipe::IGenericPipelineElement</a></td></tr>
 <tr class="memitem:a2d3002874e4a3df235746a97e0dbfbb0 inherit pub_methods_classFIPP_1_1pipe_1_1IGenericPipelineElement"><td class="memItemLeft" align="right" valign="top">virtual StartState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html#a2d3002874e4a3df235746a97e0dbfbb0">startElement</a> (int predecessorId)=0</td></tr>
@@ -120,6 +120,76 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>getId</b> () c
 virtual <a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#aee3e184dd580cf593f24f464c0238ab4">ElementTypes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getElementType</b> ()=0</td></tr>
 <tr class="separator:a282678d96a4b29e28ddadd478f8de233 inherit pub_methods_classFIPP_1_1pipe_1_1IGenericPipelineElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a413e79fa1afa676acd295d58649fafbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a413e79fa1afa676acd295d58649fafbe">&#9670;&nbsp;</a></span>connectSuccessor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void FIPP::pipe::IGenericSource::connectSuccessor </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">IGenericSink</a> &gt;&#160;</td>
+          <td class="paramname"><em>elem</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Connect a successor in pipeline order to this source. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>every plugin is handled as sink internally! (plugin extends sink) </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elem</td><td>ptr to sink/plugin </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="../../d5/d44/classFIPP_1_1pipe_1_1GenericSource.html#a4ad6596b8c9e43661383a0a057ec0806">FIPP::pipe::GenericSource</a>.</p>
+
+</div>
+</div>
+<a id="a44d5b64a7917df29321aadca2a178a26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44d5b64a7917df29321aadca2a178a26">&#9670;&nbsp;</a></span>interogateConnection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool FIPP::pipe::IGenericSource::interogateConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if connection is possible and pipeline would start. </p>
+<dl class="section return"><dt>Returns</dt><dd>true pipeline is interoperable and can start </dd>
+<dd>
+false pipeline will fail </dd></dl>
+
+<p>Implemented in <a class="el" href="../../d5/d44/classFIPP_1_1pipe_1_1GenericSource.html#a39572106c318f3d8961649c99f2da07c">FIPP::pipe::GenericSource</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/PipelineElements/<a class="el" href="../../d2/dda/IGenericSource_8hpp_source.html">IGenericSource.hpp</a></li>
 </ul>

@@ -120,8 +120,8 @@ StopState&#160;</td><td class="memItemRight" valign="bottom"><b>stopElement</b> 
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d44/classFIPP_1_1pipe_1_1GenericSource.html#a4ad6596b8c9e43661383a0a057ec0806">connectSuccessor</a> (std::shared_ptr&lt; <a class="el" href="../../dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html">IGenericSink</a> &gt; elem)</td></tr>
 <tr class="memdesc:a4ad6596b8c9e43661383a0a057ec0806"><td class="mdescLeft">&#160;</td><td class="mdescRight">connect successor to this pipelineElement <br /></td></tr>
 <tr class="separator:a4ad6596b8c9e43661383a0a057ec0806"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39572106c318f3d8961649c99f2da07c"><td class="memItemLeft" align="right" valign="top"><a id="a39572106c318f3d8961649c99f2da07c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>interogateConnection</b> ()</td></tr>
+<tr class="memitem:a39572106c318f3d8961649c99f2da07c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d44/classFIPP_1_1pipe_1_1GenericSource.html#a39572106c318f3d8961649c99f2da07c">interogateConnection</a> ()</td></tr>
+<tr class="memdesc:a39572106c318f3d8961649c99f2da07c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if connection is possible and pipeline would start.  <a href="../../d5/d44/classFIPP_1_1pipe_1_1GenericSource.html#a39572106c318f3d8961649c99f2da07c">More...</a><br /></td></tr>
 <tr class="separator:a39572106c318f3d8961649c99f2da07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02c39d0fb92d1f0dcccd4c2a65a3d335"><td class="memItemLeft" align="right" valign="top"><a id="a02c39d0fb92d1f0dcccd4c2a65a3d335"></a>
 <a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#aee3e184dd580cf593f24f464c0238ab4">ElementTypes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getElementType</b> ()</td></tr>
@@ -262,6 +262,38 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()</td></tr>
 <dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
 
 <p>Implements <a class="el" href="../../d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html#a6c31743f4e845985b17e774f4c46d647">FIPP::pipe::IGenericPipelineElement</a>.</p>
+
+</div>
+</div>
+<a id="a39572106c318f3d8961649c99f2da07c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39572106c318f3d8961649c99f2da07c">&#9670;&nbsp;</a></span>interogateConnection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FIPP::pipe::GenericSource::interogateConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if connection is possible and pipeline would start. </p>
+<dl class="section return"><dt>Returns</dt><dd>true pipeline is interoperable and can start </dd>
+<dd>
+false pipeline will fail </dd></dl>
+
+<p>Implements <a class="el" href="../../df/d51/classFIPP_1_1pipe_1_1IGenericSource.html#a44d5b64a7917df29321aadca2a178a26">FIPP::pipe::IGenericSource</a>.</p>
 
 </div>
 </div>

@@ -6,9 +6,9 @@
 <area shape="rect" id="node5" href="$dc/dcf/ImagePool_8hpp.html" title="Implementation of an ImagePool to provide access to ImageContainers preallocated before pipeline star..." alt="" coords="284,273,461,315"/>
 <area shape="rect" id="node7" href="$d6/d2c/GenericSource_8hpp_source.html" title=" " alt="" coords="474,363,661,404"/>
 <area shape="rect" id="node8" href="$d6/d36/IGenericPipelineElement_8hpp.html" title="Generic Interface for all Pipeline Elements." alt="" coords="688,184,903,225"/>
-<area shape="rect" id="node10" href="$d1/dfe/IGenericSink_8hpp_source.html" title=" " alt="" coords="971,273,1158,315"/>
+<area shape="rect" id="node10" href="$d1/dfe/IGenericSink_8hpp.html" title="An interface for all pipeline sinks." alt="" coords="971,273,1158,315"/>
 <area shape="rect" id="node14" href="$df/d40/IGenericPlugin_8hpp.html" title="Interface for a Generic Plugin as PipelineElement." alt="" coords="1037,363,1223,404"/>
-<area shape="rect" id="node17" href="$d2/dda/IGenericSource_8hpp_source.html" title=" " alt="" coords="537,273,723,315"/>
+<area shape="rect" id="node17" href="$d2/dda/IGenericSource_8hpp.html" title="A generic interface for all pipeline sources." alt="" coords="537,273,723,315"/>
 <area shape="rect" id="node6" href="$d0/d44/GenericPluginSiSoWP_8hpp.html" title="Generic Plugin Single Input Single Outpur with ImagePool." alt="" coords="599,541,789,583"/>
 <area shape="rect" id="node9" href="$d6/d9b/PipelineBuilder_8hpp_source.html" title=" " alt="" coords="748,281,947,307"/>
 <area shape="rect" id="node11" href="$dd/d5f/GenericSink_8hpp.html" title="Generic Class for a Pipeline Element with one input and no ouptu (end of pipeline,..." alt="" coords="826,363,1013,404"/>

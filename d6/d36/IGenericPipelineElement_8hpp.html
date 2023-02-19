@@ -106,8 +106,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <map name="ainclude_2PipelineElements_2IGenericPipelineElement_8hppdep" id="ainclude_2PipelineElements_2IGenericPipelineElement_8hppdep">
 <area shape="rect" title="Generic Interface for all Pipeline Elements." alt="" coords="413,5,627,47"/>
 <area shape="rect" href="../../d6/d9b/PipelineBuilder_8hpp_source.html" title=" " alt="" coords="203,102,402,129"/>
-<area shape="rect" href="../../d1/dfe/IGenericSink_8hpp_source.html" title=" " alt="" coords="427,95,613,136"/>
-<area shape="rect" href="../../d2/dda/IGenericSource_8hpp_source.html" title=" " alt="" coords="637,95,824,136"/>
+<area shape="rect" href="../../d1/dfe/IGenericSink_8hpp.html" title="An interface for all pipeline sinks." alt="" coords="427,95,613,136"/>
+<area shape="rect" href="../../d2/dda/IGenericSource_8hpp.html" title="A generic interface for all pipeline sources." alt="" coords="637,95,824,136"/>
 <area shape="rect" href="../../dd/d5f/GenericSink_8hpp.html" title="Generic Class for a Pipeline Element with one input and no ouptu (end of pipeline,..." alt="" coords="216,184,403,225"/>
 <area shape="rect" href="../../d6/d2c/GenericSource_8hpp_source.html" title=" " alt="" coords="637,184,824,225"/>
 <area shape="rect" href="../../df/d40/IGenericPlugin_8hpp.html" title="Interface for a Generic Plugin as PipelineElement." alt="" coords="427,184,613,225"/>
@@ -147,11 +147,11 @@ typedef enum FIPP::pipe::e_stopState&#160;</td><td class="memItemRight" valign="
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a9f9f2ee9daf3c2f1089981509894a28b"><td class="memItemLeft" align="right" valign="top"><a id="a9f9f2ee9daf3c2f1089981509894a28b"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#a9f9f2ee9daf3c2f1089981509894a28b">FIPP::pipe::e_ElementTypes</a> { <b>SOURCE</b>
-, <b>SINK</b>
-, <b>PLUGIN</b>
+<tr class="memitem:a9f9f2ee9daf3c2f1089981509894a28b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#a9f9f2ee9daf3c2f1089981509894a28b">FIPP::pipe::e_ElementTypes</a> { <a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#a9f9f2ee9daf3c2f1089981509894a28ba13048114fb90898b67924e634a512198">FIPP::pipe::SOURCE</a>
+, <a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#a9f9f2ee9daf3c2f1089981509894a28ba2fb4f32067f683695323d5a9faf072ba">FIPP::pipe::SINK</a>
+, <a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#a9f9f2ee9daf3c2f1089981509894a28ba907051aee710bda48bb21bd48cadcdfa">FIPP::pipe::PLUGIN</a>
  }</td></tr>
-<tr class="memdesc:a9f9f2ee9daf3c2f1089981509894a28b"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the type of implementation of the plugin <br /></td></tr>
+<tr class="memdesc:a9f9f2ee9daf3c2f1089981509894a28b"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the type of implementation of the plugin  <a href="../../d6/d36/IGenericPipelineElement_8hpp.html#a9f9f2ee9daf3c2f1089981509894a28b">More...</a><br /></td></tr>
 <tr class="separator:a9f9f2ee9daf3c2f1089981509894a28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafa0d7fa40e510a27a98f2cc80abdb59"><td class="memItemLeft" align="right" valign="top"><a id="aafa0d7fa40e510a27a98f2cc80abdb59"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#aafa0d7fa40e510a27a98f2cc80abdb59">FIPP::pipe::e_elementState</a> { <br />
 &#160;&#160;<b>IDLE</b>
@@ -164,10 +164,14 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:aafa0d7fa40e510a27a98f2cc80abdb59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal state of every pipeline element. <br /></td></tr>
 <tr class="separator:aafa0d7fa40e510a27a98f2cc80abdb59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a075e240bb39cb87d57c65a77026f3437"><td class="memItemLeft" align="right" valign="top"><a id="a075e240bb39cb87d57c65a77026f3437"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>e_startState</b> { <b>STARTED</b>
+<tr class="memitem:a075e240bb39cb87d57c65a77026f3437"><td class="memItemLeft" align="right" valign="top"><a id="a075e240bb39cb87d57c65a77026f3437"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>e_startState</b> { <br />
+&#160;&#160;<b>STARTED</b>
 , <b>PENDING</b>
 , <b>WRONG_PREDECESSOR</b>
 , <b>START_ERROR</b>
+, <br />
+&#160;&#160;<b>START_WITHOUT_SUCESSOR</b>
+<br />
  }</td></tr>
 <tr class="separator:a075e240bb39cb87d57c65a77026f3437"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a0269e23ff9ee2f06373bcb488cdfe4"><td class="memItemLeft" align="right" valign="top"><a id="a7a0269e23ff9ee2f06373bcb488cdfe4"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>e_stopState</b> { <b>STOPPED</b>
@@ -187,7 +191,32 @@ Enumerations</h2></td></tr>
 <li>implemented basics</li>
 <li>no elementState only running or not </li>
 </ul>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a9f9f2ee9daf3c2f1089981509894a28b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f9f2ee9daf3c2f1089981509894a28b">&#9670;&nbsp;</a></span>e_ElementTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="../../d6/d36/IGenericPipelineElement_8hpp.html#a9f9f2ee9daf3c2f1089981509894a28b">FIPP::pipe::e_ElementTypes</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>defines the type of implementation of the plugin </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9f9f2ee9daf3c2f1089981509894a28ba13048114fb90898b67924e634a512198"></a>SOURCE&#160;</td><td class="fielddoc"><p>Identifies element as a Pipeline Source (output only) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9f9f2ee9daf3c2f1089981509894a28ba2fb4f32067f683695323d5a9faf072ba"></a>SINK&#160;</td><td class="fielddoc"><p>Identifies element as a Pipeline Sink (input only) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9f9f2ee9daf3c2f1089981509894a28ba907051aee710bda48bb21bd48cadcdfa"></a>PLUGIN&#160;</td><td class="fielddoc"><p>Identifies element as a Pipeline Plugin (input/output) </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

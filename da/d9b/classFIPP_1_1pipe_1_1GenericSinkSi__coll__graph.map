@@ -1,6 +1,8 @@
 <map id="FIPP::pipe::GenericSinkSi" name="FIPP::pipe::GenericSinkSi">
-<area shape="rect" id="node1" title=" " alt="" coords="13,244,197,271"/>
-<area shape="rect" id="node2" href="$d4/df8/classFIPP_1_1pipe_1_1GenericSink.html" title=" " alt="" coords="19,169,191,196"/>
-<area shape="rect" id="node3" href="$dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html" title=" " alt="" coords="17,95,193,121"/>
+<area shape="rect" id="node1" title=" " alt="" coords="112,289,296,316"/>
+<area shape="rect" id="node2" href="$d4/df8/classFIPP_1_1pipe_1_1GenericSink.html" title=" " alt="" coords="118,213,290,240"/>
+<area shape="rect" id="node3" href="$dd/df9/classFIPP_1_1pipe_1_1IGenericSink.html" title=" " alt="" coords="21,124,197,151"/>
 <area shape="rect" id="node4" href="$d8/dd2/classFIPP_1_1pipe_1_1IGenericPipelineElement.html" title=" " alt="" coords="5,5,205,47"/>
+<area shape="rect" id="node5" href="$d5/d28/classFIPP_1_1pipe_1_1InputFilter.html" title=" " alt="" coords="228,124,388,151"/>
+<area shape="rect" id="node6" href="$d7/dcd/classFIPP_1_1Point.html" title=" " alt="" coords="229,5,395,47"/>
 </map>
