@@ -12,7 +12,7 @@ namespace FIPP
         {
         public:
             inline GenericSinkSi(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) : GenericSink(elemName, elemId, log){};
-            ~GenericSinkSi()
+            inline ~GenericSinkSi()
             {
                 // Stop running thread before dtor
                 if (this->m_state == ElementState::RUNNING)

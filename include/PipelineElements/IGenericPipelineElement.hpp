@@ -60,7 +60,8 @@ namespace FIPP
             STARTED,
             PENDING,
             WRONG_PREDECESSOR,
-            START_ERROR
+            START_ERROR,
+            START_WITHOUT_SUCESSOR
         } StartState;
 
         typedef enum e_stopState{

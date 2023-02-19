@@ -93,7 +93,7 @@ StartState GenericSource::startElement(int predecessorId)
     {
         return this->m_successor->startElement(this->m_elemId);
     }
-    return StartState::STARTED;
+    return StartState::START_WITHOUT_SUCESSOR;
 }
 StopState GenericSource::stopElement()
 {
