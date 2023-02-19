@@ -33,5 +33,5 @@ std::shared_ptr<ImageContainer> ImagePool::getNextFreeImage(){
             return img;
         }
     }
-    return std::shared_ptr<ImageContainer>(nullptr);
+    throw NoFreeImageAvailableException();
 }
