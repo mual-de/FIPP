@@ -13,7 +13,7 @@ GenericSource::GenericSource(std::string elemName, int elemId, std::shared_ptr<F
     m_frameNumber = 0;
     m_stop = false;
     m_state = ElementState::IDLE;
-    // Always start by frame number, thread restart doesn't reset this counter for better error tracing. 
+    // Always start by frame number, thread restart doesn't reset this counter for better error tracing.
     this->m_frameNumber = 0;
 }
 
@@ -30,8 +30,8 @@ GenericSource::~GenericSource()
 void GenericSource::startThread()
 {
     LOG(LogLevel::CONFIG, "Start Thread");
-    this->m_fps_duration = std::chrono::milliseconds(static_cast<int>(ceil((1/this->m_fps)*1000)));
-    
+    this->m_fps_duration = std::chrono::milliseconds(static_cast<int>(ceil((1 / this->m_fps) * 1000)));
+
     this->initializeInterfaces();
     this->m_state = ElementState::STARTING;
     this->m_stop = false;
@@ -57,14 +57,29 @@ void GenericSource::run()
     {
         auto sleepTimer = std::chrono::steady_clock::now() + this->m_fps_duration;
         // get next free image
-        std::shared_ptr<img::ImageContainer> img = this->m_pool->getNextFreeImage();
-        img->setFrameNumber(this->m_frameNumber);
-        // implemented by derived class
-        this->doCalculation(img);
-        // and out to pipe
-        this->m_successor->addImageToInputPipe(img);
-        this->m_frameNumber ++;
-        std::this_thread::sleep_until(sleepTimer);
+        try
+        {
+            std::shared_ptr<img::ImageContainer> img = this->m_pool->getNextFreeImage();
+            img->setFrameNumber(this->m_frameNumber);
+            // implemented by derived class
+            this->doCalculation(img);
+            // and out to pipe (only if output is connected!)
+            if (this->m_successor != nullptr)
+            {
+                this->m_successor->addImageToInputPipe(img);
+            }
+            else
+            {
+                LOG(LogLevel::DEBUG, "No output connected, image has been freed");
+                img->setUnBound();
+            }
+            this->m_frameNumber++;
+            std::this_thread::sleep_until(sleepTimer);
+        }
+        catch (img::NoFreeImageAvailableException &e)
+        {
+            LOG(LogLevel::ERROR, "No free image available in image pool");
+        }
     }
     LOG(LogLevel::CONFIG, "set in not running state!");
 }
@@ -78,7 +93,7 @@ StartState GenericSource::startElement(int predecessorId)
     {
         return this->m_successor->startElement(this->m_elemId);
     }
-    return StartState::STARTED;
+    return StartState::START_WITHOUT_SUCESSOR;
 }
 StopState GenericSource::stopElement()
 {

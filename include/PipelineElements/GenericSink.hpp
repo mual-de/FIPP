@@ -12,6 +12,7 @@
 #ifndef __GENERIC_SINK_HPP__
 #define __GENERIC_SINK_HPP__
 #include "IGenericSink.hpp"
+#include "InputFilter.hpp"
 #include "../Logging/ILogging.hpp"
 #include <memory>
 #include <string>
@@ -90,6 +91,12 @@ namespace FIPP
              * 
              */
             std::thread m_workerThread;
+            bool m_filterActivated;
+            /**
+             * @brief Filter for interogation requests to check if these can be handled by this sink.
+             * 
+             */
+            InputFilter m_filter;
             /**
              * @brief Overwrite by derived plugin to do calculation on next image
              * 

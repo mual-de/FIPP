@@ -37,6 +37,7 @@ void GenericPlugin::startThread()
     LOG(LogLevel::CONFIG, "Start Thread");
     this->m_state = ElementState::STARTING;
     this->m_stop = false;
+    this->m_newImgArrived = false;
     this->m_workerThread = std::thread(&GenericPlugin::run, this);
 }
 

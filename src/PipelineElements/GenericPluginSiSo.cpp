@@ -32,7 +32,7 @@ StartState GenericPluginSiSo::startElement(int predecessorId)
 }
 
 bool GenericPluginSiSo::interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId)
-{
+    {
     if (this->m_filterActivated)
     {
         if (this->m_filter.checkIfCompatible(imgConfig))
@@ -44,12 +44,13 @@ bool GenericPluginSiSo::interogateConnection(img::ImageContainerConfig imgConfig
             LOG(LogLevel::ERROR, "Image Formats are not compatibel!");
             return true;
         }
+        return false;
     }
     if (this->m_successor != nullptr)
     {
         return this->m_successor->interogateConnection(imgConfig, this->m_elemId);
     }
-    return false;
+    return true;
 }
 
 StopState GenericPluginSiSo::stopElement()

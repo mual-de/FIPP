@@ -32,7 +32,6 @@ namespace FIPP
         public:
             GenericPlugin(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             ~GenericPlugin();
-
             inline ElementState getState() { return this->m_state; };
             void addImageToInputPipe(std::shared_ptr<img::ImageContainer> img);
             /**

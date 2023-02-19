@@ -38,26 +38,6 @@ StartState GenericPluginSiSoWP::startElement(int predecessorId)
     return StartState::START_ERROR;
 }
 
-bool GenericPluginSiSoWP::interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId)
-{
-    if (this->m_filterActivated)
-    {
-        if (this->m_filter.checkIfCompatible(imgConfig))
-        {
-            if (this->m_successor != nullptr)
-            {
-                return this->m_successor->interogateConnection(m_outputConfiguration, this->m_elemId);
-            }
-            LOG(LogLevel::ERROR, "Image Formats are not compatibel!");
-            return true;
-        }
-    }
-    if (this->m_successor != nullptr)
-    {
-        return this->m_successor->interogateConnection(m_outputConfiguration, this->m_elemId);
-    }
-    return false;
-}
 
 StopState GenericPluginSiSoWP::stopElement()
 {
@@ -91,4 +71,27 @@ void GenericPluginSiSoWP::sendImageToSucessors(std::shared_ptr<img::ImageContain
     {
         this->m_successor->addImageToInputPipe(img);
     }
+}
+
+
+bool GenericPluginSiSoWP::interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId)
+    {
+    if (this->m_filterActivated)
+    {
+        if (this->m_filter.checkIfCompatible(imgConfig))
+        {
+            if (this->m_successor != nullptr)
+            {
+                return this->m_successor->interogateConnection(this->m_outputConfiguration, this->m_elemId);
+            }
+            LOG(LogLevel::ERROR, "Image Formats are not compatibel!");
+            return true;
+        }
+        return false;
+    }
+    if (this->m_successor != nullptr)
+    {
+        return this->m_successor->interogateConnection(this->m_outputConfiguration, this->m_elemId);
+    }
+    return true;
 }

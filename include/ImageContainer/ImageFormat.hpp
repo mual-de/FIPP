@@ -127,7 +127,7 @@ namespace FIPP
             FIPP::Point<unsigned int> dimensions;
         } ImageContainerConfig;
 
-        static ImageContainerConfig getContainerConfigFromYaml(YAML::Node containerNode);
+        ImageContainerConfig getContainerConfigFromYaml(YAML::Node containerNode);
 
     };
 }

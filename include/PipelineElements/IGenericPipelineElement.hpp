@@ -38,9 +38,9 @@ namespace FIPP
          */
         typedef enum e_ElementTypes
         {
-            SOURCE,
-            SINK,
-            PLUGIN
+            SOURCE, ///< Identifies element as a Pipeline Source (output only)
+            SINK, ///< Identifies element as a Pipeline Sink (input only)
+            PLUGIN ///< Identifies element as a Pipeline Plugin (input/output)
         } ElementTypes;
 
         /**
@@ -60,7 +60,8 @@ namespace FIPP
             STARTED,
             PENDING,
             WRONG_PREDECESSOR,
-            START_ERROR
+            START_ERROR,
+            START_WITHOUT_SUCESSOR
         } StartState;
 
         typedef enum e_stopState{
