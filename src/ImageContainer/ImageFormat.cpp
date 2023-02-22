@@ -4,7 +4,7 @@
 FIPP::img::ImageContainerConfig FIPP::img::getContainerConfigFromYaml(YAML::Node containerNode)
 {
     ImageContainerConfig conf;
-    if (!containerNode["dimensions"])
+    if (!containerNode[ "dimensions"])
     {
         throw std::invalid_argument("Dimension is not set in YAML file!");
     }

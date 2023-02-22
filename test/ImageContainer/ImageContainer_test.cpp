@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include <memory>
+#include <yaml-cpp/yaml.h>
+#include <exception>
 #include "Point.hpp"
 #include "ImageContainer/ImageContainer.hpp"
 #include "ImageContainer/ImageContainerCPU.hpp"
@@ -40,6 +42,36 @@ TEST(Creation, bounding)
     EXPECT_EQ(pImg->isBound(), false);
 }
 
+TEST(ImageFormat, fromYAML){
+    YAML::Node node;
+    YAML::Node dims;
+    dims["x"] = 100;
+    dims["y"] = 200;
+    node["dimensions"] = dims;
+    node["bitDepthPerPixel"] = 8;
+    node["imgType"] = "GRAY";
+    node["bytesPerPixel"] = 1;
+    node["backendType"] = "CPU";
+    
+    img::ImageContainerConfig conf;
+    conf.imgFormat.bitDepthPerPixel = 8;
+    conf.imgFormat.bytesPerPixel = 1;
+    conf.imgFormat.imgType = img::ImageType::GRAY;
+    conf.dimensions = Point<unsigned int>(100, 200);
+    conf.backend.type = img::BackendType::CPU;
+    
+    img::ImageContainerConfig compConf = img::getContainerConfigFromYaml(node);
+    
+    EXPECT_EQ(compConf.dimensions.getX(), conf.dimensions.getX());
+    EXPECT_EQ(compConf.dimensions.getY(), conf.dimensions.getY());
+    EXPECT_EQ(compConf.backend.type, conf.backend.type);
+    EXPECT_EQ(compConf.imgFormat.bitDepthPerPixel, conf.imgFormat.bitDepthPerPixel);
+    EXPECT_EQ(compConf.imgFormat.bytesPerPixel, conf.imgFormat.bytesPerPixel);
+    std::cout << conf.imgFormat.imgType << std::endl;
+    EXPECT_EQ(compConf.imgFormat.imgType, conf.imgFormat.imgType);
+
+}
+
 TEST(Pooling, basics){
     img::ImageContainerConfig conf;
     conf.backend.flags = img::BackendFlags::CPU_ONLY;
@@ -55,11 +87,12 @@ TEST(Pooling, basics){
     std::vector<std::shared_ptr<img::ImageContainer>> imgs;
     for(int i = 0; i < 11; i++){
         if(i < 10){
-            std::shared_ptr<img::ImageContainer> img = pool->getNextFreeImage();
+            std::shared_ptr<img::ImageContainer> img;
+            EXPECT_NO_THROW(img = pool->getNextFreeImage());
             imgs.push_back(img);
             EXPECT_EQ(img->getUUID(), i);
         }else{
-            EXPECT_EQ(pool->getNextFreeImage().get(), nullptr);
+            EXPECT_THROW(std::shared_ptr<img::ImageContainer> img = pool->getNextFreeImage(), img::NoFreeImageAvailableException);
         }
     }
     for(auto e : imgs){
@@ -67,11 +100,12 @@ TEST(Pooling, basics){
     }
     for(int i = 0; i < 11; i++){
         if(i < 10){
-            std::shared_ptr<img::ImageContainer> img = pool->getNextFreeImage();
+            std::shared_ptr<img::ImageContainer> img;
+            EXPECT_NO_THROW(img = pool->getNextFreeImage());
             imgs.push_back(img);
             EXPECT_EQ(img->getUUID(), i);
         }else{
-            EXPECT_EQ(pool->getNextFreeImage(), nullptr);
+            EXPECT_THROW(std::shared_ptr<img::ImageContainer> img = pool->getNextFreeImage(), img::NoFreeImageAvailableException);
         }
     }
 }
