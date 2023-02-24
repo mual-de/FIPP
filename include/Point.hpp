@@ -224,16 +224,14 @@ namespace FIPP
      * @brief Create a point from a given yaml node
      * 
      */
-    class PointFactory
-    {
-    public:
+    namespace PointFactory{
     /**
      * @brief Get int Point from a given yaml node.
      * 
      * @param node 
      * @return Point<int> 
      */
-        static Point<int> ptIntFromYAML(YAML::Node node);
+        Point<int> ptIntFromYAML(YAML::Node node);
     };
 };
 #endif

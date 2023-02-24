@@ -3,7 +3,7 @@ add_library(Point SHARED Point.cpp)
 find_package(yaml-cpp)
 target_include_directories(Point PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../include>  
 $<INSTALL_INTERFACE:include/FIPP/Point>)
-target_link_libraries(Point PRIVATE yaml-cpp)
+target_link_libraries(Point PUBLIC yaml-cpp)
 set_target_properties(Point PROPERTIES PUBLIC_HEADER "${PROJECT_SOURCE_DIR}/../../include/Point.hpp")
 install(TARGETS Point EXPORT PointTargets
             RUNTIME DESTINATION bin/FIPP

@@ -1,4 +1,5 @@
 project(ImageContainer VERSION 0.1.0)
+set (CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-as-needed")
 if(ENABLE_CUDA)
 add_library(ImageContainer SHARED ImageContainer.cpp ImageContainerCPU.cpp ImageContainerCUDA.cpp ImagePool.cpp MetaDataSystem.cpp ImageFormat.cpp)
 else()
@@ -8,7 +9,7 @@ find_package(yaml-cpp)
 target_include_directories(ImageContainer PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../include>  
         $<INSTALL_INTERFACE:include/FIPP/ImageContainer>)
-target_link_libraries(ImageContainer PRIVATE yaml-cpp)
+target_link_libraries(ImageContainer PUBLIC yaml-cpp Point)
 set(ImageContainerHeaders
     "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/ImageContainer.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/ImageContainerCPU.hpp"
