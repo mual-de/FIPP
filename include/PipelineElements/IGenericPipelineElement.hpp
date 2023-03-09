@@ -93,27 +93,7 @@ namespace FIPP
             */
             virtual std::string getName() const = 0;
             virtual int getId() const = 0;
-            virtual ElementTypes getElementType() = 0;
-        };
-        
-        class IGenericPipelineElementFactory
-        {
-            public:
-                /**
-                 * @brief creates a pipeline element and returns a shared ptr on this object.
-                 * @return shared_ptr of Type IGenericPipelineElement castable to @see GenericSource, @see GenericSink, @see GenericPlugin
-                */
-                virtual std::shared_ptr<IGenericPipelineElement> makePipeElement(YAML::Node config, std::string elementName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log) = 0;
-                /**
-                 * @brief get the corresponding element identifier of the plugin created by these factory. In general the name of this plugin.
-                 * @return std::string name of plugin
-                */
-                virtual std::string getElementIdentifier() = 0;
-                /**
-                 * @brief Returns the ElementType (SINK, SOURCE, PLUGIN) @see ElementTypes
-                 * @return ElementType of the created pipelineElement;
-                */
-                virtual ElementTypes getElementType() = 0;
+            virtual ElementTypes getElementType() const = 0;
         };
     };
 };

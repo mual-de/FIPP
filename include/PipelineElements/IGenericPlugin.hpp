@@ -21,6 +21,7 @@ namespace FIPP
 
     namespace pipe
     {
+        
 
         class IGenericPlugin : public IGenericSink
         {
@@ -39,6 +40,7 @@ namespace FIPP
              * @return std::shared_ptr<img::ImageContainer> return value from doCalculation
              */
             virtual std::shared_ptr<img::ImageContainer> testInternalFunction(std::shared_ptr<img::ImageContainer> img) = 0;
+            
         };
 
     };

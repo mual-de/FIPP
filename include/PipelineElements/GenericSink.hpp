@@ -44,9 +44,8 @@ namespace FIPP
              */
             inline int getId() const {return this->m_elemId;};
 
-            inline ElementTypes getElementType(){return ElementTypes::SINK;};
+            inline ElementTypes getElementType() const {return ElementTypes::SINK;};
             inline ElementState getState(){return this->m_state;};
-            virtual bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId) = 0;
 
 
         protected:

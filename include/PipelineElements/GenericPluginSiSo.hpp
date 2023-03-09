@@ -36,7 +36,7 @@ namespace FIPP
             void connectPredecessor(int elemId);
             void connectSuccessor(std::shared_ptr<IGenericSink> elem);
             bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId);
-
+            PluginTypes getPluginType() const {return PluginTypes::SISO;};
         protected:
             std::shared_ptr<IGenericSink> m_successor;
             int m_predecessorId;

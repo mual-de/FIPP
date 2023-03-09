@@ -5,6 +5,7 @@ using namespace FIPP::img;
 ImageContainerCPU::ImageContainerCPU(Point<unsigned int> size, ImageFormat format, unsigned int uuid) : ImageContainer(size, format, uuid)
 {
     m_data = (unsigned char *)malloc(m_memsize);
+    m_backend.type = BackendType::CPU;
 }
 
 ImageContainerCPU::~ImageContainerCPU()
@@ -20,18 +21,18 @@ unsigned char *ImageContainerCPU::getPtr() const
 {
     return m_data;
 };
-ContainerError ImageContainerCPU::updateMemory(unsigned long long int frame, const unsigned char *data, int size, Backend backend, int memPitch)
+ContainerError ImageContainerCPU::updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch = 0)
 {
     this->m_frameNumber = frame;
     if (backend.type == BackendType::CPU)
     {
-        if (size != this->m_memsize)
+        if (dims.getAbsValue()*bytesPerPixel != this->m_memsize)
         {
             return ContainerError::INVALID_SIZE;
         }
         if (memPitch == 0)
         {
-            std::memcpy(m_data, data, size);
+            std::memcpy(m_data, data, this->m_memsize);
             return ContainerError::OKAY;
         }
     }

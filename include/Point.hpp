@@ -85,6 +85,18 @@ namespace FIPP
          */
         inline T getY() { return m_y; };
         /**
+         * @brief get X Value as unsigned int
+         * 
+         * @return T value of x
+         */
+        inline T getXUInt() { return static_cast<unsigned int>(m_x); };
+        /**
+         * @brief Get Y Value as unsigned int
+         * 
+         * @return T value of y
+         */
+        inline T getYUInt() { return static_cast<unsigned int>(m_y); };
+        /**
          * @brief Get value of x as int
          * 
          * @return int 

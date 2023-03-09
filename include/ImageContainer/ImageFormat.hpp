@@ -17,7 +17,8 @@
 #include "../Point.hpp"
 #include <map>
 #include <stdexcept>
-namespace YAML{
+namespace YAML
+{
     class Node;
 };
 
@@ -98,15 +99,52 @@ namespace FIPP
         } BackendFlags;
 
         /**
+         * @brief conversion map for string to BackendFlags
+         * 
+         */
+        static std::map<std::string, BackendFlags> const stringToBackendFlag = {{"CPU_ONLY", BackendFlags::CPU_ONLY}, {"GPU_ONLY", BackendFlags::GPU_ONLY}, {"UNIFIED_MEMORY", BackendFlags::UNIFIED_MEMORY}, {"ZERO_COPY", BackendFlags::UNIFIED_MEMORY}};
+
+        /**
+         * @brief Get the Backend Flags object
+         *
+         * @param backendFlag
+         * @return BackendFlags
+         */
+        static BackendFlags getBackendFlags(std::string backendFlag)
+        {
+            if (stringToBackendFlag.find(backendFlag) == stringToBackendFlag.end())
+            {
+                throw std::invalid_argument("BackendFlag doesn't exist!");
+            }
+            return stringToBackendFlag.at(backendFlag);
+        }
+        /**
          * @brief Complete definition of an ImageFormat
          *
          * Containing the type (RGB, RGBA, GRAY), the number of bits per Pixel/ColorLayer (e.g. 12 Bit) and the bytesPerPixel(e.g. 3 for an RGB 8-bit image).
          */
         typedef struct e_ImageFormat
         {
+            /**
+             * @brief Type of the image
+             * 
+             */
             ImageType imgType;
+            /**
+             * @brief Number of bits per Pixel
+             * 
+             */
             unsigned char bitDepthPerPixel;
+            /**
+             * @brief Number of bytes per Pixel (e.g. RGB8 has 3 Bytes, RGB10 6)
+             * 
+             */
             unsigned char bytesPerPixel;
+            /**
+             * @brief If image is used in CUDA --> enable pitch for better performance!
+             * 
+             */
+            bool usePitch;
             inline bool operator==(e_ImageFormat a) { return (bitDepthPerPixel == a.bitDepthPerPixel) && (a.bytesPerPixel == bytesPerPixel) && (a.imgType == imgType); };
             inline bool operator!=(e_ImageFormat a) { return !((bitDepthPerPixel == a.bitDepthPerPixel) && (a.bytesPerPixel == bytesPerPixel) && (a.imgType == imgType)); };
         } ImageFormat;
@@ -116,10 +154,22 @@ namespace FIPP
          */
         typedef struct e_Backend
         {
+            /**
+             * @brief @see BackendType
+             * 
+             */
             BackendType type;
+            /**
+             * @brief @see BackendFlags
+             * 
+             */
             BackendFlags flags;
         } Backend;
 
+        /**
+         * @brief Configuration for image container
+         * 
+         */
         typedef struct e_ImageContainerConfig
         {
             ImageFormat imgFormat;

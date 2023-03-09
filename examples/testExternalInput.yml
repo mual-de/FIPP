@@ -1,0 +1,22 @@
+name: TestPipeline No 1
+description: A little test pipeline to demonstrate the functionality of configurations files
+pipelines:
+  - external:
+      id: 1
+      name: PipelineControllerInput
+      imgConfig:
+        dimensions:
+          x: 1024
+          y: 768
+        bitDepthPerPixel: 8
+        bytesPerPixel: 3
+        imgType: RGB
+        backendType: CPU
+  - element:
+      type: ImageExporter
+      name: ExportSink
+      id: 2
+      input: 1
+      filePrefix: img-exp
+      storagePath: /home/mual/Bilder/demo
+      fileFormat: png

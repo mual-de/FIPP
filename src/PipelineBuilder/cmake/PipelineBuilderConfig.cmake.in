@@ -1,0 +1,9 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+find_dependency(yaml-cpp)
+find_dependency(Logging)
+find_dependency(Point)
+find_dependency(PipelineElements)
+
+include("${CMAKE_CURRENT_LIST_DIR}/LoggingTargets.cmake")

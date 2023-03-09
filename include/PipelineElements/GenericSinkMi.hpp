@@ -55,7 +55,7 @@ namespace FIPP
                 this->stopThread();
                 return StopState::STOPPED;
             };
-
+            inline PluginTypes getPluginType() const {return PluginTypes::MISO;};
         private:
             std::vector<int> m_predecessorIds;
             std::vector<bool> m_predecessorsStartFlag;

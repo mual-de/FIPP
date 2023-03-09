@@ -18,6 +18,9 @@ FIPP::img::ImageContainerConfig FIPP::img::getContainerConfigFromYaml(YAML::Node
     {
         throw std::invalid_argument("bytesPerPixel is not set in YAML file!");
     }
+    if(containerNode["usePitch"]){
+        conf.imgFormat.usePitch = containerNode["usePitch"].as<bool>();
+    }
     conf.imgFormat.bytesPerPixel = containerNode["bytesPerPixel"].as<unsigned char>();
     conf.imgFormat.imgType = getImageType(containerNode["imgType"].as<std::string>());
     conf.backend.type = getBackendType(containerNode["backendType"].as<std::string>());

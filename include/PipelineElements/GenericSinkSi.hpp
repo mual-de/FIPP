@@ -60,6 +60,7 @@ namespace FIPP
                 }
             };
             bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId);
+            inline PluginTypes getPluginType() const {return PluginTypes::SISO;};
         private:
             int m_predeccessor = -1;
             

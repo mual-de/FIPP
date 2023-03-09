@@ -46,7 +46,7 @@ namespace FIPP
              * @return int
              */
             inline int getId() const { return this->m_elemId; };
-            inline ElementTypes getElementType() { return ElementTypes::PLUGIN; };
+            inline ElementTypes getElementType() const { return ElementTypes::PLUGIN; };
             /**
              * @brief Run internal doCalculation function for software tests.
              * 

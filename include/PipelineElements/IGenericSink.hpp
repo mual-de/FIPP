@@ -22,8 +22,28 @@
 namespace FIPP
 {
 
+
+
     namespace pipe
     {
+
+        /**
+         * @brief Definition for Plugin Types for input/output configuration identification.
+         * This information is hardcode in Generic classes.
+         * 
+         */
+        typedef enum e_PluginTypes
+        {
+            SISO, ///< Single Input, Single Output
+            MISO, ///< Multiple Input, Single Outptut
+            SIMO, ///< Single Input, Multiple Output
+            MIMO ///< Multiple Input, Multiple Output
+        } PluginTypes;
+
+        /**
+         * @brief Interface for all Sinks.
+         * 
+         */
         class IGenericSink : public IGenericPipelineElement
         {
         public:
@@ -48,7 +68,14 @@ namespace FIPP
              * @return false 
              */
             virtual bool interogateConnection(img::ImageContainerConfig imgConfig, int predecessorId) = 0;
-
+            /**
+             * @brief Get the plugin/sink input/output configuration type.
+             * Sinks can have SISO or MISO.
+             * Plugins can have SISO, MISO, SIMO, MIMO
+             * 
+             * @return PluginTypes 
+             */
+            virtual PluginTypes getPluginType() const = 0;
         };
 
     };

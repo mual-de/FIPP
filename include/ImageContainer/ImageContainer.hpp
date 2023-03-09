@@ -3,12 +3,12 @@
 /**
  * @file ImageContainer.hpp
  * @author your name (you@domain.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2023-01-21
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include "ImageFormat.hpp"
 #include "MetaDataSystem.hpp"
@@ -24,8 +24,8 @@ namespace FIPP
     namespace img
     {
         /**
-         * @brief 
-         * 
+         * @brief
+         *
          */
         typedef enum e_containerError
         {
@@ -33,13 +33,14 @@ namespace FIPP
             UNKNOWN_ERROR,
             INVALID_BACKEND,
             INVALID_SIZE,
-            INVALID_FORMAT
+            INVALID_FORMAT,
+            CUDA_RUNTIME_ERROR
         } ContainerError;
 
-/**
- * @brief 
- * 
- */
+        /**
+         * @brief
+         *
+         */
         class ImageContainer
         {
         protected:
@@ -84,57 +85,65 @@ namespace FIPP
              *
              */
             const unsigned int m_uuid;
-            
+
             std::shared_ptr<MetaDataMapNode> m_metaData;
+
+            bool m_updated = false;
 
         public:
             ImageContainer(Point<unsigned int> size, ImageFormat fmt, unsigned int uuid);
             /**
              * @brief Get the dimension of the stored image.
-             * 
-             * @return Point<unsigned int> 
+             *
+             * @return Point<unsigned int>
              */
-            inline Point<unsigned int> getDims() { return m_dims; };
+            inline Point<unsigned int> getDims() const { return m_dims; };
+            /**
+             * @brief get the memory size (without pitch!)
+             * 
+             * @return size_t 
+             */
+            inline size_t getMemSize() const {return static_cast<size_t>(m_memsize);}
             /**
              * @brief Get the actual frame number
-             * 
-             * @return unsigned long long int 
+             *
+             * @return unsigned long long int
              */
             inline unsigned long long int getFrameNumber() { return m_frameNumber; };
             /**
              * @brief Get the backend type of this image container (CPU, CUDA etc.)
-             * 
-             * @return @see ImageFormat::BackendType 
+             *
+             * @return @see ImageFormat::BackendType
              */
             inline BackendType getBackendType() { return m_backend.type; };
             /**
              * @brief Get the Backend Flags object
-             * 
-             * @return BackendFlags 
+             *
+             * @return BackendFlags
              */
             inline BackendFlags getBackendFlags() { return m_backend.flags; };
             /**
              * @brief Get the Img Format object
-             * 
-             * @return ImageFormat 
+             *
+             * @return ImageFormat
              */
             inline ImageFormat getImgFormat() { return m_imgFormat; };
             /**
              * @brief Get the Flags object
-             * 
-             * @return BackendFlags 
+             *
+             * @return BackendFlags
              */
             inline BackendFlags getFlags() { return m_backend.flags; };
             /**
              * @brief states out if this image is bound to the pipeline or is free to use by the image pool
-             * 
+             *
              * @return true imagecontainer is in use
              * @return false imagecontainer is free to use
              */
             inline bool isBound() const { return m_activeBound; };
             /**
              * @brief Set the imagecontainer bound (ONLY USED BY @see ImagePool)
-             * 
+             *
              */
             inline void setBound()
             {
@@ -144,7 +153,7 @@ namespace FIPP
             };
             /**
              * @brief Set the imagecontainer to unbound (Used by every Plugin/Sink that is an endpoint)
-             * 
+             *
              */
             inline void setUnBound()
             {
@@ -154,16 +163,25 @@ namespace FIPP
             };
             /**
              * @brief Get a pointer to the whole metadata stored inside this Imagecontainer
-             * 
-             * @return std::shared_ptr<MetaDataMapNode> 
+             *
+             * @return std::shared_ptr<MetaDataMapNode>
              */
             inline std::shared_ptr<MetaDataMapNode> getMetaData()
             {
                 return this->m_metaData;
             }
             /**
+             * @brief set updated flag true to force a download if request a cpu memory from a cuda/opencl img container
+             *
+             */
+            inline void setUpdated()
+            {
+                this->m_updated = true;
+            }
+
+            /**
              * @brief Add a new metadata node to this imagecontainer meta data structure
-             * 
+             *
              * @param key to store the meta data and call informations
              * @param meta MetaDataNode containing the information
              */
@@ -177,9 +195,9 @@ namespace FIPP
             }
             /**
              * @brief Get the meta data which corresponds to the given key or the complete structure
-             * 
-             * @param key 
-             * @return std::shared_ptr<MetaDataNode> 
+             *
+             * @param key
+             * @return std::shared_ptr<MetaDataNode>
              */
             inline std::shared_ptr<MetaDataNode> getMetaData(std::string key = "none")
             {
@@ -191,15 +209,15 @@ namespace FIPP
             }
             /**
              * @brief Get uuid of this imagecontainer
-             * 
-             * @return const unsigned int 
+             *
+             * @return const unsigned int
              */
             inline const unsigned int getUUID() const { return m_uuid; };
             inline std::shared_ptr<std::mutex> getMutex() { return m_mutexPtr; };
             virtual const unsigned char *getConstPtr() const = 0;
             virtual unsigned char *getPtr() const = 0;
-            inline void setFrameNumber(unsigned long long int frameNumber){m_frameNumber = frameNumber;};
-            virtual ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, int size, Backend backend, int memPitch = 0) = 0;
+            inline void setFrameNumber(unsigned long long int frameNumber) { m_frameNumber = frameNumber; };
+            virtual ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch) = 0;
             virtual ContainerError updateMemory(std::shared_ptr<ImageContainer> img) = 0;
         };
 

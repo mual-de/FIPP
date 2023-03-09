@@ -46,7 +46,7 @@ namespace FIPP
                 return m_successor->interogateConnection(this->m_sourceConfig, this->m_elemId);
             }
 
-            inline ElementTypes getElementType() { return ElementTypes::SOURCE; };
+            inline ElementTypes getElementType() const { return ElementTypes::SOURCE; };
 
             inline ElementState getState() {return this->m_state;};
 
