@@ -175,6 +175,7 @@ namespace FIPP
             ImageFormat imgFormat;
             Backend backend;
             FIPP::Point<unsigned int> dimensions;
+            inline size_t getMemSize(){return dimensions.getAbsValue() * imgFormat.bytesPerPixel;};
         } ImageContainerConfig;
 
         ImageContainerConfig getContainerConfigFromYaml(YAML::Node containerNode);

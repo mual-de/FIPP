@@ -141,7 +141,30 @@ unsigned char *ImageContainerCUDA::getDevPtr() const
     return this->m_gpuBuffer;
 }
 
-ContainerError ImageContainerCUDA::updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch = 0){}
+ContainerError ImageContainerCUDA::updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch = 0)
+{
+    if (dims.getAbsValue() * bytesPerPixel != this->m_memsize)
+    {
+        return ContainerError::INVALID_SIZE;
+    }
+    this->m_frameNumber = frame;
+    switch (backend.type)
+    {
+    case BackendType::OPENCL:
+        break;
+    case BackendType::CUDA:
+        this->m_lastCudaErr = this->copyFromCUDA(data, backend.flags, memPitch);
+        break;
+    default:
+        this->m_lastCudaErr = this->copyFromCPU(data);
+        break;
+    }
+    if (this->m_lastCudaErr != cudaSuccess)
+    {
+        return ContainerError::CUDA_RUNTIME_ERROR;
+    }
+    return ContainerError::OKAY;
+}
 
 cudaError_t ImageContainerCUDA::copyFromCPU(const unsigned char *data)
 {
@@ -189,7 +212,7 @@ ContainerError ImageContainerCUDA::updateMemory(shared_ptr<ImageContainer> img)
     {
         return ContainerError::INVALID_SIZE;
     }
-    this->m_frameNumber = m_frameNumber;
+    this->m_frameNumber = img->getFrameNumber();
     switch (img->getBackendType())
     {
     case BackendType::OPENCL:

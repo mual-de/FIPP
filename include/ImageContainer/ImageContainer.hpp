@@ -2,8 +2,8 @@
 #define __IMAGE_CONTAINER_HPP__
 /**
  * @file ImageContainer.hpp
- * @author your name (you@domain.com)
- * @brief
+ * @author Alexander Mueller (dev@alexandermaxmueller.de)
+ * @brief A abstract ImageContainer class to be inheritated by ImageContainerCPU and ImageContainerCUDA to store informations.
  * @version 0.1
  * @date 2023-01-21
  *
@@ -24,16 +24,37 @@ namespace FIPP
     namespace img
     {
         /**
-         * @brief
+         * @brief Errors raised by copy operations
          *
          */
         typedef enum e_containerError
         {
+            /**
+             * @brief Everything is okay, copy was a success
+             * 
+             */
             OKAY,
             UNKNOWN_ERROR,
+            /**
+             * @brief Backend is not compatible to this ImageContainer implementation
+             * 
+             */
             INVALID_BACKEND,
+            /**
+             * @brief memsize does not match, not possible to copy data
+             * 
+             */
             INVALID_SIZE,
+            /**
+             * @brief Format does not match, not possible to copy data
+             * 
+             */
             INVALID_FORMAT,
+            /**
+             * @brief Error with CUDA operations @see ImageContainerCUDA for further informations.
+             * ImageContainerCUDA::getCudaError will give further informations regarding this error.
+             * 
+             */
             CUDA_RUNTIME_ERROR
         } ContainerError;
 
@@ -85,7 +106,10 @@ namespace FIPP
              *
              */
             const unsigned int m_uuid;
-
+            /**
+             * @brief MetData to store further informations inside the image container.
+             * 
+             */
             std::shared_ptr<MetaDataMapNode> m_metaData;
 
             bool m_updated = false;
@@ -213,11 +237,50 @@ namespace FIPP
              * @return const unsigned int
              */
             inline const unsigned int getUUID() const { return m_uuid; };
+            /**
+             * @brief Get a mutex for write operations.
+             * 
+             * @return std::shared_ptr<std::mutex> 
+             */
             inline std::shared_ptr<std::mutex> getMutex() { return m_mutexPtr; };
+            /**
+             * @brief Get ptr to const host memory, if not Unified/Zero Copy memory this will return nullptr!
+             * 
+             * @return unsigned char* 
+             */
             virtual const unsigned char *getConstPtr() const = 0;
+            /**
+             * @brief Get ptr to host memory, if not Unified/Zero Copy memory this will return nullptr!
+             * 
+             * @return unsigned char* 
+             */
             virtual unsigned char *getPtr() const = 0;
+            /**
+             * @brief Set the actual frame number
+             * 
+             * @param frameNumber 
+             */
             inline void setFrameNumber(unsigned long long int frameNumber) { m_frameNumber = frameNumber; };
+            /**
+             * @brief Update internal memory with content from data array
+             * 
+             * If BackendType is UNIFIED_MEMORY or ZERO_COPY data must be the device pointer in ImageContainerCUDA.
+             * In ImageContainerCPU this pointer needs to be a host pointer. 
+             * @param frame 
+             * @param data pointer to data (device_ptr for CUDA, host_ptr for CPU)
+             * @param dims dimensions of the dataset
+             * @param bytesPerPixel 
+             * @param backend 
+             * @param memPitch 
+             * @return ContainerError 
+             */
             virtual ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch) = 0;
+            /**
+             * @brief Update internal memory with content from other image container
+             * 
+             * @param img 
+             * @return ContainerError 
+             */
             virtual ContainerError updateMemory(std::shared_ptr<ImageContainer> img) = 0;
         };
 

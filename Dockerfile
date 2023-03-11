@@ -57,4 +57,4 @@ RUN cd /opt/ &&\
 # Run the output program from the previous step
 CMD ["bash"]
 
-LABEL Name=FIPP_Developement Version=0.0.2
+LABEL Name=FIPP_Development Version=0.0.3
