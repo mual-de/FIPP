@@ -12,8 +12,8 @@
 #define __IMAGE_CONTAINER_CPU_HPP__
 
 #include "ImageContainer.hpp"
-#include "../Point.hpp"
-#include "ImageFormat.hpp"
+#include "Point.hpp"
+#include "ImageContainer/ImageFormat.hpp"
 
 namespace FIPP
 {
@@ -30,7 +30,7 @@ namespace FIPP
              * 
              * @return const unsigned char* 
              */
-            const unsigned char *getConstPtr() const;
+            const unsigned char *getConstPtr() const override;
             /**
              * @brief Get a pointer to allocated memory
              * Use the lock provided by ImageContainer if you want to write to this container!
@@ -39,7 +39,7 @@ namespace FIPP
              */
             unsigned char *getPtr() const;
             ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch);
-            ContainerError updateMemory(std::shared_ptr<ImageContainer> img);
+            ContainerError updateMemory(std::shared_ptr<IImageContainer> img) ;
 
         private:
             unsigned char *m_data;

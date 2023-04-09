@@ -15,9 +15,11 @@
 #include <string>
 #include "IGenericSink.hpp"
 #include "../ImageContainer/ImageFormat.hpp"
-#include "../ImageContainer/ImageContainer.hpp"
 namespace FIPP
 {
+    namespace img{
+        class IImageContainer;
+    };
 
     namespace pipe
     {
@@ -39,7 +41,7 @@ namespace FIPP
              * @param img to run processing on
              * @return std::shared_ptr<img::ImageContainer> return value from doCalculation
              */
-            virtual std::shared_ptr<img::ImageContainer> testInternalFunction(std::shared_ptr<img::ImageContainer> img) = 0;
+            virtual std::shared_ptr<img::IImageContainer> testInternalFunction(std::shared_ptr<img::IImageContainer> img) = 0;
             
         };
 

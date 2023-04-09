@@ -19,8 +19,7 @@
 
 #include <memory>
 #include <string>
-#include "../ImageContainer/ImageFormat.hpp"
-#include "../ImageContainer/ImageContainer.hpp"
+
 namespace YAML{
     class Node;
 }

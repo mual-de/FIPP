@@ -1,4 +1,5 @@
 #include "PipelineElements/GenericPlugin.hpp"
+#include "ImageContainer/IImageContainer.hpp"
 #include <chrono>
 #define LOG(lvl, msg) this->m_log->log(lvl, msg, "GenericPlugin", __func__, __LINE__, this->m_frameNumber);
 
@@ -24,7 +25,7 @@ GenericPlugin::~GenericPlugin()
     }
 }
 
-void GenericPlugin::addImageToInputPipe(std::shared_ptr<img::ImageContainer> img)
+void GenericPlugin::addImageToInputPipe(std::shared_ptr<img::IImageContainer> img)
 {
     std::lock_guard lk(this->m_inputLockMutex);
     this->m_inputQueue.push(img);
@@ -73,12 +74,12 @@ void GenericPlugin::run()
         if (this->m_newImgArrived || !this->m_inputQueue.empty())
         {
             LOG(LogLevel::CONFIG, "New msg available");
-            std::shared_ptr<img::ImageContainer> actImg = this->m_inputQueue.front();
+            std::shared_ptr<img::IImageContainer> actImg = this->m_inputQueue.front();
             this->m_inputQueue.pop();
             this->m_newImgArrived = false;
             lk.unlock();
             this->m_frameNumber = actImg->getFrameNumber();
-            std::shared_ptr<img::ImageContainer> retImg = this->doCalculation(actImg);
+            std::shared_ptr<img::IImageContainer> retImg = this->doCalculation(actImg);
             LOG(LogLevel::CONFIG, "Send to sucessors");
             this->sendImageToSucessors(retImg);
             

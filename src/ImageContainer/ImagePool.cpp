@@ -1,6 +1,7 @@
-#include "ImageContainer/ImagePool.hpp"
-#include "ImageContainer/ImageContainerCPU.hpp"
-#include "ImageContainer/ImageContainerCUDA.hpp"
+#include "ImagePool.hpp"
+#include "ImageContainerCPU.hpp"
+#include "ImageContainerCUDA.hpp"
+
 using namespace FIPP::img;
 
 ImagePool::ImagePool(int size, ImageContainerConfig config)
@@ -40,7 +41,7 @@ void ImagePool::createImageContainers(int size)
     }
 }
 
-std::shared_ptr<ImageContainer> ImagePool::getNextFreeImage()
+std::shared_ptr<IImageContainer> ImagePool::getNextFreeImage()
 {
     for (auto img : this->m_images)
     {

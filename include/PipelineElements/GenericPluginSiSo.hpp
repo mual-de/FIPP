@@ -41,13 +41,13 @@ namespace FIPP
             std::shared_ptr<IGenericSink> m_successor;
             int m_predecessorId;
             InputFilter m_filter;
-            void sendImageToSucessors(std::shared_ptr<img::ImageContainer> img);
+            void sendImageToSucessors(std::shared_ptr<img::IImageContainer> img);
             /**
              * @brief Overwrite by derived plugin to do calculation on next image
              *
              * @param img
              */
-            virtual std::shared_ptr<img::ImageContainer> doCalculation(std::shared_ptr<img::ImageContainer> img) = 0;
+            virtual std::shared_ptr<img::IImageContainer> doCalculation(std::shared_ptr<img::IImageContainer> img) = 0;
         };
 
     };

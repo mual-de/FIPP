@@ -10,59 +10,19 @@
  * @copyright Copyright (c) 2023
  *
  */
-#include "ImageFormat.hpp"
-#include "MetaDataSystem.hpp"
-#include "../Point.hpp"
-
-#include <mutex>
-#include <memory>
-#include <variant>
-#include <map>
+#include "ImageContainer/IImageContainer.hpp"
 
 namespace FIPP
 {
     namespace img
     {
-        /**
-         * @brief Errors raised by copy operations
-         *
-         */
-        typedef enum e_containerError
-        {
-            /**
-             * @brief Everything is okay, copy was a success
-             * 
-             */
-            OKAY,
-            UNKNOWN_ERROR,
-            /**
-             * @brief Backend is not compatible to this ImageContainer implementation
-             * 
-             */
-            INVALID_BACKEND,
-            /**
-             * @brief memsize does not match, not possible to copy data
-             * 
-             */
-            INVALID_SIZE,
-            /**
-             * @brief Format does not match, not possible to copy data
-             * 
-             */
-            INVALID_FORMAT,
-            /**
-             * @brief Error with CUDA operations @see ImageContainerCUDA for further informations.
-             * ImageContainerCUDA::getCudaError will give further informations regarding this error.
-             * 
-             */
-            CUDA_RUNTIME_ERROR
-        } ContainerError;
+        
 
         /**
          * @brief
          *
          */
-        class ImageContainer
+        class ImageContainer : public virtual IImageContainer
         {
         protected:
             Point<unsigned int> m_dims;
@@ -114,62 +74,63 @@ namespace FIPP
 
             bool m_updated = false;
 
+
         public:
-            ImageContainer(Point<unsigned int> size, ImageFormat fmt, unsigned int uuid);
+            ImageContainer(Point<unsigned int> size, ImageFormat format, unsigned int uuid);
             /**
              * @brief Get the dimension of the stored image.
              *
              * @return Point<unsigned int>
              */
-            inline Point<unsigned int> getDims() const { return m_dims; };
+            inline Point<unsigned int> getDims() const override { return m_dims; };
             /**
              * @brief get the memory size (without pitch!)
              * 
              * @return size_t 
              */
-            inline size_t getMemSize() const {return static_cast<size_t>(m_memsize);}
+            inline size_t getMemSize() const override {return static_cast<size_t>(m_memsize);}
             /**
              * @brief Get the actual frame number
              *
              * @return unsigned long long int
              */
-            inline unsigned long long int getFrameNumber() { return m_frameNumber; };
+            inline unsigned long long int getFrameNumber() const override { return m_frameNumber; };
             /**
              * @brief Get the backend type of this image container (CPU, CUDA etc.)
              *
              * @return @see ImageFormat::BackendType
              */
-            inline BackendType getBackendType() { return m_backend.type; };
+            inline BackendType getBackendType() const override { return m_backend.type; };
             /**
              * @brief Get the Backend Flags object
              *
              * @return BackendFlags
              */
-            inline BackendFlags getBackendFlags() { return m_backend.flags; };
+            inline BackendFlags getBackendFlags() const override { return m_backend.flags; };
             /**
              * @brief Get the Img Format object
              *
              * @return ImageFormat
              */
-            inline ImageFormat getImgFormat() { return m_imgFormat; };
+            inline ImageFormat getImgFormat() const override { return m_imgFormat; };
             /**
              * @brief Get the Flags object
              *
              * @return BackendFlags
              */
-            inline BackendFlags getFlags() { return m_backend.flags; };
+            inline BackendFlags getFlags() const override{ return m_backend.flags; };
             /**
              * @brief states out if this image is bound to the pipeline or is free to use by the image pool
              *
              * @return true imagecontainer is in use
              * @return false imagecontainer is free to use
              */
-            inline bool isBound() const { return m_activeBound; };
+            inline bool isBound() const override { return m_activeBound; };
             /**
              * @brief Set the imagecontainer bound (ONLY USED BY @see ImagePool)
              *
              */
-            inline void setBound()
+            inline void setBound() override
             {
                 m_mutexPtr->lock();
                 m_activeBound = true;
@@ -179,7 +140,7 @@ namespace FIPP
              * @brief Set the imagecontainer to unbound (Used by every Plugin/Sink that is an endpoint)
              *
              */
-            inline void setUnBound()
+            inline void setUnBound() override
             {
                 m_mutexPtr->lock();
                 m_activeBound = false;
@@ -190,7 +151,7 @@ namespace FIPP
              *
              * @return std::shared_ptr<MetaDataMapNode>
              */
-            inline std::shared_ptr<MetaDataMapNode> getMetaData()
+            inline std::shared_ptr<MetaDataMapNode> getMetaData() override
             {
                 return this->m_metaData;
             }
@@ -198,7 +159,7 @@ namespace FIPP
              * @brief set updated flag true to force a download if request a cpu memory from a cuda/opencl img container
              *
              */
-            inline void setUpdated()
+            inline void setUpdated() override
             {
                 this->m_updated = true;
             }
@@ -209,7 +170,7 @@ namespace FIPP
              * @param key to store the meta data and call informations
              * @param meta MetaDataNode containing the information
              */
-            inline void addMetaData(std::string key, std::shared_ptr<MetaDataNode> meta)
+            inline void addMetaData(std::string key, std::shared_ptr<MetaDataNode> meta) override
             {
                 if (this->m_metaData == nullptr)
                 {
@@ -223,7 +184,7 @@ namespace FIPP
              * @param key
              * @return std::shared_ptr<MetaDataNode>
              */
-            inline std::shared_ptr<MetaDataNode> getMetaData(std::string key = "none")
+            inline std::shared_ptr<MetaDataNode> getMetaData(std::string key = "none") override
             {
                 if (key.compare("none") == 0)
                 {
@@ -236,13 +197,13 @@ namespace FIPP
              *
              * @return const unsigned int
              */
-            inline const unsigned int getUUID() const { return m_uuid; };
+            inline const unsigned int getUUID() const override { return m_uuid; };
             /**
              * @brief Get a mutex for write operations.
              * 
              * @return std::shared_ptr<std::mutex> 
              */
-            inline std::shared_ptr<std::mutex> getMutex() { return m_mutexPtr; };
+            inline std::shared_ptr<std::mutex> getMutex() override { return m_mutexPtr; };
             /**
              * @brief Get ptr to const host memory, if not Unified/Zero Copy memory this will return nullptr!
              * 
@@ -260,28 +221,7 @@ namespace FIPP
              * 
              * @param frameNumber 
              */
-            inline void setFrameNumber(unsigned long long int frameNumber) { m_frameNumber = frameNumber; };
-            /**
-             * @brief Update internal memory with content from data array
-             * 
-             * If BackendType is UNIFIED_MEMORY or ZERO_COPY data must be the device pointer in ImageContainerCUDA.
-             * In ImageContainerCPU this pointer needs to be a host pointer. 
-             * @param frame 
-             * @param data pointer to data (device_ptr for CUDA, host_ptr for CPU)
-             * @param dims dimensions of the dataset
-             * @param bytesPerPixel 
-             * @param backend 
-             * @param memPitch 
-             * @return ContainerError 
-             */
-            virtual ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch) = 0;
-            /**
-             * @brief Update internal memory with content from other image container
-             * 
-             * @param img 
-             * @return ContainerError 
-             */
-            virtual ContainerError updateMemory(std::shared_ptr<ImageContainer> img) = 0;
+            inline void setFrameNumber(unsigned long long int frameNumber) override { m_frameNumber = frameNumber; };
         };
 
     };

@@ -10,31 +10,21 @@
  */
 #ifndef __IMAGE_POOL_HPP__
 #define __IMAGE_POOL_HPP__
-#include "ImageFormat.hpp"
-#include "ImageContainer.hpp"
+
+#include "ImageContainer/IImagePool.hpp"
 #include <vector>
 
 namespace FIPP
 {
     namespace img
     {
-        /**
-         * @brief Exception if ImagePool has no free image available.
-         *
-         */
-        struct NoFreeImageAvailableException : public std::exception
-        {
-            const char *what() const throw()
-            {
-                return "No free image available in pool";
-            }
-        };
+
 
         /**
          * @brief ImagePool is a supervisor for ImageContainers.
          *
          */
-        class ImagePool
+        class ImagePool : public IImagePool
         {
         public:
             ImagePool(int size, ImageContainerConfig config);
@@ -44,7 +34,7 @@ namespace FIPP
              * Surround with try/catch to solve issues if no free ImageContainer is available.
              * @return std::shared_ptr<ImageContainer>
              */
-            std::shared_ptr<ImageContainer> getNextFreeImage();
+            std::shared_ptr<IImageContainer> getNextFreeImage();
             /**
              * @brief Create more ImageContainers and add them to internal vector.
              *
@@ -73,7 +63,7 @@ namespace FIPP
              * @brief vector of all created ImageContainers.
              *
              */
-            std::vector<std::shared_ptr<ImageContainer>> m_images;
+            std::vector<std::shared_ptr<IImageContainer>> m_images;
             /**
              * @brief Create a number of ImageContainers and add them to m_images.
              *

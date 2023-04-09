@@ -1,11 +1,11 @@
-#include "ImageContainer/ImageContainerCUDA.hpp"
+#include "ImageContainerCUDA.hpp"
 #include <cstring>
 
 using namespace FIPP;
 using namespace FIPP::img;
 using namespace std;
 
-ImageContainerCUDA::ImageContainerCUDA(Point<unsigned int> size, ImageFormat format, BackendFlags flags, unsigned int uuid) : ImageContainer(size, format, uuid)
+ImageContainerCUDA::ImageContainerCUDA(Point<unsigned int> size, ImageFormat format, BackendFlags flags, unsigned int uuid): ImageContainer(size, format, uuid)
 {
     this->m_backend.type = BackendType::CUDA;
     this->m_backend.flags = flags;
@@ -96,7 +96,7 @@ void ImageContainerCUDA::allocCudaZCMem()
     }
 }
 
-cudaError_t ImageContainerCUDA::getLastCudaErr()
+cudaError_t ImageContainerCUDA::getLastCudaErr() const
 {
     return this->m_lastCudaErr;
 }
@@ -143,7 +143,7 @@ unsigned char *ImageContainerCUDA::getDevPtr() const
 
 ContainerError ImageContainerCUDA::updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch = 0)
 {
-    if (dims.getAbsValue() * bytesPerPixel != this->m_memsize)
+    if (dims.getArea() * bytesPerPixel != this->m_memsize)
     {
         return ContainerError::INVALID_SIZE;
     }
@@ -200,13 +200,12 @@ cudaError_t ImageContainerCUDA::copyFromCUDA(const unsigned char *data, BackendF
     return err;
 }
 
-cudaError_t ImageContainerCUDA::copyFromCUDA(std::shared_ptr<ImageContainer> img)
+cudaError_t ImageContainerCUDA::copyFromCUDA(std::shared_ptr<IImageContainerCUDA> imgCuda)
 {
-    shared_ptr<ImageContainerCUDA> imgCuda = static_pointer_cast<ImageContainerCUDA>(img);
     return this->copyFromCUDA(imgCuda->getConstDevPtr(), imgCuda->getBackendFlags(), imgCuda->getMemPitch());
 }
 
-ContainerError ImageContainerCUDA::updateMemory(shared_ptr<ImageContainer> img)
+ContainerError ImageContainerCUDA::updateMemory(shared_ptr<IImageContainer> img)
 {
     if (img->getMemSize() != this->m_memsize)
     {
@@ -218,7 +217,7 @@ ContainerError ImageContainerCUDA::updateMemory(shared_ptr<ImageContainer> img)
     case BackendType::OPENCL:
         break;
     case BackendType::CUDA:
-        this->m_lastCudaErr = this->copyFromCUDA(img);
+        this->m_lastCudaErr = this->copyFromCUDA(dynamic_pointer_cast<IImageContainerCUDA>(img));
         break;
     default:
         this->m_lastCudaErr = this->copyFromCPU(img->getConstPtr());

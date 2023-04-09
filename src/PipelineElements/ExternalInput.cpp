@@ -2,8 +2,8 @@
 #include <yaml-cpp/yaml.h>
 #include <exception>
 #include "Logging/ILogging.hpp"
-#include "ImageContainer/ImageContainer.hpp"
-#include "ImageContainer/ImagePool.hpp"
+#include "ImageContainer/IImageContainer.hpp"
+#include "ImageContainer/ImagePoolFactory.hpp"
 #include "PipelineElements/IGenericSink.hpp"
 
 using namespace FIPP::pipe;
@@ -14,7 +14,7 @@ ExternalInput::ExternalInput(YAML::Node config, int elemId, std::shared_ptr<FIPP
     this->m_log = log;
     this->m_uuid = elemId;
     this->m_config = FIPP::img::getContainerConfigFromYaml(config["imgConfig"]);
-    this->m_pool = std::make_unique<FIPP::img::ImagePool>(10, this->m_config);
+    this->m_pool = FIPP::img::getImagePool(10, this->m_config);
 }
 ExternalInput::~ExternalInput()
 {
@@ -31,12 +31,12 @@ ExternalInput::~ExternalInput()
     }
 }
 
-std::shared_ptr<FIPP::img::ImageContainer> ExternalInput::getImgContainer()
+std::shared_ptr<FIPP::img::IImageContainer> ExternalInput::getImgContainer()
 {
     return this->m_pool->getNextFreeImage();
 }
 
-void ExternalInput::pushImgToPipe(std::shared_ptr<FIPP::img::ImageContainer> img)
+void ExternalInput::pushImgToPipe(std::shared_ptr<FIPP::img::IImageContainer> img)
 {
     if (m_successor == nullptr)
     {

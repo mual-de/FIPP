@@ -30,7 +30,7 @@ namespace FIPP
         public:
             GenericSink(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             ~GenericSink();
-            void addImageToInputPipe(std::shared_ptr<img::ImageContainer> img);
+            void addImageToInputPipe(std::shared_ptr<img::IImageContainer> img);
                         /**
              * @brief get the object name set by the derived class (e.g. crop-plugin).
              * 
@@ -69,7 +69,7 @@ namespace FIPP
              * @brief queue holding all incomming images for further processing
              * 
              */
-            std::queue<std::shared_ptr<img::ImageContainer>> m_inputQueue;
+            std::queue<std::shared_ptr<img::IImageContainer>> m_inputQueue;
             /**
              * @brief Condition variable to wait worker thread
              * 
@@ -101,7 +101,7 @@ namespace FIPP
              * 
              * @param img 
              */
-            virtual void doCalculation(std::shared_ptr<img::ImageContainer> img) = 0;
+            virtual void doCalculation(std::shared_ptr<img::IImageContainer> img) = 0;
             virtual void initializeInterfaces() = 0;
             virtual void closeInterfaces() = 0;
             void startThread();

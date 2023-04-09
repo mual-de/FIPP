@@ -9,6 +9,7 @@ FIPP imageProcessing Library is planned as direct interface between FIPP and ope
 ## Build
 
 This project depends on the libstdc++11 ABI. Conan needs to be updated to this ABI:
+`conan profile new default --detect --force`
 `conan profile update settings.compiler.libcxx=libstdc++11 default`
 
 The last two lines are the important ones, otherwise gtest will fail.

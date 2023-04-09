@@ -15,14 +15,15 @@
 #include <string>
 #include "IGenericPipelineElement.hpp"
 #include "../ImageContainer/ImageFormat.hpp"
-#include "../ImageContainer/ImageContainer.hpp"
 
 #define INPUT_FILTER_ALLOW_ALL_INPUTS false
 #define INPUT_FILTER_CHECK_VALUES true
 namespace FIPP
 {
 
-
+    namespace img{
+        class IImageContainer;
+    };
 
     namespace pipe
     {
@@ -58,7 +59,7 @@ namespace FIPP
              * 
              * @param img 
              */
-            virtual void addImageToInputPipe(std::shared_ptr<img::ImageContainer> img) = 0;
+            virtual void addImageToInputPipe(std::shared_ptr<img::IImageContainer> img) = 0;
             /**
              * @brief Check if the incomming images can be processed by this pipeline element.
              * 

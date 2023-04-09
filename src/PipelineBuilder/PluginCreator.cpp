@@ -2,8 +2,8 @@
 #include <iostream>
 #include <filesystem>
 #include <dlfcn.h>
-#include <FIPP/PipelineElements/IGenericPipelineElement.hpp>
-#include <FIPP/Logging/ILogging.hpp>
+#include "PipelineElements/IGenericPipelineElement.hpp"
+#include "Logging/ILogging.hpp"
 #include <yaml-cpp/yaml.h>
 
 using namespace FIPP;

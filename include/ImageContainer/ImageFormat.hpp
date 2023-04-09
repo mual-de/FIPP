@@ -14,9 +14,9 @@
 
 #ifndef __IMAGE_FORMAT_HPP__
 #define __IMAGE_FORMAT_HPP__
-#include "../Point.hpp"
 #include <map>
 #include <stdexcept>
+#include "../Point.hpp"
 namespace YAML
 {
     class Node;
@@ -175,7 +175,7 @@ namespace FIPP
             ImageFormat imgFormat;
             Backend backend;
             FIPP::Point<unsigned int> dimensions;
-            inline size_t getMemSize(){return dimensions.getAbsValue() * imgFormat.bytesPerPixel;};
+            inline size_t getMemSize() {return static_cast<size_t>(dimensions.getArea() * imgFormat.bytesPerPixel);};
         } ImageContainerConfig;
 
         ImageContainerConfig getContainerConfigFromYaml(YAML::Node containerNode);

@@ -6,7 +6,6 @@ target_link_libraries(ImageContainerTest
     PRIVATE
     GTest::GTest
     ImageContainer
-    Point
 )
 
 add_test(

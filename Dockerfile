@@ -25,7 +25,7 @@ RUN apt-get -y install libavformat-dev libpq-dev libxine2-dev libglew-dev
 RUN apt-get -y install libtiff5-dev zlib1g-dev libjpeg-dev libavcodec-dev libavformat-dev
 RUN apt-get -y install libavutil-dev libpostproc-dev libeigen3-dev python3-dev
 RUN apt-get -y install nano
-RUN pip install conan numpy pandas
+RUN pip install conan==1.59.0 numpy pandas
 
 RUN cd /opt/ &&\
     # Download and unzip OpenCV and opencv_contrib and delte zip files

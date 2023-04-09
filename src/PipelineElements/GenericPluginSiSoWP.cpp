@@ -1,6 +1,9 @@
 #include "PipelineElements/GenericPluginSiSoWP.hpp"
 #include "PipelineElements/IGenericSink.hpp"
 #include "ImageContainer/ImageFormat.hpp"
+#include "ImageContainer/IImageContainer.hpp"
+#include "ImageContainer/IImagePool.hpp"
+#include "ImageContainer/ImagePoolFactory.hpp"
 #include "Logging/ILogging.hpp"
 using namespace FIPP::pipe;
 using namespace FIPP::logging;
@@ -26,7 +29,7 @@ StartState GenericPluginSiSoWP::startElement(int predecessorId)
         LOG(LogLevel::INFO, "pool hasn't been reseted yet, reset is done by starter");
         this->m_pool.reset();
     }
-    this->m_pool = std::make_unique<img::ImagePool>(m_poolSize, m_outputConfiguration);
+    this->m_pool = FIPP::img::getImagePool(m_poolSize, m_outputConfiguration);
     this->startThread();
     // Needed for tests without connected output!
     if (this->m_successor != nullptr)
@@ -64,7 +67,7 @@ void GenericPluginSiSoWP::connectSuccessor(std::shared_ptr<IGenericSink> elem)
     this->m_successor = elem;
 }
 
-void GenericPluginSiSoWP::sendImageToSucessors(std::shared_ptr<img::ImageContainer> img)
+void GenericPluginSiSoWP::sendImageToSucessors(std::shared_ptr<img::IImageContainer> img)
 {
     // Needed for testruns
     if (this->m_successor != nullptr)

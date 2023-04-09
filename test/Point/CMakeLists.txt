@@ -6,7 +6,6 @@ find_package(yaml-cpp)
 target_link_libraries(PointTest
     PRIVATE
     GTest::GTest
-    Point
     yaml-cpp
 )
 

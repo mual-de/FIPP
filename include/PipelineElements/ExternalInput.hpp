@@ -4,8 +4,7 @@
 #include "../Logging/ILogging.hpp"
 #include "IGenericSource.hpp"
 #include "ImageContainer/ImageFormat.hpp"
-#include "ImageContainer/ImagePool.hpp"
-
+#include "ImageContainer/IImagePool.hpp"
 namespace FIPP
 {
     namespace pipe
@@ -18,8 +17,8 @@ namespace FIPP
             ExternalInput(YAML::Node config, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             ~ExternalInput();
             inline int getId() const { return m_uuid; };
-            std::shared_ptr<img::ImageContainer> getImgContainer();
-            void pushImgToPipe(std::shared_ptr<img::ImageContainer> img);
+            std::shared_ptr<img::IImageContainer> getImgContainer();
+            void pushImgToPipe(std::shared_ptr<img::IImageContainer> img);
             void connectSuccessor(std::shared_ptr<pipe::IGenericSink> elem);
             bool interogateConnection();
             /**
@@ -54,7 +53,7 @@ namespace FIPP
              * @brief Internal image pool to provide images for further processing
              *
              */
-            std::unique_ptr<img::ImagePool> m_pool;
+            std::unique_ptr<img::IImagePool> m_pool;
             /**
              * @brief unique identifier in pipeline
              * 

@@ -1,22 +1,22 @@
 project(ImageContainer VERSION 0.1.0)
 set (CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-as-needed")
 if(ENABLE_CUDA)
-add_library(ImageContainer SHARED ImageContainer.cpp ImageContainerCPU.cpp ImageContainerCUDA.cpp ImagePool.cpp MetaDataSystem.cpp ImageFormat.cpp)
+add_library(ImageContainer SHARED ImageContainer.cpp ImageContainerCPU.cpp ImageContainerCUDA.cpp ImagePool.cpp ImagePoolFactory.cpp MetaDataSystem.cpp ImageFormat.cpp)
 else()
-add_library(ImageContainer SHARED ImageContainer.cpp ImageContainerCPU.cpp ImageContainerCUDA.cpp ImagePool.cpp MetaDataSystem.cpp ImageFormat.cpp)
+add_library(ImageContainer SHARED ImageContainer.cpp ImageContainerCPU.cpp ImageContainerCUDA.cpp ImagePool.cpp ImagePoolFactory.cpp MetaDataSystem.cpp ImageFormat.cpp)
 endif()
 find_package(yaml-cpp)
 find_package(CUDAToolkit REQUIRED)
 target_include_directories(ImageContainer PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../include>  
         $<INSTALL_INTERFACE:include/FIPP/ImageContainer>)
-target_link_libraries(ImageContainer PUBLIC yaml-cpp Point CUDA::cudart CUDA::cuda_driver)
+target_link_libraries(ImageContainer PUBLIC yaml-cpp CUDA::cudart CUDA::cuda_driver)
 set(ImageContainerHeaders
-    "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/ImageContainer.hpp"
-    "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/ImageContainerCPU.hpp"
-    "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/ImageContainerCUDA.hpp"
+    "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/IImageContainer.hpp"
+    "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/IImageContainerCUDA.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/ImageFormat.hpp"
-    "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/ImagePool.hpp"
+    "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/IImagePool.hpp"
+    "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/ImagePoolFactory.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/ImageContainer/MetaDataSystem.hpp"
 )
 set_target_properties(ImageContainer PROPERTIES PUBLIC_HEADER "${ImageContainerHeaders}")

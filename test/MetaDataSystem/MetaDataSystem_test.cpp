@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <memory>
-#include "Point.hpp"
+#include "../../include/Point.hpp"
 #include "ImageContainer/MetaDataSystem.hpp"
 
 using namespace FIPP;

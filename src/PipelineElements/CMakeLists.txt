@@ -3,7 +3,7 @@ add_library(PipelineElements SHARED GenericSource.cpp GenericSink.cpp GenericSin
 target_include_directories(PipelineElements PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../include>  
 $<INSTALL_INTERFACE:include/FIPP/PipelineElements>)
 find_package(yaml-cpp)
-target_link_libraries(PipelineElements PUBLIC yaml-cpp Point ImageContainer Logging)
+target_link_libraries(PipelineElements PUBLIC yaml-cpp ImageContainer Logging)
 set(PipelineElementsHeaders
     "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/GenericPlugin.hpp"
     "${PROJECT_SOURCE_DIR}/../../include/PipelineElements/GenericPluginSiSo.hpp"

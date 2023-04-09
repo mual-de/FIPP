@@ -12,11 +12,8 @@
 #ifndef __POINT_HPP__
 #define __POINT_HPP__
 #include <string>
-
-namespace YAML
-{
-    class Node;
-};
+#include "math.h"
+#include <yaml-cpp/yaml.h>
 
 namespace FIPP
 {
@@ -24,18 +21,27 @@ namespace FIPP
     class Point
     {
     public:
-    /**
-     * @brief X value
-     * 
-     */
+        /**
+         * @brief X value
+         *
+         */
         T m_x;
         /**
          * @brief Y value
-         * 
+         *
          */
         T m_y;
+        /**
+         * 
+        */
         Point<T>() : m_x(static_cast<T>(0)), m_y(static_cast<T>(0)){};
-        Point<T>(T x, T y);
+        /**
+         * 
+        */
+        Point<T>(T x, T y) : m_x(x), m_y(y){};
+        /**
+         * 
+        */
         template <typename U>
         Point<T>(U x, U y)
         {
@@ -49,201 +55,217 @@ namespace FIPP
             m_y = static_cast<T>(pt.m_y);
         };
         /**
+         * Create a point from a yaml node
+        */
+        Point<T>(YAML::Node node){
+            m_x = node["x"].as<T>();
+            m_y = node["y"].as<T>();
+        }
+        /**
          * @brief Get the absolute value (sqrt(x^2 + y^2)) of this point
-         * 
-         * @return double 
+         *
+         * @return double
          */
-        double getAbsValue();
+        inline double getAbsValue() const
+        {
+            return sqrt(this->m_x * this->m_x + this->m_y * this->m_y);
+        }
+        /**
+         * @brief get x/y values as yaml node
+         *
+         * @return YAML::Node
+         */
+        YAML::Node asYaml()
+        {
+            YAML::Node node;
+            node["x"] = m_x;
+            node["y"] = m_y;
+            return node;
+        };
+
         /**
          * @brief convert to human readable string
-         * 
-         * @return std::string 
+         *
+         * @return std::string
          */
         inline std::string asStr() { return "x: " + std::to_string(m_x) + " - y: " + std::to_string(m_y); };
-        /**
-         * @brief get x/y values as yaml node 
-         * 
-         * @return YAML::Node 
-         */
-        YAML::Node asYaml();
+        
         /**
          * @brief Get the product of x and y
-         * 
+         *
          * @return T size of area spawned by a and y
          */
         inline T getArea() { return m_x * m_y; };
         /**
          * @brief get X Value
-         * 
+         *
          * @return T value of x
          */
         inline T getX() { return m_x; };
         /**
          * @brief Get Y Value
-         * 
+         *
          * @return T value of y
          */
         inline T getY() { return m_y; };
         /**
          * @brief get X Value as unsigned int
-         * 
+         *
          * @return T value of x
          */
         inline T getXUInt() { return static_cast<unsigned int>(m_x); };
         /**
          * @brief Get Y Value as unsigned int
-         * 
+         *
          * @return T value of y
          */
         inline T getYUInt() { return static_cast<unsigned int>(m_y); };
         /**
          * @brief Get value of x as int
-         * 
-         * @return int 
+         *
+         * @return int
          */
         inline int getXInt() const { return static_cast<int>(m_x); };
         /**
          * @brief Get value of y as int
-         * 
-         * @return int 
+         *
+         * @return int
          */
         inline int getYInt() const { return static_cast<int>(m_y); };
         /**
          * @brief Get value of x as float
-         * 
-         * @return float 
+         *
+         * @return float
          */
         inline float getXFloat() const { return static_cast<float>(m_x); };
         /**
          * @brief Get value of y as float
-         * 
-         * @return float 
+         *
+         * @return float
          */
         inline float getYFloat() const { return static_cast<float>(m_y); };
         /**
          * @brief Compare this point with another
-         * 
-         * @param cmp 
-         * @return true x>cmp.x and y>cmp.y 
-         * @return false 
+         *
+         * @param cmp
+         * @return true x>cmp.x and y>cmp.y
+         * @return false
          */
         inline bool operator>(Point<T> cmp) { return (m_x > cmp.m_x) && (m_y > cmp.m_y); };
         /**
          * @brief Compare this point with another
-         * 
-         * @param cmp 
-         * @return true x<cmp.x and y<cmp.y 
-         * @return false 
+         *
+         * @param cmp
+         * @return true x<cmp.x and y<cmp.y
+         * @return false
          */
         inline bool operator<(Point<T> cmp) { return (m_x < cmp.m_x) && (m_y < cmp.m_y); };
         /**
          * @brief Compare this point with another
-         * 
-         * @param cmp 
-         * @return true x==cmp.x and y==cmp.y 
-         * @return false 
+         *
+         * @param cmp
+         * @return true x==cmp.x and y==cmp.y
+         * @return false
          */
         inline bool operator==(Point<T> cmp) { return (m_x == cmp.m_x) && (m_y == cmp.m_y); };
         /**
          * @brief Compare this point with another
-         * 
-         * @param cmp 
-         * @return true !(x==cmp.x and y==cmp.y) 
-         * @return false 
+         *
+         * @param cmp
+         * @return true !(x==cmp.x and y==cmp.y)
+         * @return false
          */
         inline bool operator!=(Point<T> cmp) { return !((m_x == cmp.m_x) && (m_y == cmp.m_y)); };
         /**
          * @brief Compare this point with another
-         * 
-         * @param cmp 
-         * @return true x==cmp.x and y==cmp.y 
-         * @return false 
+         *
+         * @param cmp
+         * @return true x==cmp.x and y==cmp.y
+         * @return false
          */
         template <typename U>
         inline bool operator==(Point<U> cmp) { return (m_x == static_cast<T>(cmp.m_x)) && (m_y == static_cast<T>(cmp.m_y)); };
         /**
          * @brief Compare this point with another
-         * 
-         * @param cmp 
-         * @return true !(x==cmp.x and y==cmp.y) 
-         * @return false 
+         *
+         * @param cmp
+         * @return true !(x==cmp.x and y==cmp.y)
+         * @return false
          */
         template <typename U>
         inline bool operator!=(Point<U> cmp) { return !((m_x == static_cast<T>(cmp.m_x)) && (m_y == static_cast<T>(cmp.m_y))); };
         template <typename U>
         /**
          * @brief Divide point by divisor
-         * 
-         * @param div 
+         *
+         * @param div
          * @return Point<T> x/div.x, y/div.y
          */
-        inline Point<T> operator/(const U div) { return Point<T>(m_x / static_cast<T>(div), m_y / static_cast<T>(div)); };
+        inline Point<T> operator/(const U div)
+        {
+            return Point<T>(m_x / static_cast<T>(div), m_y / static_cast<T>(div));
+        };
         /**
          * @brief Divide point by divisor
-         * 
-         * @param div 
+         *
+         * @param div
          * @return Point<T> x/div, y/div
          */
         inline Point<T> operator/(const T div) { return Point<T>(m_x / div, m_y / div); };
         template <typename U>
         /**
          * @brief Multiplicate point by multiplier
-         * 
-         * @param mul 
+         *
+         * @param mul
          * @return Point<T> x*mul.x, y*mul.y
          */
-        inline Point<T> operator*(const U mul) { return Point<T>(m_x * static_cast<T>(mul), m_y * static_cast<T>(mul)); };
+        inline Point<T> operator*(const U mul)
+        {
+            return Point<T>(m_x * static_cast<T>(mul), m_y * static_cast<T>(mul));
+        };
         /**
          * @brief Multiplicate point by multiplier
-         * 
-         * @param mul 
+         *
+         * @param mul
          * @return Point<T> x*mul, y*mul
          */
         inline Point<T> operator*(const T mul) { return Point<T>(m_x * mul, m_y * mul); };
         template <typename U>
         /**
          * @brief Add point to other point
-         * 
-         * @param add 
+         *
+         * @param add
          * @return Point<T> x+other.x, y+other.y
          */
-        inline Point<T> operator+(const Point<U> add) { return Point<T>(m_x + static_cast<T>(add.getX()), m_y + static_cast<T>(add.getY())); };
+        inline Point<T> operator+(const Point<U> add)
+        {
+            return Point<T>(m_x + static_cast<T>(add.getX()), m_y + static_cast<T>(add.getY()));
+        };
         /**
          * @brief Add point to other point
-         * 
-         * @param add 
+         *
+         * @param add
          * @return Point<T> x+other.x, y+other.y
          */
         inline Point<T> operator+(const Point<T> add) { return Point<T>(m_x + add.m_x, m_y + add.m_y); };
         template <typename U>
         /**
          * @brief Sub point to other point
-         * 
-         * @param sub 
+         *
+         * @param sub
          * @return Point<T> x-other.x, y-other.y
          */
-        inline Point<T> operator-(const Point<U> sub) { return Point<T>(m_x - static_cast<T>(sub.getX()), m_y - static_cast<T>(sub.getY())); };
+        inline Point<T> operator-(const Point<U> sub)
+        {
+            return Point<T>(m_x - static_cast<T>(sub.getX()), m_y - static_cast<T>(sub.getY()));
+        };
         /**
          * @brief Sub point to other point
-         * 
-         * @param sub 
+         *
+         * @param sub
          * @return Point<T> x-other.x, y-other.y
          */
-        inline Point<T> operator-(const Point<T> sub) { return Point<T>(m_x - sub.m_x , m_y - sub.m_y); };
-    };
-
-    /**
-     * @brief Create a point from a given yaml node
-     * 
-     */
-    namespace PointFactory{
-    /**
-     * @brief Get int Point from a given yaml node.
-     * 
-     * @param node 
-     * @return Point<int> 
-     */
-        Point<int> ptIntFromYAML(YAML::Node node);
+        inline Point<T> operator-(const Point<T> sub) { return Point<T>(m_x - sub.m_x, m_y - sub.m_y); };
     };
 };
 #endif

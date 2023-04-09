@@ -6,8 +6,7 @@ target_link_libraries(MetaDataSystemTest
     PRIVATE
     GTest::GTest
     ImageContainer
-    Point
-)
+    )
 add_test(
     NAME MetaDataSystemTest
     COMMAND MetaDataSystemTest

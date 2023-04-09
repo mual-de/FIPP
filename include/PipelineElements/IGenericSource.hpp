@@ -14,8 +14,7 @@
 #include <memory>
 #include <string>
 #include "IGenericPipelineElement.hpp"
-#include "../ImageContainer/ImageFormat.hpp"
-#include "../ImageContainer/ImageContainer.hpp"
+
 namespace FIPP
 {
 

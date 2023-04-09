@@ -1,6 +1,7 @@
 #include "PipelineElements/GenericPluginSiSo.hpp"
 #include "PipelineElements/IGenericSink.hpp"
 #include "ImageContainer/ImageFormat.hpp"
+#include "ImageContainer/IImageContainer.hpp"
 #include "Logging/ILogging.hpp"
 using namespace FIPP::pipe;
 using namespace FIPP::logging;
@@ -74,7 +75,7 @@ void GenericPluginSiSo::connectSuccessor(std::shared_ptr<IGenericSink> elem)
     this->m_successor = elem;
 }
 
-void GenericPluginSiSo::sendImageToSucessors(std::shared_ptr<img::ImageContainer> img)
+void GenericPluginSiSo::sendImageToSucessors(std::shared_ptr<img::IImageContainer> img)
 {
     // Needed for testruns
     if (this->m_successor != nullptr)

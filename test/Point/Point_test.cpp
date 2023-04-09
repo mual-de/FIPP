@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "Point.hpp"
+#include "../../include/Point.hpp"
 #include <yaml-cpp/yaml.h>
 
 using namespace FIPP;
@@ -68,7 +68,7 @@ TEST(YamlTest, Set){
   YAML::Node testNode;
   testNode["x"] = 10;
   testNode["y"] = -20;
-  Point<int> test = PointFactory::ptIntFromYAML(testNode);
+  Point<int> test(testNode);
   EXPECT_EQ(test.getX(), 10);
   EXPECT_EQ(test.getY(), -20);
 }

@@ -32,11 +32,6 @@ namespace FIPP{
         class IGenericPlugin;
         class ExternalInput;
     }
-    namespace img
-    {
-        class ImagePool;
-        class ImageContainer;
-    }
     namespace logging
     {
         class ILogger;

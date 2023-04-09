@@ -1,5 +1,7 @@
 #include "PipelineElements/GenericSource.hpp"
 #include "ImageContainer/ImageFormat.hpp"
+#include "ImageContainer/IImageContainer.hpp"
+#include "ImageContainer/IImagePool.hpp"
 #include "Logging/ILogging.hpp"
 #include <math.h>
 using namespace FIPP::pipe;
@@ -59,7 +61,7 @@ void GenericSource::run()
         // get next free image
         try
         {
-            std::shared_ptr<img::ImageContainer> img = this->m_pool->getNextFreeImage();
+            std::shared_ptr<img::IImageContainer> img = this->m_pool->getNextFreeImage();
             img->setFrameNumber(this->m_frameNumber);
             // implemented by derived class
             this->doCalculation(img);

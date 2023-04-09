@@ -8,7 +8,7 @@ FIPP::img::ImageContainerConfig FIPP::img::getContainerConfigFromYaml(YAML::Node
     {
         throw std::invalid_argument("Dimension is not set in YAML file!");
     }
-    conf.dimensions = FIPP::PointFactory::ptIntFromYAML(containerNode["dimensions"]);
+    conf.dimensions = FIPP::Point<int>(containerNode["dimensions"]);
     if (!containerNode["bitDepthPerPixel"])
     {
         throw std::invalid_argument("bitDepthPerPixel is not set in YAML file!");
@@ -20,6 +20,11 @@ FIPP::img::ImageContainerConfig FIPP::img::getContainerConfigFromYaml(YAML::Node
     }
     if(containerNode["usePitch"]){
         conf.imgFormat.usePitch = containerNode["usePitch"].as<bool>();
+    }else{
+        conf.imgFormat.usePitch = false;
+    }
+    if(containerNode["backendFlags"]){
+        conf.backend.flags = getBackendFlags(containerNode["backendFlags"].as<std::string>());
     }
     conf.imgFormat.bytesPerPixel = containerNode["bytesPerPixel"].as<unsigned char>();
     conf.imgFormat.imgType = getImageType(containerNode["imgType"].as<std::string>());

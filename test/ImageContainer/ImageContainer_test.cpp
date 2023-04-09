@@ -2,11 +2,11 @@
 #include <memory>
 #include <yaml-cpp/yaml.h>
 #include <exception>
-#include "Point.hpp"
-#include "ImageContainer/ImageContainer.hpp"
-#include "ImageContainer/ImageContainerCPU.hpp"
+#include "../../include/Point.hpp"
+#include "ImageContainer/IImageContainer.hpp"
 #include "ImageContainer/ImageFormat.hpp"
-#include "ImageContainer/ImagePool.hpp"
+#include "ImageContainer/IImagePool.hpp"
+#include "ImageContainer/ImagePoolFactory.hpp"
 
 using namespace FIPP;
 // Demonstrate some basic assertions.
@@ -14,11 +14,14 @@ TEST(Creation, basics)
 {
     // Expect equality.
     Point<unsigned int> size(10, 10);
-    img::ImageFormat format;
-    format.bitDepthPerPixel=8;
-    format.bytesPerPixel = 1;
-    format.imgType = img::ImageType::GRAY;
-    std::shared_ptr<img::ImageContainer> pImg = std::make_shared<img::ImageContainerCPU>(size, format,0);
+    img::ImageContainerConfig config;
+    config.backend.type = img::BackendType::CPU;
+    config.dimensions = size;
+    config.imgFormat.bitDepthPerPixel=8;
+    config.imgFormat.bytesPerPixel = 1;
+    config.imgFormat.imgType = img::ImageType::GRAY;
+    std::unique_ptr<img::IImagePool> pPool = img::getImagePool(1, config);
+    std::shared_ptr<img::IImageContainer> pImg = pPool->getNextFreeImage();
     EXPECT_EQ(pImg->getBackendType(), img::BackendType::CPU);
     EXPECT_EQ(pImg->getBackendFlags(), 0);
     EXPECT_EQ(pImg->getDims().getArea(), 100);
@@ -30,11 +33,15 @@ TEST(Creation, bounding)
 {
     // Expect equality.
     Point<unsigned int> size(10, 10);
-    img::ImageFormat format;
-    format.bitDepthPerPixel=8;
-    format.bytesPerPixel = 1;
-    format.imgType = img::ImageType::GRAY;
-    std::shared_ptr<img::ImageContainer> pImg = std::make_shared<img::ImageContainerCPU>(size, format,0);
+    img::ImageContainerConfig config;
+    config.backend.type = img::BackendType::CPU;
+    config.dimensions = size;
+    config.imgFormat.bitDepthPerPixel=8;
+    config.imgFormat.bytesPerPixel = 1;
+    config.imgFormat.imgType = img::ImageType::GRAY;
+    std::unique_ptr<img::IImagePool> pPool = img::getImagePool(1, config);
+    std::shared_ptr<img::IImageContainer> pImg = pPool->getNextFreeImage();
+    pImg->setUnBound();
     EXPECT_EQ(pImg->isBound(), false);
     pImg->setBound();
     EXPECT_EQ(pImg->isBound(), true);
@@ -82,17 +89,17 @@ TEST(Pooling, basics){
     format.bytesPerPixel = 1;
     format.imgType = img::ImageType::GRAY;
     conf.imgFormat = format;
-    std::unique_ptr<img::ImagePool> pool = std::make_unique<img::ImagePool>(10, conf);
-    EXPECT_EQ(pool->getNumberOfContainers(), 10);
-    std::vector<std::shared_ptr<img::ImageContainer>> imgs;
+    std::unique_ptr<img::IImagePool> pPool = img::getImagePool(10, conf);
+    EXPECT_EQ(pPool->getNumberOfContainers(), 10);
+    std::vector<std::shared_ptr<img::IImageContainer>> imgs;
     for(int i = 0; i < 11; i++){
         if(i < 10){
-            std::shared_ptr<img::ImageContainer> img;
-            EXPECT_NO_THROW(img = pool->getNextFreeImage());
+            std::shared_ptr<img::IImageContainer> img;
+            EXPECT_NO_THROW(img = pPool->getNextFreeImage());
             imgs.push_back(img);
             EXPECT_EQ(img->getUUID(), i);
         }else{
-            EXPECT_THROW(std::shared_ptr<img::ImageContainer> img = pool->getNextFreeImage(), img::NoFreeImageAvailableException);
+            EXPECT_THROW(std::shared_ptr<img::IImageContainer> img = pPool->getNextFreeImage(), img::NoFreeImageAvailableException);
         }
     }
     for(auto e : imgs){
@@ -100,12 +107,12 @@ TEST(Pooling, basics){
     }
     for(int i = 0; i < 11; i++){
         if(i < 10){
-            std::shared_ptr<img::ImageContainer> img;
-            EXPECT_NO_THROW(img = pool->getNextFreeImage());
+            std::shared_ptr<img::IImageContainer> img;
+            EXPECT_NO_THROW(img = pPool->getNextFreeImage());
             imgs.push_back(img);
             EXPECT_EQ(img->getUUID(), i);
         }else{
-            EXPECT_THROW(std::shared_ptr<img::ImageContainer> img = pool->getNextFreeImage(), img::NoFreeImageAvailableException);
+            EXPECT_THROW(std::shared_ptr<img::IImageContainer> img = pPool->getNextFreeImage(), img::NoFreeImageAvailableException);
         }
     }
 }

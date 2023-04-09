@@ -15,7 +15,6 @@
 #define __GENERIC_PLUGIN_SISO_WP_HPP__
 #include "GenericPlugin.hpp"
 #include "../Logging/ILogging.hpp"
-#include "../ImageContainer/ImagePool.hpp"
 #include <memory>
 #include <string>
 #include <mutex>
@@ -24,6 +23,9 @@
 
 namespace FIPP
 {
+    namespace img{
+        class IImagePool;
+    };
     namespace pipe
     {
         class GenericPluginSiSoWP : public GenericPlugin
@@ -47,7 +49,7 @@ namespace FIPP
              * @brief ptr to image pool created at startElement, will be released at stopElement
              * 
              */
-            std::unique_ptr<img::ImagePool> m_pool;
+            std::unique_ptr<img::IImagePool> m_pool;
             /**
              * @brief Pool Size given by configuration
              * 
@@ -61,13 +63,13 @@ namespace FIPP
              * 
              */
             img::ImageContainerConfig m_outputConfiguration;
-            void sendImageToSucessors(std::shared_ptr<img::ImageContainer> img);
+            void sendImageToSucessors(std::shared_ptr<img::IImageContainer> img);
             /**
              * @brief Overwrite by derived plugin to do calculation on next image
              *
              * @param img
              */
-            virtual std::shared_ptr<img::ImageContainer> doCalculation(std::shared_ptr<img::ImageContainer> img) = 0;
+            virtual std::shared_ptr<img::IImageContainer> doCalculation(std::shared_ptr<img::IImageContainer> img) = 0;
 
         };
 

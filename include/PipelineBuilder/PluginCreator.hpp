@@ -14,6 +14,8 @@
 #include <exception>
 #include <memory>
 #include <string>
+#include <vector>
+#include <map>
 #include "../PipelineElements/IGenericPipelineElement.hpp"
 namespace YAML
 {

@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "/workspaces/FIPP-DevEnvironment/FIPP/build/build/CMakePresets.json"
+    ]
+}

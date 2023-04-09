@@ -33,7 +33,7 @@ namespace FIPP
             GenericPlugin(std::string elemName, int elemId, std::shared_ptr<FIPP::logging::ILogger> log);
             ~GenericPlugin();
             inline ElementState getState() { return this->m_state; };
-            void addImageToInputPipe(std::shared_ptr<img::ImageContainer> img);
+            void addImageToInputPipe(std::shared_ptr<img::IImageContainer> img);
             /**
              * @brief get the object name set by the derived class (e.g. crop-plugin).
              *
@@ -51,9 +51,9 @@ namespace FIPP
              * @brief Run internal doCalculation function for software tests.
              * 
              * @param img 
-             * @return std::shared_ptr<img::ImageContainer> 
+             * @return std::shared_ptr<img::IImageContainer> 
              */
-            inline std::shared_ptr<img::ImageContainer> testInternalFunction(std::shared_ptr<img::ImageContainer> img){return this->doCalculation(img);};
+            inline std::shared_ptr<img::IImageContainer> testInternalFunction(std::shared_ptr<img::IImageContainer> img){return this->doCalculation(img);};
 
             
 
@@ -78,7 +78,7 @@ namespace FIPP
              * @brief queue holding all incomming images for further processing
              *
              */
-            std::queue<std::shared_ptr<img::ImageContainer>> m_inputQueue;
+            std::queue<std::shared_ptr<img::IImageContainer>> m_inputQueue;
             /**
              * @brief Condition variable to wait worker thread
              *
@@ -105,13 +105,13 @@ namespace FIPP
              * @param img shared ptr to outgoing image
              *
              */
-            virtual void sendImageToSucessors(std::shared_ptr<img::ImageContainer> img) = 0;
+            virtual void sendImageToSucessors(std::shared_ptr<img::IImageContainer> img) = 0;
             /**
              * @brief Overwrite by derived plugin to do calculation on next image
              *
              * @param img
              */
-            virtual std::shared_ptr<img::ImageContainer> doCalculation(std::shared_ptr<img::ImageContainer> img) = 0;
+            virtual std::shared_ptr<img::IImageContainer> doCalculation(std::shared_ptr<img::IImageContainer> img) = 0;
             /**
              * @brief Start internal thread by startElement
              *

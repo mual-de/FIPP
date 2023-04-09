@@ -12,16 +12,13 @@
 #define __IMAGE_CONTAINER_CUDA_HPP__
 
 #include "ImageContainer.hpp"
-#include "../Point.hpp"
-#include "ImageFormat.hpp"
-#include "cuda_runtime.h"
-
+#include "ImageContainer/IImageContainerCUDA.hpp"
 
 namespace FIPP
 {
     namespace img
     {
-        class ImageContainerCUDA : public ImageContainer
+        class ImageContainerCUDA : public ImageContainer, public IImageContainerCUDA
         {
 
         public:
@@ -44,13 +41,13 @@ namespace FIPP
              * 
              * @return const unsigned char* 
              */
-            const unsigned char *getConstPtr() const;
+            const unsigned char *getConstPtr() const override;
             /**
              * @brief Get ptr to host memory, if not Unified/Zero Copy memory this will return nullptr!
              * 
              * @return unsigned char* 
              */
-            unsigned char *getPtr() const;
+            unsigned char *getPtr() const override;
             /**
              * @brief Get const pointer to device memory
              * 
@@ -65,7 +62,7 @@ namespace FIPP
              * @return unsigned char* 
              */
             unsigned char *getDevPtr() const;
-            ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch);
+            ContainerError updateMemory(unsigned long long int frame, const unsigned char *data, Point<unsigned int> dims, int bytesPerPixel, Backend backend, int memPitch) override;
             /**
              * @brief Copy the content of an ImageContainer into this ImageContainer.
              * 
@@ -75,26 +72,26 @@ namespace FIPP
              * @param img 
              * @return ContainerError 
              */
-            ContainerError updateMemory(std::shared_ptr<ImageContainer> img);
+            ContainerError updateMemory(std::shared_ptr<IImageContainer> img) override;
             /**
              * @brief Check if CPU access is possible without checking for Unified Memory/Zero Copy memory!
              * 
              * @return true CPU access is possible!
              * @return false CPU access is not possible!
              */
-            bool allowsCPUAccess(){return this->m_allowsCPUAccess;};
+            bool allowsCPUAccess() {return this->m_allowsCPUAccess;};
             /**
              * @brief if memory is allocated for device it is possibly aligned with a pitch for better memory access.
              * 
              * @return unsigned int 
              */
-            unsigned int getMemPitch()const{return this->m_memoryPitch;};
+            unsigned int getMemPitch() const override {return this->m_memoryPitch;};
             /**
              * @brief Get the last raised cuda error
              * 
              * @return cudaError_t 
              */
-            cudaError_t getLastCudaErr();
+            cudaError_t getLastCudaErr() const override;
             /**
              * @brief Get the last raised cude error code!
              * 
@@ -168,7 +165,7 @@ namespace FIPP
              * @param img 
              * @return cudaError code @see cudaError_t
              */
-            cudaError_t copyFromCUDA(std::shared_ptr<ImageContainer> img);
+            cudaError_t copyFromCUDA(std::shared_ptr<IImageContainerCUDA> img);
             /**
              * @brief Copy from device to device memory
              * @throw runtime exception if cuda error occurs

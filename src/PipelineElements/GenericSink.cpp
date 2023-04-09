@@ -1,5 +1,6 @@
 #include "PipelineElements/GenericSink.hpp"
 #include "ImageContainer/ImageFormat.hpp"
+#include "ImageContainer/IImageContainer.hpp"
 #include "Logging/ILogging.hpp"
 using namespace FIPP::pipe;
 using namespace FIPP::logging;
@@ -48,7 +49,7 @@ void GenericSink::startThread()
     this->m_workerThread = std::thread(&GenericSink::run, this);
 }
 
-void GenericSink::addImageToInputPipe(std::shared_ptr<img::ImageContainer> img)
+void GenericSink::addImageToInputPipe(std::shared_ptr<img::IImageContainer> img)
 {
     std::lock_guard lk(this->m_inputLockMutex);
     LOG(LogLevel::DEBUG, "Added image to queue");
@@ -80,7 +81,7 @@ void GenericSink::run()
         if (this->m_newImgArrived || !this->m_inputQueue.empty())
         {
             LOG(LogLevel::CONFIG, "New msg available");
-            std::shared_ptr<img::ImageContainer> actImg = this->m_inputQueue.front();
+            std::shared_ptr<img::IImageContainer> actImg = this->m_inputQueue.front();
             this->m_inputQueue.pop();
             this->m_newImgArrived = false;
             lk.unlock();

@@ -13,12 +13,13 @@ pipelines:
         bitDepthPerPixel: 8
         bytesPerPixel: 3
         imgType: RGB
-        backendType: CPU
+        backendType: CUDA
+        backendFlags: GPU_ONLY
   - element:
       type: ImageExporter
       name: ExportSink
       id: 2
       input: 1
       filePrefix: img-exp
-      storagePath: /home/mual/Bilder/demo
+      storagePath: /tmp
       fileFormat: png

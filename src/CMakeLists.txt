@@ -1,4 +1,3 @@
-add_subdirectory(Point)
 add_subdirectory(PipelineElements)
 add_subdirectory(Logging)
 add_subdirectory(ImageContainer)
